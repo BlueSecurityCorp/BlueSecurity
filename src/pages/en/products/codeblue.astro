@@ -1,12 +1,12 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import type { Locale } from '../../i18n/index';
-import { t } from '../../i18n/ui';
-import { getProducts } from '../../data/products';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getProducts } from '../../../data/products';
+import { t } from '../../../i18n/ui';
+import { localePath } from '../../../i18n/index';
 
-const lang = 'ko' as Locale;
+const lang = 'en' as const;
 const products = getProducts(lang);
 const product = products.find((p) => p.id === 'codeblue')!;
 ---
@@ -14,6 +14,7 @@ const product = products.find((p) => p.id === 'codeblue')!;
 <Layout
   title={`${product.name} | BlueSecurity`}
   description={product.description}
+  lang={lang}
 >
   <Header slot="header" lang={lang} />
 
@@ -27,11 +28,11 @@ const product = products.find((p) => p.id === 'codeblue')!;
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Breadcrumb -->
       <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10">
-        <a href="/" class="hover:text-slate-300 transition-colors">{t('products.detail.home', lang)}</a>
+        <a href={localePath('/', lang)} class="hover:text-slate-300 transition-colors">{t('products.detail.home', lang)}</a>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-        <a href="/products" class="hover:text-slate-300 transition-colors">{t('products.detail.products', lang)}</a>
+        <a href={localePath('/products', lang)} class="hover:text-slate-300 transition-colors">{t('products.detail.products', lang)}</a>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -70,7 +71,7 @@ const product = products.find((p) => p.id === 'codeblue')!;
               {t('products.detail.start', lang)}
             </a>
             <a
-              href="/contact"
+              href={localePath('/contact', lang)}
               class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg border border-blue-700/60 hover:border-blue-500 text-slate-300 hover:text-white font-medium transition-all duration-200"
             >
               {t('products.detail.contact', lang)}
@@ -144,7 +145,7 @@ const product = products.find((p) => p.id === 'codeblue')!;
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
           </svg>
-          이런 팀에 적합합니다
+          Best for these teams
         </h3>
         <div class="space-y-4">
           <div class="flex items-start gap-3 p-4 rounded-xl bg-navy-900/50 border border-blue-900/40">
@@ -153,8 +154,8 @@ const product = products.find((p) => p.id === 'codeblue')!;
                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
             <div>
-              <div class="text-white font-medium text-sm">DevSecOps 도입 팀</div>
-              <div class="text-slate-500 text-xs mt-0.5">CI/CD 파이프라인에 보안 스캔을 자동화하고 싶은 개발팀</div>
+              <div class="text-white font-medium text-sm">DevSecOps Teams</div>
+              <div class="text-slate-500 text-xs mt-0.5">Development teams looking to automate security scanning in CI/CD pipelines</div>
             </div>
           </div>
           <div class="flex items-start gap-3 p-4 rounded-xl bg-navy-900/50 border border-blue-900/40">
@@ -163,8 +164,8 @@ const product = products.find((p) => p.id === 'codeblue')!;
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <div>
-              <div class="text-white font-medium text-sm">컴플라이언스 대응 기업</div>
-              <div class="text-slate-500 text-xs mt-0.5">ISMS-P, OWASP, CWE 기준 정기 감사가 필요한 기업</div>
+              <div class="text-white font-medium text-sm">Compliance-Driven Organizations</div>
+              <div class="text-slate-500 text-xs mt-0.5">Companies requiring regular audits against ISMS-P, OWASP, and CWE standards</div>
             </div>
           </div>
           <div class="flex items-start gap-3 p-4 rounded-xl bg-navy-900/50 border border-blue-900/40">
@@ -173,15 +174,15 @@ const product = products.find((p) => p.id === 'codeblue')!;
                 d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
             <div>
-              <div class="text-white font-medium text-sm">소프트웨어 공급망 관리</div>
-              <div class="text-slate-500 text-xs mt-0.5">오픈소스 의존성 취약점과 SBOM 자동화가 필요한 조직</div>
+              <div class="text-white font-medium text-sm">Software Supply Chain Management</div>
+              <div class="text-slate-500 text-xs mt-0.5">Organizations needing open-source dependency vulnerability tracking and SBOM automation</div>
             </div>
           </div>
         </div>
 
         <!-- Standards -->
         <div class="mt-6 pt-6 border-t border-blue-900/40">
-          <p class="text-xs text-slate-500 mb-3 uppercase tracking-wider font-medium">대응 보안 표준</p>
+          <p class="text-xs text-slate-500 mb-3 uppercase tracking-wider font-medium">Supported Security Standards</p>
           <div class="flex flex-wrap gap-2">
             {['OWASP Top 10', 'CWE', 'ISMS-P', 'SBOM'].map((std) => (
               <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-900/40 text-blue-300 border border-blue-800/50">
@@ -204,10 +205,10 @@ const product = products.find((p) => p.id === 'codeblue')!;
       <div class="relative px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
         <div>
           <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
-            지금 바로 무료로 시작하세요
+            Get Started Free Today
           </h2>
           <p class="text-slate-400 max-w-lg">
-            신용카드 없이 월 5회 무료 스캔. 언제든 유료 플랜으로 업그레이드 가능합니다.
+            No credit card required. 5 free scans per month. Upgrade to a paid plan anytime.
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
@@ -223,7 +224,7 @@ const product = products.find((p) => p.id === 'codeblue')!;
             </svg>
           </a>
           <a
-            href="/products"
+            href={localePath('/products', lang)}
             class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-white/20 hover:border-white/40 text-slate-300 hover:text-white font-medium transition-all duration-200 whitespace-nowrap"
           >
             {t('products.detail.others', lang)}

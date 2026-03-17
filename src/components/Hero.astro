@@ -1,5 +1,15 @@
 ---
-import { company } from '../data/company';
+import type { Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getCompany } from '../data/company';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'ko' } = Astro.props;
+const company = getCompany(lang);
 ---
 
 <section
@@ -40,7 +50,7 @@ import { company } from '../data/company';
         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
         <span class="relative inline-flex h-2 w-2 rounded-full bg-cyan-400"></span>
       </span>
-      대한민국 중소기업 보안의 표준
+      {t('hero.badge', lang)}
     </div>
 
     <!-- Main headline -->
@@ -95,7 +105,7 @@ import { company } from '../data/company';
           <polyline points="16 18 22 12 16 6" />
           <polyline points="8 6 2 12 8 18" />
         </svg>
-        무료로 시작하기
+        {t('hero.cta.start', lang)}
         <svg
           class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
           viewBox="0 0 24 24"
@@ -111,7 +121,7 @@ import { company } from '../data/company';
       </a>
 
       <a
-        href="/contact"
+        href={localePath('/contact', lang)}
         class="group inline-flex items-center gap-2 rounded-xl border border-slate-600 bg-navy-800/80 px-8 py-4 text-base font-semibold text-slate-200 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/60 hover:bg-navy-700/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-navy-900"
       >
         <!-- Chat icon -->
@@ -127,7 +137,7 @@ import { company } from '../data/company';
         >
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
-        문의하기
+        {t('hero.cta.contact', lang)}
       </a>
     </div>
 
@@ -187,7 +197,7 @@ import { company } from '../data/company';
 
     <!-- Scroll indicator -->
     <div class="animate-fade-in-up mt-16 flex flex-col items-center gap-2 text-slate-500" style="animation-delay: 0.8s;">
-      <span class="text-xs uppercase tracking-widest">스크롤</span>
+      <span class="text-xs uppercase tracking-widest">{t('hero.scroll', lang)}</span>
       <svg
         class="h-5 w-5 animate-bounce"
         viewBox="0 0 24 24"

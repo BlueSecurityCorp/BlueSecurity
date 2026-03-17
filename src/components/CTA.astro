@@ -1,5 +1,13 @@
 ---
-// Bottom call-to-action section
+import type { Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'ko' } = Astro.props;
 ---
 
 <section
@@ -61,15 +69,15 @@
         id="cta-heading"
         class="mb-4 text-4xl font-black text-white md:text-5xl"
       >
-        지금 바로 <span class="text-gradient">시작하세요</span>
+        {t('cta.heading.prefix', lang)}<span class="text-gradient">{t('cta.heading.accent', lang)}</span>
       </h2>
 
       <!-- Description -->
       <p class="mx-auto mb-4 max-w-xl text-lg leading-relaxed text-slate-300">
-        CodeBlue를 무료로 체험하고, AI가 당신의 코드에서 찾아내는 보안 취약점을 직접 확인하세요.
+        {t('cta.description', lang)}
       </p>
       <p class="mx-auto mb-10 max-w-md text-sm text-slate-500">
-        신용카드 불필요 · 즉시 사용 가능 · 한국어 리포트 제공
+        {t('cta.trust', lang)}
       </p>
 
       <!-- CTA buttons -->
@@ -97,7 +105,7 @@
             <polyline points="16 18 22 12 16 6" />
             <polyline points="8 6 2 12 8 18" />
           </svg>
-          CodeBlue 무료 체험
+          {t('cta.button.start', lang)}
           <svg
             class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
             viewBox="0 0 24 24"
@@ -113,7 +121,7 @@
         </a>
 
         <a
-          href="/contact"
+          href={localePath('/contact', lang)}
           class="group inline-flex items-center gap-2 rounded-xl border border-slate-600/80 bg-navy-900/60 px-8 py-4 text-base font-semibold text-slate-200 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:bg-navy-800/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-navy-800"
         >
           <svg
@@ -128,7 +136,7 @@
           >
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
-          전문가 상담 요청
+          {t('cta.button.consult', lang)}
         </a>
       </div>
 
@@ -147,7 +155,7 @@
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           <path d="m9 12 2 2 4-4" />
         </svg>
-        OWASP Top 10 · CWE · ISMS-P 기준 완벽 대응
+        {t('cta.compliance', lang)}
       </p>
     </div>
   </div>

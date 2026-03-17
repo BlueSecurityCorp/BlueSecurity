@@ -1,18 +1,30 @@
 ---
-import { products } from '../data/products';
+import type { Locale } from '../i18n/index';
+import { localePath, switchLocalePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getProducts } from '../data/products';
 
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'ko' } = Astro.props;
+const products = getProducts(lang);
 const currentPath = Astro.url.pathname;
 
 function isActive(href: string) {
   if (href === '/') return currentPath === '/';
   return currentPath.startsWith(href);
 }
+
+const koPath = switchLocalePath(currentPath, 'ko');
+const enPath = switchLocalePath(currentPath, 'en');
 ---
 
 <header class="site-header">
   <nav class="nav-inner">
     <!-- Logo -->
-    <a href="/" class="logo-link" aria-label="BlueSecurity 홈">
+    <a href={localePath('/', lang)} class="logo-link" aria-label={t('nav.home', lang)}>
       <span class="logo-icon" aria-hidden="true">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -48,10 +60,10 @@ function isActive(href: string) {
     <ul class="desktop-nav" role="list">
       <li>
         <a
-          href="/about"
+          href={localePath('/about', lang)}
           class:list={['nav-link', { 'nav-link--active': isActive('/about') }]}
         >
-          회사 소개
+          {t('nav.about', lang)}
         </a>
       </li>
 
@@ -63,7 +75,7 @@ function isActive(href: string) {
           aria-controls="products-dropdown"
           type="button"
         >
-          제품
+          {t('nav.products', lang)}
           <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -71,7 +83,7 @@ function isActive(href: string) {
 
         <div id="products-dropdown" class="dropdown-menu" role="menu">
           <div class="dropdown-header">
-            <span class="dropdown-header-label">제품 라인업</span>
+            <span class="dropdown-header-label">{t('nav.products.lineup', lang)}</span>
           </div>
           {products.map((product) => (
             <a
@@ -115,8 +127,8 @@ function isActive(href: string) {
             </a>
           ))}
           <div class="dropdown-footer">
-            <a href="/pricing" class="dropdown-footer-link">
-              가격 보기
+            <a href={localePath('/pricing', lang)} class="dropdown-footer-link">
+              {t('nav.pricing.view', lang)}
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                 <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -127,15 +139,32 @@ function isActive(href: string) {
 
       <li>
         <a
-          href="/pricing"
+          href={localePath('/pricing', lang)}
           class:list={['nav-link', { 'nav-link--active': isActive('/pricing') }]}
         >
-          가격
+          {t('nav.pricing', lang)}
         </a>
       </li>
 
       <li>
-        <a href="/contact" class="nav-cta">문의하기</a>
+        <a href={localePath('/contact', lang)} class="nav-cta">{t('nav.contact', lang)}</a>
+      </li>
+
+      <!-- Language toggle -->
+      <li class="lang-toggle" aria-label="Language">
+        <a
+          href={koPath}
+          class:list={['lang-link', { 'lang-link--active': lang === 'ko' }]}
+          hreflang="ko"
+          aria-label="한국어"
+        >KO</a>
+        <span class="lang-divider" aria-hidden="true">|</span>
+        <a
+          href={enPath}
+          class:list={['lang-link', { 'lang-link--active': lang === 'en' }]}
+          hreflang="en"
+          aria-label="English"
+        >EN</a>
       </li>
     </ul>
 
@@ -153,13 +182,13 @@ function isActive(href: string) {
   <!-- Mobile Navigation -->
   <div class="mobile-nav" id="mobile-nav" role="dialog" aria-label="모바일 내비게이션">
     <div class="mobile-nav-inner">
-      <a href="/about" class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive('/about') }]}>
-        회사 소개
+      <a href={localePath('/about', lang)} class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive('/about') }]}>
+        {t('nav.about', lang)}
       </a>
 
       <!-- Mobile products section -->
       <div class="mobile-products-section">
-        <span class="mobile-section-label">제품</span>
+        <span class="mobile-section-label">{t('nav.products', lang)}</span>
         {products.map((product) => (
           <a
             href={product.href}
@@ -171,13 +200,20 @@ function isActive(href: string) {
         ))}
       </div>
 
-      <a href="/pricing" class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive('/pricing') }]}>
-        가격
+      <a href={localePath('/pricing', lang)} class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive('/pricing') }]}>
+        {t('nav.pricing', lang)}
       </a>
 
-      <a href="/contact" class="mobile-nav-cta">
-        문의하기
+      <a href={localePath('/contact', lang)} class="mobile-nav-cta">
+        {t('nav.contact', lang)}
       </a>
+
+      <!-- Mobile language toggle -->
+      <div class="mobile-lang-toggle">
+        <a href={koPath} class:list={['lang-link', { 'lang-link--active': lang === 'ko' }]} hreflang="ko">KO</a>
+        <span class="lang-divider" aria-hidden="true">|</span>
+        <a href={enPath} class:list={['lang-link', { 'lang-link--active': lang === 'en' }]} hreflang="en">EN</a>
+      </div>
     </div>
   </div>
 </header>
@@ -618,5 +654,46 @@ function isActive(href: string) {
   /* Also highlight the toggle on active state */
   .site-header:has(.mobile-menu-checkbox:checked) .mobile-toggle {
     background-color: rgba(59, 130, 246, 0.12);
+  }
+
+  /* ── Language toggle ─────────────────────────────────────────────── */
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+    padding: 0 0.25rem;
+  }
+
+  .lang-link {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #64748b;
+    text-decoration: none;
+    padding: 0.2rem 0.3rem;
+    border-radius: 0.25rem;
+    transition: color 0.2s ease;
+  }
+
+  .lang-link:hover {
+    color: #94a3b8;
+  }
+
+  .lang-link--active {
+    color: #60a5fa;
+  }
+
+  .lang-divider {
+    font-size: 0.7rem;
+    color: #334155;
+  }
+
+  .mobile-lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.25rem;
   }
 </style>

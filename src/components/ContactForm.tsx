@@ -1,10 +1,77 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 
 // ---------------------------------------------------------------------------
+// i18n (inline translations — mirrors src/i18n/ui.ts for form keys)
+// ---------------------------------------------------------------------------
+
+type Locale = 'ko' | 'en';
+
+const formUI = {
+  ko: {
+    name: '이름',
+    namePlaceholder: '홍길동',
+    email: '이메일',
+    emailPlaceholder: 'example@company.com',
+    company: '회사명',
+    companyPlaceholder: '(주)블루시큐리티',
+    companyOptional: '(선택)',
+    type: '문의 유형',
+    message: '문의 내용',
+    messagePlaceholder: '문의하실 내용을 자세히 작성해 주세요.',
+    privacy: '입력하신 개인정보는 문의 응대 목적으로만 사용되며, 답변 완료 후 안전하게 파기됩니다.',
+    submit: '문의 보내기',
+    submitting: '전송 중…',
+    successHeading: '문의가 접수되었습니다',
+    successDescription: '소중한 문의 감사합니다. 영업일 기준 24시간 이내에 이메일로 답변 드리겠습니다.',
+    successReset: '새 문의 작성',
+    error: '전송 중 오류가 발생했습니다.',
+    errorName: '이름을 입력해 주세요.',
+    errorEmailRequired: '이메일 주소를 입력해 주세요.',
+    errorEmailInvalid: '올바른 이메일 형식이 아닙니다.',
+    errorMessageRequired: '문의 내용을 입력해 주세요.',
+    errorMessageMin: '문의 내용을 10자 이상 입력해 주세요.',
+    typeProduct: '제품 문의',
+    typeQuote: '견적 요청',
+    typeSupport: '기술 지원',
+    typeOther: '기타',
+    ariaLabel: '문의하기 양식',
+  },
+  en: {
+    name: 'Name',
+    namePlaceholder: 'John Doe',
+    email: 'Email',
+    emailPlaceholder: 'example@company.com',
+    company: 'Company',
+    companyPlaceholder: 'BlueSecurity Inc.',
+    companyOptional: '(Optional)',
+    type: 'Inquiry Type',
+    message: 'Message',
+    messagePlaceholder: 'Please describe your inquiry in detail.',
+    privacy: 'Your personal information will only be used for responding to your inquiry and will be safely disposed of after the response is complete.',
+    submit: 'Send Message',
+    submitting: 'Sending…',
+    successHeading: 'Message Received',
+    successDescription: 'Thank you for your inquiry. We will respond via email within 24 business hours.',
+    successReset: 'Send Another Message',
+    error: 'An error occurred while sending.',
+    errorName: 'Please enter your name.',
+    errorEmailRequired: 'Please enter your email address.',
+    errorEmailInvalid: 'Please enter a valid email address.',
+    errorMessageRequired: 'Please enter your message.',
+    errorMessageMin: 'Please enter at least 10 characters.',
+    typeProduct: 'Product Inquiry',
+    typeQuote: 'Quote Request',
+    typeSupport: 'Technical Support',
+    typeOther: 'Other',
+    ariaLabel: 'Contact form',
+  },
+} as const;
+
+// ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
-type InquiryType = '제품 문의' | '견적 요청' | '기술 지원' | '기타';
+type InquiryType = string;
 
 interface FormData {
   name: string;
@@ -28,20 +95,19 @@ type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORM_ID';
 
-const INQUIRY_OPTIONS: InquiryType[] = [
-  '제품 문의',
-  '견적 요청',
-  '기술 지원',
-  '기타',
-];
+function getInquiryOptions(ui: typeof formUI[Locale]): InquiryType[] {
+  return [ui.typeProduct, ui.typeQuote, ui.typeSupport, ui.typeOther];
+}
 
-const INITIAL_FORM: FormData = {
-  name: '',
-  email: '',
-  company: '',
-  inquiryType: '제품 문의',
-  message: '',
-};
+function makeInitialForm(ui: typeof formUI[Locale]): FormData {
+  return {
+    name: '',
+    email: '',
+    company: '',
+    inquiryType: ui.typeProduct,
+    message: '',
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Validation
@@ -49,23 +115,23 @@ const INITIAL_FORM: FormData = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function validate(data: FormData): FormErrors {
+function validate(data: FormData, ui: typeof formUI[Locale]): FormErrors {
   const errors: FormErrors = {};
 
   if (!data.name.trim()) {
-    errors.name = '이름을 입력해 주세요.';
+    errors.name = ui.errorName;
   }
 
   if (!data.email.trim()) {
-    errors.email = '이메일 주소를 입력해 주세요.';
+    errors.email = ui.errorEmailRequired;
   } else if (!EMAIL_RE.test(data.email)) {
-    errors.email = '올바른 이메일 형식이 아닙니다.';
+    errors.email = ui.errorEmailInvalid;
   }
 
   if (!data.message.trim()) {
-    errors.message = '문의 내용을 입력해 주세요.';
+    errors.message = ui.errorMessageRequired;
   } else if (data.message.trim().length < 10) {
-    errors.message = '문의 내용을 10자 이상 입력해 주세요.';
+    errors.message = ui.errorMessageMin;
   }
 
   return errors;
@@ -79,18 +145,19 @@ interface FieldProps {
   id: string;
   label: string;
   optional?: boolean;
+  optionalLabel?: string;
   error?: string;
   children: React.ReactNode;
 }
 
-function Field({ id, label, optional, error, children }: FieldProps) {
+function Field({ id, label, optional, optionalLabel, error, children }: FieldProps) {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-sm font-medium text-slate-300">
         {label}
         {optional && (
           <span className="ml-1.5 text-xs font-normal text-slate-500">
-            (선택)
+            {optionalLabel ?? '(선택)'}
           </span>
         )}
       </label>
@@ -130,7 +197,15 @@ const inputError  = `${inputBase} border-red-500/70 focus:border-red-400`;
 // Main component
 // ---------------------------------------------------------------------------
 
-export default function ContactForm() {
+interface ContactFormProps {
+  lang?: Locale;
+}
+
+export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
+  const ui = formUI[lang];
+  const INQUIRY_OPTIONS = getInquiryOptions(ui);
+  const INITIAL_FORM = makeInitialForm(ui);
+
   const [form, setForm]         = useState<FormData>(INITIAL_FORM);
   const [errors, setErrors]     = useState<FormErrors>({});
   const [touched, setTouched]   = useState<Partial<Record<keyof FormData, boolean>>>({});
@@ -149,7 +224,7 @@ export default function ContactForm() {
     // Re-validate touched fields on change
     if (touched[name as keyof FormData]) {
       const next = { ...form, [name]: value };
-      const nextErrors = validate(next);
+      const nextErrors = validate(next, ui);
       setErrors((prev) => ({
         ...prev,
         [name]: nextErrors[name as keyof FormErrors],
@@ -162,7 +237,7 @@ export default function ContactForm() {
   ) {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
-    const nextErrors = validate(form);
+    const nextErrors = validate(form, ui);
     setErrors((prev) => ({
       ...prev,
       [name]: nextErrors[name as keyof FormErrors],
@@ -174,7 +249,7 @@ export default function ContactForm() {
 
     // Mark all validatable fields as touched
     setTouched({ name: true, email: true, message: true });
-    const nextErrors = validate(form);
+    const nextErrors = validate(form, ui);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) return;
@@ -245,12 +320,10 @@ export default function ContactForm() {
 
         <div>
           <h3 className="mb-2 text-xl font-semibold text-slate-100">
-            문의가 접수되었습니다
+            {ui.successHeading}
           </h3>
           <p className="text-sm leading-relaxed text-slate-400">
-            소중한 문의 감사합니다.
-            <br />
-            영업일 기준 24시간 이내에 이메일로 답변 드리겠습니다.
+            {ui.successDescription}
           </p>
         </div>
 
@@ -259,7 +332,7 @@ export default function ContactForm() {
           onClick={handleReset}
           className="mt-2 rounded-lg border border-slate-700 bg-slate-800 px-6 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-blue-600 hover:text-blue-400"
         >
-          새 문의 작성
+          {ui.successReset}
         </button>
       </div>
     );
@@ -275,7 +348,7 @@ export default function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      aria-label="문의하기 양식"
+      aria-label={ui.ariaLabel}
       className="flex flex-col gap-5"
     >
       {/* Error banner */}
@@ -297,27 +370,26 @@ export default function ContactForm() {
             />
           </svg>
           <span>
-            전송 중 오류가 발생했습니다. 잠시 후 다시 시도하거나{' '}
+            {ui.error}{' '}
             <a
               href="mailto:blue@bluesecurity.online"
               className="underline underline-offset-2 hover:text-red-200"
             >
               blue@bluesecurity.online
             </a>
-            으로 직접 연락해 주세요.
           </span>
         </div>
       )}
 
-      {/* Row: 이름 + 이메일 */}
+      {/* Row: name + email */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <Field id="name" label="이름" error={errors.name}>
+        <Field id="name" label={ui.name} error={errors.name}>
           <input
             id="name"
             name="name"
             type="text"
             autoComplete="name"
-            placeholder="홍길동"
+            placeholder={ui.namePlaceholder}
             value={form.name}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -328,13 +400,13 @@ export default function ContactForm() {
           />
         </Field>
 
-        <Field id="email" label="이메일" error={errors.email}>
+        <Field id="email" label={ui.email} error={errors.email}>
           <input
             id="email"
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="example@company.com"
+            placeholder={ui.emailPlaceholder}
             value={form.email}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -345,15 +417,15 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      {/* Row: 회사명 + 문의 유형 */}
+      {/* Row: company + inquiry type */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <Field id="company" label="회사명" optional>
+        <Field id="company" label={ui.company} optional optionalLabel={ui.companyOptional}>
           <input
             id="company"
             name="company"
             type="text"
             autoComplete="organization"
-            placeholder="(주)블루시큐리티"
+            placeholder={ui.companyPlaceholder}
             value={form.company}
             onChange={handleChange}
             disabled={isLoading}
@@ -361,7 +433,7 @@ export default function ContactForm() {
           />
         </Field>
 
-        <Field id="inquiryType" label="문의 유형">
+        <Field id="inquiryType" label={ui.type}>
           <select
             id="inquiryType"
             name="inquiryType"
@@ -379,13 +451,13 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      {/* 내용 */}
-      <Field id="message" label="내용" error={errors.message}>
+      {/* message */}
+      <Field id="message" label={ui.message} error={errors.message}>
         <textarea
           id="message"
           name="message"
           rows={6}
-          placeholder="문의하실 내용을 자세히 작성해 주세요. (예: 현재 보안 환경, 도입하고자 하는 제품, 예산 규모 등)"
+          placeholder={ui.messagePlaceholder}
           value={form.message}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -397,8 +469,7 @@ export default function ContactForm() {
 
       {/* Privacy notice */}
       <p className="text-xs leading-relaxed text-slate-500">
-        입력하신 개인정보는 문의 응대 목적으로만 사용되며, 답변 완료 후
-        안전하게 파기됩니다.
+        {ui.privacy}
       </p>
 
       {/* Submit */}
@@ -435,11 +506,11 @@ export default function ContactForm() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
               />
             </svg>
-            전송 중…
+            {ui.submitting}
           </>
         ) : (
           <>
-            문의 보내기
+            {ui.submit}
             <svg
               aria-hidden="true"
               className="h-4 w-4"

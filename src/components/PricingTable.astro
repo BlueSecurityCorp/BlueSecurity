@@ -1,6 +1,15 @@
 ---
-import { pricing } from '../data/pricing.ts';
+import type { Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getPricing } from '../data/pricing.ts';
 
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'ko' } = Astro.props;
+const pricing = getPricing(lang);
 const codeblue = pricing.find((p) => p.productId === 'codeblue');
 const tiers = codeblue?.tiers ?? [];
 
@@ -29,7 +38,7 @@ const tierIcons: Record<string, string> = {
           {tier.highlighted && (
             <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
               <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-0.5 text-xs font-semibold tracking-wide text-white">
-                추천
+                {t('pricing.recommended', lang)}
               </span>
             </div>
           )}
@@ -45,7 +54,7 @@ const tierIcons: Record<string, string> = {
             {/* Price */}
             <div class="flex items-baseline gap-1">
               {tier.price === '0' ? (
-                <span class="text-4xl font-extrabold text-white">무료</span>
+                <span class="text-4xl font-extrabold text-white">{t('pricing.free', lang)}</span>
               ) : (
                 <>
                   <span class="text-sm font-medium text-slate-400">₩</span>
@@ -94,14 +103,14 @@ const tierIcons: Record<string, string> = {
 
           {/* CTA */}
           <a
-            href={tier.cta === '문의하기' ? '/contact' : 'https://codeblue.bluesecurity.online'}
-            target={tier.cta === '문의하기' ? undefined : '_blank'}
-            rel={tier.cta === '문의하기' ? undefined : 'noopener noreferrer'}
+            href={tier.name === 'Business' ? localePath('/contact', lang) : 'https://codeblue.bluesecurity.online'}
+            target={tier.name === 'Business' ? undefined : '_blank'}
+            rel={tier.name === 'Business' ? undefined : 'noopener noreferrer'}
             class={[
               'mt-auto block rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition-all duration-200',
               tier.highlighted
                 ? 'bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-900/50'
-                : tier.cta === '문의하기'
+                : tier.name === 'Business'
                   ? 'border border-blue-700 text-blue-300 hover:bg-blue-900/40'
                   : 'border border-blue-800 text-slate-200 hover:border-blue-600 hover:text-white',
             ].join(' ')}
@@ -133,9 +142,10 @@ const tierIcons: Record<string, string> = {
     </svg>
     <p class="text-sm text-slate-400">
       <strong class="font-semibold text-slate-200">BluePhalanx</strong>,{' '}
-      <strong class="font-semibold text-slate-200">BlueProxy</strong>는 맞춤 견적을 제공합니다.{' '}
-      <a href="/contact" class="text-blue-400 underline underline-offset-2 hover:text-blue-300">
-        문의하기 →
+      <strong class="font-semibold text-slate-200">BlueProxy</strong>{' '}
+      {t('pricing.custom.note', lang)}{' '}
+      <a href={localePath('/contact', lang)} class="text-blue-400 underline underline-offset-2 hover:text-blue-300">
+        {t('nav.contact', lang)} →
       </a>
     </p>
   </div>

@@ -1,13 +1,23 @@
 ---
-import { company } from '../data/company';
-import { products } from '../data/products';
+import type { Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getCompany } from '../data/company';
+import { getProducts } from '../data/products';
 
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'ko' } = Astro.props;
+const company = getCompany(lang);
+const products = getProducts(lang);
 const currentYear = new Date().getFullYear();
 
 const companyLinks = [
-  { href: '/about', label: '회사 소개' },
-  { href: '/pricing', label: '가격' },
-  { href: '/contact', label: '문의하기' },
+  { href: localePath('/about', lang), label: t('nav.about', lang) },
+  { href: localePath('/pricing', lang), label: t('nav.pricing', lang) },
+  { href: localePath('/contact', lang), label: t('nav.contact', lang) },
 ];
 
 // Placeholder social links — swap hrefs when accounts are live
@@ -47,7 +57,7 @@ const socialLinks = [
 
       <!-- Brand column -->
       <div class="footer-brand">
-        <a href="/" class="footer-logo" aria-label="BlueSecurity 홈">
+        <a href={localePath('/', lang)} class="footer-logo" aria-label={t('nav.home', lang)}>
           <span class="footer-logo-icon" aria-hidden="true">
             <svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -102,7 +112,7 @@ const socialLinks = [
 
       <!-- Products column -->
       <div class="footer-nav-col">
-        <h3 class="footer-col-heading">제품</h3>
+        <h3 class="footer-col-heading">{t('footer.products', lang)}</h3>
         <ul class="footer-nav-list" role="list">
           {products.map((product) => (
             <li>
@@ -118,7 +128,7 @@ const socialLinks = [
 
       <!-- Company column -->
       <div class="footer-nav-col">
-        <h3 class="footer-col-heading">회사</h3>
+        <h3 class="footer-col-heading">{t('footer.company', lang)}</h3>
         <ul class="footer-nav-list" role="list">
           {companyLinks.map((link) => (
             <li>
@@ -133,7 +143,7 @@ const socialLinks = [
 
       <!-- Contact column -->
       <div class="footer-nav-col">
-        <h3 class="footer-col-heading">연락처</h3>
+        <h3 class="footer-col-heading">{t('footer.contact', lang)}</h3>
         <ul class="footer-contact-list" role="list">
           <li>
             <a href={`mailto:${company.email}`} class="footer-contact-link">
@@ -149,14 +159,14 @@ const socialLinks = [
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 6v6l4 2"/>
             </svg>
-            평일 09:00 – 18:00 (KST)
+            {t('footer.hours', lang)}
           </li>
         </ul>
 
         <!-- CTA card -->
         <div class="footer-cta-card">
-          <p class="footer-cta-text">무료 보안 컨설팅</p>
-          <a href="/contact" class="footer-cta-btn">지금 문의하기</a>
+          <p class="footer-cta-text">{t('footer.consult', lang)}</p>
+          <a href={localePath('/contact', lang)} class="footer-cta-btn">{t('footer.consult.cta', lang)}</a>
         </div>
       </div>
 
@@ -168,11 +178,11 @@ const socialLinks = [
         &copy; {currentYear} BlueSecurity. All rights reserved.
       </p>
       <div class="footer-bottom-links">
-        <a href="/privacy" class="footer-bottom-link">개인정보처리방침</a>
+        <a href={localePath('/privacy', lang)} class="footer-bottom-link">{t('footer.privacy', lang)}</a>
         <span class="footer-divider" aria-hidden="true">/</span>
-        <a href="/terms" class="footer-bottom-link">이용약관</a>
+        <a href={localePath('/terms', lang)} class="footer-bottom-link">{t('footer.terms', lang)}</a>
         <span class="footer-divider" aria-hidden="true">/</span>
-        <span class="footer-founded">설립 {company.founded}</span>
+        <span class="footer-founded">{t('footer.founded', lang)} {company.founded}</span>
       </div>
     </div>
   </div>

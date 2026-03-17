@@ -1,21 +1,26 @@
 ---
+import type { Locale } from '../i18n/index';
+
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  lang?: Locale;
 }
 
 const {
   title,
   description = 'BlueSecurity - 한국 중소기업을 위한 기업급 사이버보안 솔루션',
   ogImage = '/og/default.png',
+  lang = 'ko',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogLocale = lang === 'en' ? 'en_US' : 'ko_KR';
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +33,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, Astro.site)} />
-    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

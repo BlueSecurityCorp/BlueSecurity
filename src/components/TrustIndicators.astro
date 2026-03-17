@@ -1,5 +1,15 @@
 ---
-import { stats, techHighlights } from '../data/company';
+import type { Locale } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getStats, getTechHighlights } from '../data/company';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'ko' } = Astro.props;
+const stats = getStats(lang);
+const techHighlights = getTechHighlights(lang);
 ---
 
 <section
@@ -23,14 +33,13 @@ import { stats, techHighlights } from '../data/company';
     <!-- Section heading -->
     <div class="mb-16 text-center">
       <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-400">
-        신뢰할 수 있는 보안
+        {t('trust.eyebrow', lang)}
       </p>
       <h2
         id="trust-heading"
         class="text-4xl font-black text-white md:text-5xl"
       >
-        숫자로 증명하는
-        <span class="text-gradient"> 기술력</span>
+        {t('trust.heading', lang)}
       </h2>
     </div>
 
@@ -75,9 +84,9 @@ import { stats, techHighlights } from '../data/company';
     <!-- Tech highlights grid -->
     <div class="mb-4 text-center">
       <h3 class="text-2xl font-bold text-white md:text-3xl">
-        왜 BlueSecurity인가?
+        {t('trust.why.heading', lang)}
       </h3>
-      <p class="mt-3 text-slate-400">최신 기술과 한국 시장 최적화의 결합</p>
+      <p class="mt-3 text-slate-400">{t('trust.why.subtitle', lang)}</p>
     </div>
 
     <div class="stagger-children mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

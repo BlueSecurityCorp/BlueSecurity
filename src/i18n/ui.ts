@@ -1,0 +1,296 @@
+import type { Locale } from './index';
+
+const ui = {
+  ko: {
+    // Navigation
+    'nav.about': '회사 소개',
+    'nav.products': '제품',
+    'nav.products.lineup': '제품 라인업',
+    'nav.pricing': '가격',
+    'nav.pricing.view': '가격 보기',
+    'nav.contact': '문의하기',
+    'nav.home': 'BlueSecurity 홈',
+
+    // Hero
+    'hero.badge': '대한민국 중소기업 보안의 표준',
+    'hero.cta.start': '무료로 시작하기',
+    'hero.cta.contact': '문의하기',
+    'hero.scroll': '스크롤',
+
+    // Products section
+    'products.eyebrow': '제품 라인업',
+    'products.heading': '보안의 전 단계를',
+    'products.heading.accent': ' 하나로',
+    'products.subtitle': '소스코드 분석부터 악성코드 탐지, 모의해킹까지 — 중소기업에 필요한 보안을 합리적 비용으로',
+    'products.card.more': '자세히 보기',
+
+    // Trust indicators
+    'trust.eyebrow': '신뢰할 수 있는 보안',
+    'trust.heading': '숫자로 증명하는 기술력',
+    'trust.why.heading': '왜 BlueSecurity인가?',
+    'trust.why.subtitle': '최신 기술과 한국 시장 최적화의 결합',
+
+    // CTA
+    'cta.heading.prefix': '지금 바로 ',
+    'cta.heading.accent': '시작하세요',
+    'cta.description': 'CodeBlue를 무료로 체험하고, AI가 당신의 코드에서 찾아내는 보안 취약점을 직접 확인하세요.',
+    'cta.trust': '신용카드 불필요 · 즉시 사용 가능 · 한국어 리포트 제공',
+    'cta.button.start': 'CodeBlue 무료 체험',
+    'cta.button.consult': '전문가 상담 요청',
+    'cta.compliance': 'OWASP Top 10 · CWE · ISMS-P 기준 완벽 대응',
+
+    // About page
+    'about.title': '회사 소개 | BlueSecurity',
+    'about.meta': 'BlueSecurity의 미션, 비전, 기술 역량을 소개합니다.',
+    'about.eyebrow': 'Company',
+    'about.heading': '회사 소개',
+    'about.mission': '미션',
+    'about.vision': '비전',
+    'about.history.eyebrow': 'History',
+    'about.history.heading': '주요 연혁',
+    'about.tech.eyebrow': 'Technology',
+    'about.tech.heading': '핵심 기술',
+    'about.tech.subtitle': '검증된 기술력과 전문 컨설팅으로 중소기업에 최적화된 보안 환경을 구축합니다.',
+    'about.cta': '합리적 보안, 지금 시작하세요',
+    'about.cta.description': '제품 데모 또는 도입 상담이 필요하시면 언제든지 문의해 주세요.',
+    'about.cta.products': '제품 살펴보기',
+
+    // Pricing page
+    'pricing.title': '가격 정책 | BlueSecurity',
+    'pricing.meta': 'CodeBlue 요금제를 확인하세요. 투명한 가격으로 기업급 보안을 제공합니다.',
+    'pricing.heading': '가격 정책',
+    'pricing.subtitle': '숨겨진 비용 없이 투명한 가격으로 제공합니다. 팀 규모와 요구사항에 맞는 플랜을 선택하세요.',
+    'pricing.annual': '연간 구독 시 20% 할인 적용',
+    'pricing.faq.heading': '자주 묻는 질문',
+    'pricing.custom.heading': '맞춤형 견적이 필요하신가요?',
+    'pricing.custom.description': '대규모 팀이나 특수 요구사항이 있으신 경우, 전담 매니저가 최적의 솔루션을 제안해 드립니다.',
+    'pricing.custom.cta': '맞춤 견적 문의하기 →',
+    'pricing.recommended': '추천',
+    'pricing.free': '무료',
+    'pricing.custom.note': '맞춤 견적을 제공합니다.',
+
+    // Contact page
+    'contact.title': '문의하기 | BlueSecurity',
+    'contact.meta': 'BlueSecurity 제품 문의, 견적 요청, 기술 지원 등 궁금한 점이 있으시면 언제든지 연락해 주세요.',
+    'contact.heading': '문의하기',
+    'contact.subtitle': 'BlueSecurity에 대해 궁금한 점이 있으시면 언제든 연락해 주세요.',
+    'contact.email.heading': '이메일 문의',
+    'contact.email.button': '이메일 보내기',
+    'contact.response.heading': '응답 안내',
+    'contact.response.time': '영업일 기준 24시간 이내 답변',
+    'contact.response.detail': '평일 09:00–18:00 (KST) 기준으로 처리됩니다. 긴급 보안 이슈는 이메일 제목에 [긴급]을 표기해 주세요.',
+    'contact.type.heading': '문의 유형',
+    'contact.form.heading': '문의 양식 작성',
+    'contact.form.required': '표시 항목은 필수 입력 사항입니다.',
+
+    // Contact form
+    'form.name': '이름',
+    'form.name.placeholder': '홍길동',
+    'form.email': '이메일',
+    'form.email.placeholder': 'example@company.com',
+    'form.company': '회사명',
+    'form.company.placeholder': '(주)블루시큐리티',
+    'form.company.optional': '(선택)',
+    'form.type': '문의 유형',
+    'form.type.product': '제품 문의',
+    'form.type.quote': '견적 요청',
+    'form.type.support': '기술 지원',
+    'form.type.other': '기타',
+    'form.message': '문의 내용',
+    'form.message.placeholder': '문의하실 내용을 자세히 작성해 주세요.',
+    'form.privacy': '입력하신 개인정보는 문의 응대 목적으로만 사용되며, 답변 완료 후 안전하게 파기됩니다.',
+    'form.submit': '문의 보내기',
+    'form.submitting': '전송 중…',
+    'form.success.heading': '문의가 접수되었습니다',
+    'form.success.description': '소중한 문의 감사합니다. 영업일 기준 24시간 이내에 이메일로 답변 드리겠습니다.',
+    'form.success.reset': '새 문의 작성',
+    'form.error': '전송 중 오류가 발생했습니다.',
+    'form.error.name': '이름을 입력해 주세요.',
+    'form.error.email.required': '이메일 주소를 입력해 주세요.',
+    'form.error.email.invalid': '올바른 이메일 형식이 아닙니다.',
+    'form.error.message.required': '문의 내용을 입력해 주세요.',
+    'form.error.message.min': '문의 내용을 10자 이상 입력해 주세요.',
+
+    // Products pages
+    'products.page.title': '제품 소개 | BlueSecurity',
+    'products.page.meta': 'BlueSecurity의 사이버보안 제품 및 서비스',
+    'products.page.eyebrow': '제품 포트폴리오',
+    'products.page.heading': '제품 소개',
+    'products.page.subtitle': '소스코드 분석, 악성코드 탐지, 모의해킹까지 중소기업에 필요한 보안 솔루션과 전문 컨설팅을 합리적 비용으로 제공합니다.',
+    'products.page.bundle.heading': '제품과 서비스를 함께 도입하면 더 강력합니다',
+    'products.page.bundle.description': '개발(CodeBlue) → 위협 탐지(BluePhalanx) → 모의해킹 검증으로 이어지는 완전한 보안 사이클을 합리적인 비용으로 구축하세요.',
+    'products.page.bundle.cta': '통합 도입 문의',
+    'products.page.pricing': '요금 안내',
+    'products.detail.features': '주요 기능',
+    'products.detail.start': '무료로 시작하기',
+    'products.detail.contact': '문의하기',
+    'products.detail.others': '다른 제품 보기',
+    'products.detail.home': '홈',
+    'products.detail.products': '제품',
+
+    // Footer
+    'footer.products': '제품',
+    'footer.company': '회사',
+    'footer.contact': '연락처',
+    'footer.email': '이메일',
+    'footer.hours': '평일 09:00 – 18:00 (KST)',
+    'footer.consult': '무료 보안 컨설팅',
+    'footer.consult.cta': '지금 문의하기',
+    'footer.privacy': '개인정보처리방침',
+    'footer.terms': '이용약관',
+    'footer.founded': '설립',
+
+    // Common
+    'common.learnMore': '자세히 보기',
+    'common.contact': '문의하기',
+  },
+  en: {
+    // Navigation
+    'nav.about': 'About',
+    'nav.products': 'Products',
+    'nav.products.lineup': 'Product Lineup',
+    'nav.pricing': 'Pricing',
+    'nav.pricing.view': 'View Pricing',
+    'nav.contact': 'Contact',
+    'nav.home': 'BlueSecurity Home',
+
+    // Hero
+    'hero.badge': 'Security Standard for Korean SMEs',
+    'hero.cta.start': 'Get Started Free',
+    'hero.cta.contact': 'Contact Us',
+    'hero.scroll': 'Scroll',
+
+    // Products section
+    'products.eyebrow': 'Product Lineup',
+    'products.heading': 'All Stages of Security',
+    'products.heading.accent': ' in One',
+    'products.subtitle': 'From source code analysis to malware detection and penetration testing — enterprise security at a reasonable cost for SMEs',
+    'products.card.more': 'Learn More',
+
+    // Trust indicators
+    'trust.eyebrow': 'Trusted Security',
+    'trust.heading': 'Proven by Numbers',
+    'trust.why.heading': 'Why BlueSecurity?',
+    'trust.why.subtitle': 'Cutting-edge technology optimized for the Korean market',
+
+    // CTA
+    'cta.heading.prefix': 'Get Started ',
+    'cta.heading.accent': 'Today',
+    'cta.description': 'Try CodeBlue for free and see the security vulnerabilities AI finds in your code.',
+    'cta.trust': 'No credit card required · Instant access · Reports in Korean',
+    'cta.button.start': 'Try CodeBlue Free',
+    'cta.button.consult': 'Request Consultation',
+    'cta.compliance': 'Full compliance with OWASP Top 10 · CWE · ISMS-P',
+
+    // About page
+    'about.title': 'About | BlueSecurity',
+    'about.meta': 'Learn about BlueSecurity\'s mission, vision, and technology.',
+    'about.eyebrow': 'Company',
+    'about.heading': 'About Us',
+    'about.mission': 'Mission',
+    'about.vision': 'Vision',
+    'about.history.eyebrow': 'History',
+    'about.history.heading': 'Milestones',
+    'about.tech.eyebrow': 'Technology',
+    'about.tech.heading': 'Core Technology',
+    'about.tech.subtitle': 'Building security environments optimized for SMEs with proven technology and expert consulting.',
+    'about.cta': 'Start Affordable Security Today',
+    'about.cta.description': 'Contact us anytime for product demos or deployment consultations.',
+    'about.cta.products': 'View Products',
+
+    // Pricing page
+    'pricing.title': 'Pricing | BlueSecurity',
+    'pricing.meta': 'Check CodeBlue plans. Enterprise-grade security at transparent prices.',
+    'pricing.heading': 'Pricing',
+    'pricing.subtitle': 'Transparent pricing with no hidden costs. Choose the plan that fits your team size and requirements.',
+    'pricing.annual': '20% discount on annual subscription',
+    'pricing.faq.heading': 'Frequently Asked Questions',
+    'pricing.custom.heading': 'Need a custom quote?',
+    'pricing.custom.description': 'For large teams or special requirements, our dedicated manager will propose the optimal solution.',
+    'pricing.custom.cta': 'Request Custom Quote →',
+    'pricing.recommended': 'Recommended',
+    'pricing.free': 'Free',
+    'pricing.custom.note': 'Custom pricing available.',
+
+    // Contact page
+    'contact.title': 'Contact | BlueSecurity',
+    'contact.meta': 'Contact BlueSecurity for product inquiries, quotes, technical support, and more.',
+    'contact.heading': 'Contact Us',
+    'contact.subtitle': 'Have questions about BlueSecurity? Feel free to reach out anytime.',
+    'contact.email.heading': 'Email Us',
+    'contact.email.button': 'Send Email',
+    'contact.response.heading': 'Response Time',
+    'contact.response.time': 'Within 24 hours on business days',
+    'contact.response.detail': 'Processed during weekdays 09:00–18:00 (KST). For urgent security issues, please mark [URGENT] in the email subject.',
+    'contact.type.heading': 'Inquiry Types',
+    'contact.form.heading': 'Send a Message',
+    'contact.form.required': 'Fields marked with * are required.',
+
+    // Contact form
+    'form.name': 'Name',
+    'form.name.placeholder': 'John Doe',
+    'form.email': 'Email',
+    'form.email.placeholder': 'example@company.com',
+    'form.company': 'Company',
+    'form.company.placeholder': 'BlueSecurity Inc.',
+    'form.company.optional': '(Optional)',
+    'form.type': 'Inquiry Type',
+    'form.type.product': 'Product Inquiry',
+    'form.type.quote': 'Quote Request',
+    'form.type.support': 'Technical Support',
+    'form.type.other': 'Other',
+    'form.message': 'Message',
+    'form.message.placeholder': 'Please describe your inquiry in detail.',
+    'form.privacy': 'Your personal information will only be used for responding to your inquiry and will be safely disposed of after the response is complete.',
+    'form.submit': 'Send Message',
+    'form.submitting': 'Sending…',
+    'form.success.heading': 'Message Received',
+    'form.success.description': 'Thank you for your inquiry. We will respond via email within 24 business hours.',
+    'form.success.reset': 'Send Another Message',
+    'form.error': 'An error occurred while sending.',
+    'form.error.name': 'Please enter your name.',
+    'form.error.email.required': 'Please enter your email address.',
+    'form.error.email.invalid': 'Please enter a valid email address.',
+    'form.error.message.required': 'Please enter your message.',
+    'form.error.message.min': 'Please enter at least 10 characters.',
+
+    // Products pages
+    'products.page.title': 'Products | BlueSecurity',
+    'products.page.meta': 'BlueSecurity cybersecurity products and services',
+    'products.page.eyebrow': 'Product Portfolio',
+    'products.page.heading': 'Our Products',
+    'products.page.subtitle': 'From source code analysis and malware detection to penetration testing — security solutions and expert consulting for SMEs at reasonable costs.',
+    'products.page.bundle.heading': 'Stronger Together',
+    'products.page.bundle.description': 'Build a complete security cycle: Development (CodeBlue) → Threat Detection (BluePhalanx) → Penetration Testing at a reasonable cost.',
+    'products.page.bundle.cta': 'Inquire About Integration',
+    'products.page.pricing': 'View Pricing',
+    'products.detail.features': 'Key Features',
+    'products.detail.start': 'Get Started Free',
+    'products.detail.contact': 'Contact Us',
+    'products.detail.others': 'View Other Products',
+    'products.detail.home': 'Home',
+    'products.detail.products': 'Products',
+
+    // Footer
+    'footer.products': 'Products',
+    'footer.company': 'Company',
+    'footer.contact': 'Contact',
+    'footer.email': 'Email',
+    'footer.hours': 'Weekdays 09:00 – 18:00 (KST)',
+    'footer.consult': 'Free Security Consultation',
+    'footer.consult.cta': 'Contact Now',
+    'footer.privacy': 'Privacy Policy',
+    'footer.terms': 'Terms of Service',
+    'footer.founded': 'Founded',
+
+    // Common
+    'common.learnMore': 'Learn More',
+    'common.contact': 'Contact Us',
+  },
+} as const;
+
+type UIKeys = keyof typeof ui.ko;
+
+export function t(key: UIKeys, lang: Locale): string {
+  return ui[lang]?.[key] ?? ui.ko[key] ?? key;
+}

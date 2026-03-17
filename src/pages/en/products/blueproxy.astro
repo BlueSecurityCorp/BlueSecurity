@@ -1,19 +1,19 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import type { Locale } from '../../i18n/index';
-import { t } from '../../i18n/ui';
-import { getProducts } from '../../data/products';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getProducts } from '../../../data/products';
+import { t } from '../../../i18n/ui';
+import { localePath } from '../../../i18n/index';
 
-const lang = 'ko' as Locale;
+const lang = 'en' as const;
 const products = getProducts(lang);
 const product = products.find((p) => p.id === 'blueproxy')!;
 
 const platforms = [
   {
     name: 'Android',
-    description: 'APK 트래픽 분석 및 SSL 핀닝 우회 지원',
+    description: 'APK traffic analysis and SSL pinning bypass support',
     color: 'from-green-600/20 to-green-800/10',
     border: 'border-green-500/30',
     textColor: 'text-green-400',
@@ -22,7 +22,7 @@ const platforms = [
   },
   {
     name: 'iOS',
-    description: 'iPhone/iPad 앱 트래픽 인터셉트 및 인증서 분석',
+    description: 'iPhone/iPad app traffic intercept and certificate analysis',
     color: 'from-slate-600/20 to-slate-800/10',
     border: 'border-slate-500/30',
     textColor: 'text-slate-300',
@@ -31,7 +31,7 @@ const platforms = [
   },
   {
     name: 'Windows',
-    description: '데스크톱 애플리케이션 TCP 트래픽 모니터링 및 변조',
+    description: 'Desktop application TCP traffic monitoring and modification',
     color: 'from-blue-600/20 to-blue-800/10',
     border: 'border-blue-500/30',
     textColor: 'text-blue-400',
@@ -44,6 +44,7 @@ const platforms = [
 <Layout
   title={`${product.name} | BlueSecurity`}
   description={product.description}
+  lang={lang}
 >
   <Header slot="header" lang={lang} />
 
@@ -57,11 +58,11 @@ const platforms = [
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Breadcrumb -->
       <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10">
-        <a href="/" class="hover:text-slate-300 transition-colors">{t('products.detail.home', lang)}</a>
+        <a href={localePath('/', lang)} class="hover:text-slate-300 transition-colors">{t('products.detail.home', lang)}</a>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-        <a href="/products" class="hover:text-slate-300 transition-colors">{t('products.detail.products', lang)}</a>
+        <a href={localePath('/products', lang)} class="hover:text-slate-300 transition-colors">{t('products.detail.products', lang)}</a>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
@@ -90,12 +91,12 @@ const platforms = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
-            합법적 침투 테스트 전용 도구입니다. 허가받지 않은 시스템에 사용을 금지합니다.
+            This tool is for authorized penetration testing only. Use on unauthorized systems is strictly prohibited.
           </div>
 
           <div class="flex flex-wrap gap-4">
             <a
-              href="/contact"
+              href={localePath('/contact', lang)}
               class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-200 glow-blue"
             >
               {t('products.detail.contact', lang)}
@@ -104,7 +105,7 @@ const platforms = [
               </svg>
             </a>
             <a
-              href="/products"
+              href={localePath('/products', lang)}
               class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg border border-blue-700/60 hover:border-blue-500 text-slate-300 hover:text-white font-medium transition-all duration-200"
             >
               {t('products.detail.others', lang)}
@@ -149,10 +150,10 @@ const platforms = [
   <!-- Supported Platforms -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-white mb-3">지원 플랫폼</h2>
+      <h2 class="text-3xl font-bold text-white mb-3">Supported Platforms</h2>
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full mx-auto mb-4"></div>
       <p class="text-slate-400 max-w-xl mx-auto">
-        Android, iOS, Windows 세 가지 플랫폼에서 동일한 수준의 TCP 트래픽 분석 및 조작이 가능합니다.
+        The same level of TCP traffic analysis and manipulation is available across Android, iOS, and Windows.
       </p>
     </div>
 
@@ -176,7 +177,7 @@ const platforms = [
             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 8 8">
               <circle cx="4" cy="4" r="3" />
             </svg>
-            지원
+            Supported
           </div>
         </div>
       ))}
@@ -212,16 +213,16 @@ const platforms = [
               d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
-          핵심 기술 사양
+          Core Technical Specifications
         </h3>
 
         <div class="space-y-3">
           {[
-            { label: '프로토콜', value: 'TCP (Layer 4)', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
-            { label: '인터셉트 방식', value: 'MITM + SSL/TLS 핀닝 우회', icon: 'M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z' },
-            { label: '패킷 처리', value: '정책 기반 변조 + 코덱 체인', icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4' },
-            { label: '로깅', value: '전 세션 감사 로그 + 리플레이', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
-            { label: '라이선스', value: '합법적 침투 테스트 전용', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+            { label: 'Protocol', value: 'TCP (Layer 4)', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+            { label: 'Intercept Method', value: 'MITM + SSL/TLS Pinning Bypass', icon: 'M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z' },
+            { label: 'Packet Handling', value: 'Policy-Based Modification + Codec Chain', icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4' },
+            { label: 'Logging', value: 'Full Session Audit Log + Replay', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+            { label: 'License', value: 'Authorized Penetration Testing Only', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
           ].map((spec) => (
             <div class="flex items-center gap-4 p-3.5 rounded-xl bg-navy-900/50 border border-cyan-900/30">
               <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-cyan-600/15 border border-cyan-500/25 flex items-center justify-center">
@@ -238,9 +239,9 @@ const platforms = [
         </div>
 
         <div class="mt-6 pt-6 border-t border-cyan-900/30">
-          <p class="text-xs text-slate-500 mb-3 uppercase tracking-wider font-medium">사용 사례</p>
+          <p class="text-xs text-slate-500 mb-3 uppercase tracking-wider font-medium">Use Cases</p>
           <div class="flex flex-wrap gap-2">
-            {['모의침투 테스트', 'API 보안 분석', '앱 취약점 진단', '트래픽 포렌식'].map((tag) => (
+            {['Penetration Testing', 'API Security Analysis', 'App Vulnerability Assessment', 'Traffic Forensics'].map((tag) => (
               <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-cyan-900/30 text-cyan-300 border border-cyan-800/50">
                 {tag}
               </span>
@@ -259,15 +260,15 @@ const platforms = [
       <div class="relative px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
         <div>
           <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
-            BlueProxy 도입 문의
+            Inquire About BlueProxy
           </h2>
           <p class="text-slate-400 max-w-lg">
-            귀사의 침투 테스트 환경에 최적화된 라이선스 및 기술 지원을 제공합니다.
+            We provide licensing and technical support optimized for your penetration testing environment.
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
           <a
-            href="/contact"
+            href={localePath('/contact', lang)}
             class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-200 whitespace-nowrap"
           >
             {t('products.detail.contact', lang)}
@@ -276,7 +277,7 @@ const platforms = [
             </svg>
           </a>
           <a
-            href="/products"
+            href={localePath('/products', lang)}
             class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-white/20 hover:border-white/40 text-slate-300 hover:text-white font-medium transition-all duration-200 whitespace-nowrap"
           >
             {t('products.detail.others', lang)}

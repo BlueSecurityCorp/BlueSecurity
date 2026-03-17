@@ -1,17 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ContactForm from '../components/ContactForm.tsx';
-import type { Locale } from '../i18n/index';
-import { t } from '../i18n/ui';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ContactForm from '../../components/ContactForm.tsx';
+import { t } from '../../i18n/ui';
 
-const lang = 'ko' as Locale;
-const pageTitle = t('contact.title', lang);
-const pageDescription = t('contact.meta', lang);
+const lang = 'en' as const;
 ---
 
-<Layout title={pageTitle} description={pageDescription}>
+<Layout
+  title={t('contact.title', lang)}
+  description={t('contact.meta', lang)}
+  lang={lang}
+>
 
   <Header slot="header" lang={lang} />
 
@@ -134,10 +135,10 @@ const pageDescription = t('contact.meta', lang);
 
                 <ul class="flex flex-col gap-2.5">
                   {[
-                    { label: '제품 문의', desc: 'CodeBlue, BluePhalanx, BlueProxy 관련' },
-                    { label: '견적 요청', desc: '팀·기업 플랜 맞춤 견적 산정' },
-                    { label: '기술 지원', desc: '도입 후 기술적 문제 해결' },
-                    { label: '기타', desc: '파트너십, 미디어, 일반 문의' },
+                    { label: t('form.type.product', lang), desc: 'CodeBlue, BluePhalanx, BlueProxy' },
+                    { label: t('form.type.quote', lang), desc: 'Custom quotes for team & enterprise plans' },
+                    { label: t('form.type.support', lang), desc: 'Technical issues after deployment' },
+                    { label: t('form.type.other', lang), desc: 'Partnership, media, general inquiries' },
                   ].map(({ label, desc }) => (
                     <li class="flex items-start gap-2.5">
                       <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" aria-hidden="true" />

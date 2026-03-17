@@ -1,25 +1,25 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import ProductCard from '../components/ProductCard.astro';
-import TrustIndicators from '../components/TrustIndicators.astro';
-import CTA from '../components/CTA.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import TrustIndicators from '../../components/TrustIndicators.astro';
+import CTA from '../../components/CTA.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 
-import type { Locale } from '../i18n/index';
-import { t } from '../i18n/ui';
-import { getProducts } from '../data/products';
-import { getCompany } from '../data/company';
+import { getProducts } from '../../data/products';
+import { getCompany } from '../../data/company';
+import { t } from '../../i18n/ui';
 
-const lang = 'ko' as Locale;
-const products = getProducts(lang);
+const lang = 'en' as const;
 const company = getCompany(lang);
+const products = getProducts(lang);
 ---
 
 <Layout
   title={`${company.name} - ${company.slogan}`}
   description={company.description}
+  lang={lang}
 >
   <!-- Header injected into named slot -->
   <Header slot="header" lang={lang} />
@@ -60,7 +60,6 @@ const company = getCompany(lang);
       <div class="stagger-children grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (
           <ProductCard
-            lang={lang}
             name={product.name}
             tagline={product.tagline}
             href={product.href}
@@ -68,6 +67,7 @@ const company = getCompany(lang);
             category={product.category}
             highlights={product.highlights}
             description={product.description}
+            lang={lang}
           />
         ))}
       </div>
