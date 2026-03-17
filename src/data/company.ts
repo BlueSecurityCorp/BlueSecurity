@@ -1,15 +1,14 @@
 export const company = {
   name: 'BlueSecurity',
-  slogan: '보안의 민주화',
+  slogan: '기업 규모가 보안 수준을 결정하지 않습니다',
   description:
-    '한국 중소기업을 위한 기업급 사이버보안 솔루션을 합리적 가격에 제공합니다.',
+    '중소기업도 대기업과 동일한 수준의 보안을 합리적인 비용으로 구축할 수 있습니다.',
   mission:
-    '모든 기업이 규모에 관계없이 최고 수준의 보안을 누릴 수 있는 세상을 만듭니다.',
+    '보안 서비스의 비용 장벽을 낮춰, 모든 기업이 사이버 위협에 대응할 수 있는 환경을 만듭니다.',
   vision:
-    '대한민국 중소기업 보안의 표준이 되어, 안전한 디지털 비즈니스 환경을 구축합니다.',
+    '대한민국 중소기업이 보안 걱정 없이 본업에 집중할 수 있는 세상을 만들어 갑니다.',
   email: 'blue@bluesecurity.online',
   website: 'https://www.bluesecurity.online',
-  ceo: '이장호',
   founded: 2025,
 } as const;
 
@@ -42,5 +41,9 @@ export const techHighlights = [
   {
     title: '유연한 배포',
     description: 'SaaS, On-Premise, Air-Gap 환경 모두 지원하여 어떤 인프라에도 적합',
+  },
+  {
+    title: '모의해킹 서비스',
+    description: '전문 보안 컨설턴트가 실제 공격자 관점에서 시스템 취약점을 진단하고 개선 방안을 제시',
   },
 ] as const;

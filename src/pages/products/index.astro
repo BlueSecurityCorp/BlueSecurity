@@ -7,7 +7,7 @@ import { products } from '../../data/products';
 
 <Layout
   title="제품 소개 | BlueSecurity"
-  description="BlueSecurity의 사이버보안 제품 라인업 - CodeBlue, BluePhalanx, BlueProxy"
+  description="BlueSecurity의 사이버보안 제품 및 서비스 - CodeBlue, BluePhalanx, BlueProxy, 모의해킹"
 >
   <Header slot="header" />
 
@@ -30,15 +30,15 @@ import { products } from '../../data/products';
         <span class="text-gradient">제품 소개</span>
       </h1>
       <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        BlueSecurity는 소스코드 분석부터 악성코드 탐지, 침투 테스트까지<br class="hidden sm:block" />
-        전 영역을 아우르는 통합 사이버보안 제품 라인업을 제공합니다.
+        소스코드 분석, 악성코드 탐지, 모의해킹까지<br class="hidden sm:block" />
+        중소기업에 필요한 보안 솔루션과 전문 컨설팅을 합리적 비용으로 제공합니다.
       </p>
     </div>
   </section>
 
   <!-- Products Grid -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
       {products.map((product) => (
         <a
           href={product.href}
@@ -119,11 +119,11 @@ import { products } from '../../data/products';
       <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-cyan-900/10 pointer-events-none"></div>
       <div class="relative">
         <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
-          모든 제품을 함께 도입하면 더 강력합니다
+          제품과 서비스를 함께 도입하면 더 강력합니다
         </h2>
         <p class="text-slate-400 max-w-xl mx-auto mb-8">
-          개발(CodeBlue) → 배포 후 위협 탐지(BluePhalanx) → 모의침투 검증(BlueProxy)으로
-          이어지는 완전한 보안 사이클을 구축하세요.
+          개발(CodeBlue) → 위협 탐지(BluePhalanx) → 모의해킹 검증으로
+          이어지는 완전한 보안 사이클을 합리적인 비용으로 구축하세요.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a

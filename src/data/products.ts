@@ -7,7 +7,7 @@ export interface Product {
   href: string;
   features: string[];
   highlights: { label: string; value: string }[];
-  icon: 'code' | 'shield' | 'network';
+  icon: 'code' | 'shield' | 'network' | 'pentest';
 }
 
 export const products: Product[] = [
@@ -79,5 +79,28 @@ export const products: Product[] = [
       { label: '용도', value: '모의침투' },
     ],
     icon: 'network',
+  },
+  {
+    id: 'pentest',
+    name: '모의해킹 서비스',
+    tagline: '실제 공격자 관점의 보안 진단',
+    description:
+      '전문 보안 컨설턴트가 실제 공격자의 관점에서 웹 애플리케이션, 네트워크, 인프라의 취약점을 진단합니다. 체계적인 시나리오 기반 테스트와 상세한 개선 보고서를 제공하여 실질적인 보안 강화를 지원합니다.',
+    category: '보안 컨설팅',
+    href: '/contact',
+    features: [
+      '웹/모바일 애플리케이션 모의침투 테스트',
+      '내부/외부 네트워크 침투 테스트',
+      '시나리오 기반 공격 시뮬레이션',
+      'OWASP / PTES / OSSTMM 방법론 준수',
+      '한국어 상세 진단 보고서 및 개선 권고안',
+      '재진단을 통한 조치 확인',
+    ],
+    highlights: [
+      { label: '진단 방법론', value: '국제 표준' },
+      { label: '보고서', value: '한국어' },
+      { label: '재진단', value: '포함' },
+    ],
+    icon: 'pentest',
   },
 ];
