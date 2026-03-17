@@ -94,7 +94,9 @@ const tierIcons: Record<string, string> = {
 
           {/* CTA */}
           <a
-            href={tier.cta === '문의하기' ? '/contact' : '/products/codeblue'}
+            href={tier.cta === '문의하기' ? '/contact' : 'https://codeblue.bluesecurity.online'}
+            target={tier.cta === '문의하기' ? undefined : '_blank'}
+            rel={tier.cta === '문의하기' ? undefined : 'noopener noreferrer'}
             class={[
               'mt-auto block rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition-all duration-200',
               tier.highlighted
