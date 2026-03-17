@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import TrustIndicators from '../components/TrustIndicators.astro';
+import CTA from '../components/CTA.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+import { products } from '../data/products';
+import { company } from '../data/company';
+---
+
+<Layout
+  title={`${company.name} - ${company.slogan}`}
+  description={company.description}
+>
+  <!-- Header injected into named slot -->
+  <Header slot="header" />
+
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <Hero />
+
+  <!-- ── Products ──────────────────────────────────────────── -->
+  <section
+    class="relative overflow-hidden bg-navy-900 py-24"
+    aria-labelledby="products-heading"
+  >
+    <!-- Subtle top fade from hero -->
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-navy-900 to-transparent"
+      aria-hidden="true"
+    ></div>
+
+    <div class="relative z-10 mx-auto max-w-6xl px-6">
+      <!-- Section header -->
+      <div class="mb-16 text-center">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-400">
+          제품 라인업
+        </p>
+        <h2
+          id="products-heading"
+          class="text-4xl font-black text-white md:text-5xl"
+        >
+          보안의 전 단계를
+          <span class="text-gradient"> 하나로</span>
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-slate-400">
+          소스코드 분석부터 악성코드 탐지, 침투 테스트까지 — 기업 보안의 전 과정을 커버하는 통합 솔루션
+        </p>
+      </div>
+
+      <!-- Product cards grid -->
+      <div class="stagger-children grid grid-cols-1 gap-6 md:grid-cols-3">
+        {products.map((product) => (
+          <ProductCard
+            name={product.name}
+            tagline={product.tagline}
+            href={product.href}
+            icon={product.icon}
+            category={product.category}
+            highlights={product.highlights}
+            description={product.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Trust Indicators ───────────────────────────────────── -->
+  <TrustIndicators />
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <CTA />
+
+  <!-- Footer injected into named slot -->
+  <Footer slot="footer" />
+</Layout>

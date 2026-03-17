@@ -1,0 +1,150 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products } from '../../data/products';
+---
+
+<Layout
+  title="제품 소개 | BlueSecurity"
+  description="BlueSecurity의 사이버보안 제품 라인업 - CodeBlue, BluePhalanx, BlueProxy"
+>
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-16 overflow-hidden bg-grid">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-900/90 to-navy-900 pointer-events-none"></div>
+    <!-- Ambient glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        제품 포트폴리오
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        <span class="text-gradient">제품 소개</span>
+      </h1>
+      <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        BlueSecurity는 소스코드 분석부터 악성코드 탐지, 침투 테스트까지<br class="hidden sm:block" />
+        전 영역을 아우르는 통합 사이버보안 제품 라인업을 제공합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children">
+      {products.map((product) => (
+        <a
+          href={product.href}
+          class="card-hover group relative flex flex-col rounded-2xl border border-blue-900/50 bg-navy-800/60 overflow-hidden no-underline"
+          style="text-decoration: none;"
+        >
+          <!-- Top accent line -->
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+
+          <!-- Card content -->
+          <div class="p-8 flex flex-col flex-1">
+            <!-- Icon -->
+            <div class="mb-6">
+              <div class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 group-hover:bg-blue-600/30 group-hover:border-blue-400/50 transition-colors duration-300">
+                {product.icon === 'code' && (
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                )}
+                {product.icon === 'shield' && (
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                )}
+                {product.icon === 'network' && (
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                  </svg>
+                )}
+              </div>
+            </div>
+
+            <!-- Category badge -->
+            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-medium bg-blue-900/50 text-blue-300 border border-blue-800/60 mb-3 self-start">
+              {product.category}
+            </span>
+
+            <!-- Name & tagline -->
+            <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300">
+              {product.name}
+            </h2>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
+              {product.tagline}
+            </p>
+
+            <!-- Highlights row -->
+            <div class="grid grid-cols-3 gap-2 mb-6">
+              {product.highlights.map((h) => (
+                <div class="rounded-lg bg-navy-900/60 border border-blue-900/40 px-2 py-2 text-center">
+                  <div class="text-base font-bold text-cyan-400">{h.value}</div>
+                  <div class="text-xs text-slate-500 mt-0.5">{h.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <!-- CTA -->
+            <div class="flex items-center gap-1.5 text-sm font-medium text-blue-400 group-hover:text-blue-300 transition-colors duration-300">
+              자세히 보기
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Bottom glow on hover -->
+          <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/0 to-transparent group-hover:via-cyan-500/40 transition-all duration-500"></div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Why BlueSecurity banner -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="relative rounded-2xl border border-blue-800/40 bg-navy-800/40 overflow-hidden p-8 md:p-12 text-center">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-cyan-900/10 pointer-events-none"></div>
+      <div class="relative">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
+          모든 제품을 함께 도입하면 더 강력합니다
+        </h2>
+        <p class="text-slate-400 max-w-xl mx-auto mb-8">
+          개발(CodeBlue) → 배포 후 위협 탐지(BluePhalanx) → 모의침투 검증(BlueProxy)으로
+          이어지는 완전한 보안 사이클을 구축하세요.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors duration-200"
+          >
+            통합 도입 문의
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="/pricing"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-blue-700/60 hover:border-blue-500 text-slate-300 hover:text-white font-medium transition-all duration-200"
+          >
+            요금 안내
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

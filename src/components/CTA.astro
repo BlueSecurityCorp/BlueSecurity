@@ -1,0 +1,152 @@
+---
+// Bottom call-to-action section
+---
+
+<section
+  class="relative overflow-hidden py-28"
+  aria-labelledby="cta-heading"
+>
+  <!-- Background glow -->
+  <div
+    class="pointer-events-none absolute inset-0"
+    aria-hidden="true"
+  >
+    <div class="absolute left-1/4 top-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl"></div>
+    <div class="absolute right-1/4 top-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-cyan-600/15 blur-3xl"></div>
+  </div>
+
+  <!-- Grid pattern -->
+  <div class="pointer-events-none absolute inset-0 bg-grid opacity-50" aria-hidden="true"></div>
+
+  <!-- Inner border card -->
+  <div class="relative z-10 mx-auto max-w-4xl px-6">
+    <div class="relative overflow-hidden rounded-3xl border border-blue-500/20 bg-navy-800/60 p-12 text-center shadow-2xl backdrop-blur-sm md:p-16">
+
+      <!-- Top gradient border line -->
+      <div
+        class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/60 to-transparent"
+        aria-hidden="true"
+      ></div>
+      <!-- Bottom gradient border line -->
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Inner ambient glow -->
+      <div
+        class="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/8 via-transparent to-cyan-600/5 rounded-3xl"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Shield check icon -->
+      <div class="relative mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl border border-blue-500/30 bg-blue-950/60 glow-blue">
+        <svg
+          class="h-10 w-10 text-cyan-400"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      </div>
+
+      <!-- Heading -->
+      <h2
+        id="cta-heading"
+        class="mb-4 text-4xl font-black text-white md:text-5xl"
+      >
+        지금 바로 <span class="text-gradient">시작하세요</span>
+      </h2>
+
+      <!-- Description -->
+      <p class="mx-auto mb-4 max-w-xl text-lg leading-relaxed text-slate-300">
+        CodeBlue를 무료로 체험하고, AI가 당신의 코드에서 찾아내는 보안 취약점을 직접 확인하세요.
+      </p>
+      <p class="mx-auto mb-10 max-w-md text-sm text-slate-500">
+        신용카드 불필요 · 즉시 사용 가능 · 한국어 리포트 제공
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a
+          href="/products/codeblue"
+          class="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:from-blue-500 hover:to-cyan-500 hover:shadow-xl hover:shadow-blue-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-navy-800"
+        >
+          <span
+            class="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+            aria-hidden="true"
+          ></span>
+          <svg
+            class="h-5 w-5 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+          CodeBlue 무료 체험
+          <svg
+            class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <a
+          href="/contact"
+          class="group inline-flex items-center gap-2 rounded-xl border border-slate-600/80 bg-navy-900/60 px-8 py-4 text-base font-semibold text-slate-200 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:bg-navy-800/80 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-navy-800"
+        >
+          <svg
+            class="h-5 w-5 shrink-0 text-slate-400 transition-colors duration-200 group-hover:text-blue-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          전문가 상담 요청
+        </a>
+      </div>
+
+      <!-- Trust line -->
+      <p class="mt-10 flex items-center justify-center gap-2 text-xs text-slate-600">
+        <svg
+          class="h-4 w-4 text-green-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+        OWASP Top 10 · CWE · ISMS-P 기준 완벽 대응
+      </p>
+    </div>
+  </div>
+</section>

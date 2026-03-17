@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { products } from '../../data/products';
+
+const product = products.find((p) => p.id === 'codeblue')!;
+---
+
+<Layout
+  title={`${product.name} | BlueSecurity`}
+  description={product.description}
+>
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <section class="relative pt-32 pb-20 overflow-hidden bg-grid">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-900/95 to-navy-900 pointer-events-none"></div>
+    <!-- Blue ambient glow -->
+    <div class="absolute top-0 left-1/4 w-[600px] h-[500px] bg-blue-700/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 right-1/4 w-[400px] h-[400px] bg-cyan-700/8 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-sm text-slate-500 mb-10">
+        <a href="/" class="hover:text-slate-300 transition-colors">홈</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <a href="/products" class="hover:text-slate-300 transition-colors">제품</a>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-blue-400">{product.name}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left: Text -->
+        <div class="animate-fade-in-up">
+          <!-- Category badge -->
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 8 8">
+              <circle cx="4" cy="4" r="3" />
+            </svg>
+            {product.category}
+          </span>
+
+          <h1 class="text-5xl sm:text-6xl font-bold mb-4">
+            <span class="text-gradient">{product.name}</span>
+          </h1>
+          <p class="text-xl text-slate-300 font-medium mb-6">{product.tagline}</p>
+          <p class="text-slate-400 leading-relaxed text-lg mb-10">{product.description}</p>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="/pricing"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-200 glow-blue hover:shadow-lg"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              무료로 시작하기
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg border border-blue-700/60 hover:border-blue-500 text-slate-300 hover:text-white font-medium transition-all duration-200"
+            >
+              도입 문의
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Icon display -->
+        <div class="flex items-center justify-center lg:justify-end">
+          <div class="relative">
+            <!-- Outer ring -->
+            <div class="absolute inset-0 rounded-full border border-blue-500/20 scale-125"></div>
+            <div class="absolute inset-0 rounded-full border border-blue-500/10 scale-150"></div>
+            <!-- Main icon container -->
+            <div class="relative w-48 h-48 rounded-3xl bg-gradient-to-br from-blue-900/60 to-navy-800/80 border border-blue-500/30 flex items-center justify-center glow-blue">
+              <!-- Code icon SVG -->
+              <svg class="w-24 h-24 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </div>
+            <!-- Floating badge -->
+            <div class="absolute -bottom-3 -right-3 px-3 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 text-xs font-bold">
+              SAST
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights / Stats -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 stagger-children">
+      {product.highlights.map((h) => (
+        <div class="card-hover relative rounded-2xl border border-blue-800/50 bg-navy-800/60 p-8 text-center overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"></div>
+          <div class="text-5xl font-bold text-gradient mb-3">{h.value}</div>
+          <div class="text-slate-400 font-medium">{h.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <!-- Feature list -->
+      <div>
+        <h2 class="text-3xl font-bold text-white mb-2">주요 기능</h2>
+        <div class="w-12 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-8"></div>
+        <ul class="space-y-4">
+          {product.features.map((feature) => (
+            <li class="flex items-start gap-4 group">
+              <!-- Checkmark icon -->
+              <div class="flex-shrink-0 mt-0.5 w-6 h-6 rounded-full bg-blue-600/20 border border-blue-500/40 flex items-center justify-center group-hover:bg-blue-600/40 transition-colors duration-200">
+                <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <span class="text-slate-300 leading-relaxed">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Use case card -->
+      <div class="rounded-2xl border border-blue-800/40 bg-navy-800/50 p-8">
+        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+          <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+          이런 팀에 적합합니다
+        </h3>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-navy-900/50 border border-blue-900/40">
+            <svg class="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <div>
+              <div class="text-white font-medium text-sm">DevSecOps 도입 팀</div>
+              <div class="text-slate-500 text-xs mt-0.5">CI/CD 파이프라인에 보안 스캔을 자동화하고 싶은 개발팀</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-navy-900/50 border border-blue-900/40">
+            <svg class="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <div>
+              <div class="text-white font-medium text-sm">컴플라이언스 대응 기업</div>
+              <div class="text-slate-500 text-xs mt-0.5">ISMS-P, OWASP, CWE 기준 정기 감사가 필요한 기업</div>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-navy-900/50 border border-blue-900/40">
+            <svg class="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <div>
+              <div class="text-white font-medium text-sm">소프트웨어 공급망 관리</div>
+              <div class="text-slate-500 text-xs mt-0.5">오픈소스 의존성 취약점과 SBOM 자동화가 필요한 조직</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standards -->
+        <div class="mt-6 pt-6 border-t border-blue-900/40">
+          <p class="text-xs text-slate-500 mb-3 uppercase tracking-wider font-medium">대응 보안 표준</p>
+          <div class="flex flex-wrap gap-2">
+            {['OWASP Top 10', 'CWE', 'ISMS-P', 'SBOM'].map((std) => (
+              <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-900/40 text-blue-300 border border-blue-800/50">
+                {std}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="relative rounded-2xl overflow-hidden border border-blue-700/30">
+      <!-- Background gradient -->
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-900/60 via-navy-800/80 to-cyan-900/40"></div>
+      <div class="absolute inset-0 bg-grid opacity-30"></div>
+
+      <div class="relative px-8 py-12 md:px-16 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">
+            지금 바로 무료로 시작하세요
+          </h2>
+          <p class="text-slate-400 max-w-lg">
+            신용카드 없이 월 5회 무료 스캔. 언제든 유료 플랜으로 업그레이드 가능합니다.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+          <a
+            href="/pricing"
+            class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all duration-200 whitespace-nowrap"
+          >
+            무료로 시작하기
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="/products"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-white/20 hover:border-white/40 text-slate-300 hover:text-white font-medium transition-all duration-200 whitespace-nowrap"
+          >
+            다른 제품 보기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
