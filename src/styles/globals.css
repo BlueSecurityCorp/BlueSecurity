@@ -36,6 +36,8 @@ body {
   background-color: var(--color-navy-900);
   color: #e2e8f0;
   font-family: var(--font-sans);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* Smooth scroll */
