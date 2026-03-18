@@ -71,7 +71,6 @@ const productsData: Record<Locale, Product[]> = {
         '코덱 체인을 통한 인코딩/디코딩 자동화',
         '감사 로깅 및 세션 리플레이',
         'SSL/TLS 인터셉트 지원',
-        '합법적 침투 테스트 전용 라이선스',
       ],
       highlights: [
         { label: '지원 플랫폼', value: '3종' },
@@ -161,7 +160,6 @@ const productsData: Record<Locale, Product[]> = {
         'Codec chain for encoding/decoding automation',
         'Audit logging and session replay',
         'SSL/TLS intercept support',
-        'Licensed for authorized penetration testing only',
       ],
       highlights: [
         { label: 'Platforms', value: '3' },
