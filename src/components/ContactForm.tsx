@@ -93,7 +93,9 @@ type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 // Constants
 // ---------------------------------------------------------------------------
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_FORM_ID';
+// Cloudflare Worker endpoint for contact form
+// Deploy worker first: cd worker && npm install && npm run deploy
+const WORKER_ENDPOINT = 'https://bluesecurity-contact.ljho2321.workers.dev';
 
 function getInquiryOptions(ui: typeof formUI[Locale]): InquiryType[] {
   return [ui.typeProduct, ui.typeQuote, ui.typeSupport, ui.typeOther];
@@ -257,18 +259,17 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
     setStatus('loading');
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(WORKER_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
         body: JSON.stringify({
-          이름: form.name,
-          이메일: form.email,
-          회사명: form.company || '(미입력)',
-          '문의 유형': form.inquiryType,
-          내용: form.message,
+          name: form.name,
+          email: form.email,
+          company: form.company || '',
+          inquiryType: form.inquiryType,
+          message: form.message,
         }),
       });
 
