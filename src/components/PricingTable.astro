@@ -9,122 +9,148 @@ interface Props {
 }
 
 const { lang = 'ko' } = Astro.props;
-const pricing = getPricing(lang);
-const codeblue = pricing.find((p) => p.productId === 'codeblue');
-const tiers = codeblue?.tiers ?? [];
+const products = getPricing(lang);
 
 const tierIcons: Record<string, string> = {
   Free: '⬡',
   Starter: '◈',
   Team: '◉',
   Business: '◆',
+  Standard: '◇',
+  Professional: '◉',
+  Enterprise: '◆',
 };
 ---
 
-<section class="w-full">
-  <!-- CodeBlue tiers grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-    {
-      tiers.map((tier) => (
-        <div
-          class={[
-            'relative flex flex-col rounded-2xl border p-6 transition-all duration-300 card-hover',
-            tier.highlighted
-              ? 'border-blue-500 bg-navy-700 glow-blue'
-              : 'border-blue-900/50 bg-navy-800 hover:border-blue-700/70',
-          ].join(' ')}
-        >
-          {/* Popular badge */}
-          {tier.highlighted && (
-            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-0.5 text-xs font-semibold tracking-wide text-white">
-                {t('pricing.recommended', lang)}
-              </span>
-            </div>
-          )}
+<section class="w-full space-y-16">
+  {
+    products.map((product) => (
+      <div>
+        {/* Product heading */}
+        <h2 class="mb-6 text-2xl font-bold text-white">{product.productName}</h2>
 
-          {/* Header */}
-          <div class="mb-5">
-            <div class="mb-3 flex items-center gap-2">
-              <span class="text-lg text-blue-400">{tierIcons[tier.name] ?? '◇'}</span>
-              <h3 class="text-lg font-bold text-white">{tier.name}</h3>
-            </div>
-            <p class="mb-4 text-sm text-slate-400">{tier.description}</p>
-
-            {/* Price */}
-            <div class="flex items-baseline gap-1">
-              {tier.price === '0' ? (
-                <span class="text-4xl font-extrabold text-white">{t('pricing.free', lang)}</span>
-              ) : (
-                <>
-                  <span class="text-sm font-medium text-slate-400">₩</span>
-                  <span class="text-4xl font-extrabold text-white">
-                    {tier.price}
+        {/* Tiers grid */}
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          {product.tiers.map((tier) => (
+            <div
+              class={[
+                'relative flex flex-col rounded-2xl border p-6 transition-all duration-300 card-hover',
+                tier.highlighted
+                  ? 'border-blue-500 bg-navy-700 glow-blue'
+                  : 'border-blue-900/50 bg-navy-800 hover:border-blue-700/70',
+              ].join(' ')}
+            >
+              {/* Popular badge */}
+              {tier.highlighted && (
+                <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                  <span class="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-0.5 text-xs font-semibold tracking-wide text-white">
+                    {t('pricing.recommended', lang)}
                   </span>
-                  {tier.period && (
-                    <span class="text-sm text-slate-400">{tier.period}</span>
-                  )}
-                </>
+                </div>
               )}
+
+              {/* Header */}
+              <div class="mb-5">
+                <div class="mb-3 flex items-center gap-2">
+                  <span class="text-lg text-blue-400">{tierIcons[tier.name] ?? '◇'}</span>
+                  <h3 class="text-lg font-bold text-white">{tier.name}</h3>
+                </div>
+                <p class="mb-4 text-sm text-slate-400">{tier.description}</p>
+
+                {/* Price */}
+                <div class="flex items-baseline gap-1">
+                  {tier.price === '0' ? (
+                    <span class="text-4xl font-extrabold text-white">{t('pricing.free', lang)}</span>
+                  ) : tier.price === '문의하기' || tier.price === 'Contact Us' ? (
+                    <span class="text-2xl font-extrabold text-white">{tier.price}</span>
+                  ) : (
+                    <>
+                      <span class="text-sm font-medium text-slate-400">₩</span>
+                      <span class="text-4xl font-extrabold text-white">
+                        {tier.price}
+                      </span>
+                      {tier.period && (
+                        <span class="text-sm text-slate-400">{tier.period}</span>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div
+                class={[
+                  'mb-5 h-px w-full',
+                  tier.highlighted ? 'bg-blue-500/30' : 'bg-blue-900/30',
+                ].join(' ')}
+              />
+
+              {/* Features */}
+              <ul class="mb-6 flex-1 space-y-2.5">
+                {tier.features.map((feature) => (
+                  <li class="flex items-start gap-2.5 text-sm">
+                    <svg
+                      class="mt-0.5 h-4 w-4 shrink-0 text-blue-400"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" />
+                      <path
+                        d="M5 8l2 2 4-4"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span class="text-slate-300">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <a
+                href={
+                  tier.cta === '문의하기' || tier.cta === 'Contact Us'
+                    ? localePath('/contact', lang)
+                    : product.productId === 'codeblue'
+                      ? 'https://codeblue.bluesecurity.online'
+                      : localePath('/contact', lang)
+                }
+                target={
+                  (tier.cta === '문의하기' || tier.cta === 'Contact Us') ||
+                  product.productId !== 'codeblue'
+                    ? undefined
+                    : '_blank'
+                }
+                rel={
+                  (tier.cta === '문의하기' || tier.cta === 'Contact Us') ||
+                  product.productId !== 'codeblue'
+                    ? undefined
+                    : 'noopener noreferrer'
+                }
+                class={[
+                  'mt-auto block rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition-all duration-200',
+                  tier.highlighted
+                    ? 'bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-900/50'
+                    : tier.cta === '문의하기' || tier.cta === 'Contact Us'
+                      ? 'border border-blue-700 text-blue-300 hover:bg-blue-900/40'
+                      : 'border border-blue-800 text-slate-200 hover:border-blue-600 hover:text-white',
+                ].join(' ')}
+              >
+                {tier.cta}
+              </a>
             </div>
-          </div>
-
-          {/* Divider */}
-          <div
-            class={[
-              'mb-5 h-px w-full',
-              tier.highlighted ? 'bg-blue-500/30' : 'bg-blue-900/30',
-            ].join(' ')}
-          />
-
-          {/* Features */}
-          <ul class="mb-6 flex-1 space-y-2.5">
-            {tier.features.map((feature) => (
-              <li class="flex items-start gap-2.5 text-sm">
-                <svg
-                  class="mt-0.5 h-4 w-4 shrink-0 text-blue-400"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5" />
-                  <path
-                    d="M5 8l2 2 4-4"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <span class="text-slate-300">{feature}</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA */}
-          <a
-            href={tier.name === 'Business' ? localePath('/contact', lang) : 'https://codeblue.bluesecurity.online'}
-            target={tier.name === 'Business' ? undefined : '_blank'}
-            rel={tier.name === 'Business' ? undefined : 'noopener noreferrer'}
-            class={[
-              'mt-auto block rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition-all duration-200',
-              tier.highlighted
-                ? 'bg-blue-600 text-white hover:bg-blue-500 shadow-lg shadow-blue-900/50'
-                : tier.name === 'Business'
-                  ? 'border border-blue-700 text-blue-300 hover:bg-blue-900/40'
-                  : 'border border-blue-800 text-slate-200 hover:border-blue-600 hover:text-white',
-            ].join(' ')}
-          >
-            {tier.cta}
-          </a>
+          ))}
         </div>
-      ))
-    }
-  </div>
+      </div>
+    ))
+  }
 
-  <!-- Other products note -->
+  <!-- BlueProxy free note -->
   <div
-    class="mt-8 flex items-center gap-3 rounded-xl border border-blue-900/40 bg-navy-800/60 px-5 py-4"
+    class="flex items-center gap-3 rounded-xl border border-blue-900/40 bg-navy-800/60 px-5 py-4"
   >
     <svg
       class="h-5 w-5 shrink-0 text-cyan-400"
@@ -141,11 +167,15 @@ const tierIcons: Record<string, string> = {
       />
     </svg>
     <p class="text-sm text-slate-400">
-      <strong class="font-semibold text-slate-200">BluePhalanx</strong>,{' '}
-      <strong class="font-semibold text-slate-200">BlueProxy</strong>{' '}
-      {t('pricing.custom.note', lang)}{' '}
-      <a href={localePath('/contact', lang)} class="text-blue-400 underline underline-offset-2 hover:text-blue-300">
-        {t('nav.contact', lang)} →
+      <strong class="font-semibold text-slate-200">BlueProxy</strong>{' '}—{' '}
+      {t('pricing.blueproxy.free', lang)}{' '}
+      <a
+        href="https://github.com/BlueSecurityCorp/blueproxy"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-blue-400 underline underline-offset-2 hover:text-blue-300"
+      >
+        {t('pricing.blueproxy.github', lang)} →
       </a>
     </p>
   </div>

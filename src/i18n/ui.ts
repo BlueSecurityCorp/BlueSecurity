@@ -63,11 +63,13 @@ const ui = {
     'pricing.annual': '연간 구독 시 20% 할인 적용',
     'pricing.faq.heading': '자주 묻는 질문',
     'pricing.custom.heading': '맞춤형 견적이 필요하신가요?',
-    'pricing.custom.description': '대규모 팀이나 특수 요구사항이 있으신 경우, 전담 매니저가 최적의 솔루션을 제안해 드립니다.',
+    'pricing.custom.description': 'CodeBlue 또는 BluePhalanx의 엔터프라이즈 도입, 온프레미스 배포, 대규모 팀 라이선스 등 특수 요구사항이 있으시면 전담 매니저가 최적의 솔루션을 제안해 드립니다.',
     'pricing.custom.cta': '맞춤 견적 문의하기 →',
     'pricing.recommended': '추천',
     'pricing.free': '무료',
     'pricing.custom.note': '맞춤 견적을 제공합니다.',
+    'pricing.blueproxy.free': 'BlueProxy는 무료 오픈소스 소프트웨어입니다.',
+    'pricing.blueproxy.github': 'GitHub에서 다운로드',
 
     // Contact page
     'contact.title': '문의하기 | BlueSecurity',
@@ -206,11 +208,13 @@ const ui = {
     'pricing.annual': '20% discount on annual subscription',
     'pricing.faq.heading': 'Frequently Asked Questions',
     'pricing.custom.heading': 'Need a custom quote?',
-    'pricing.custom.description': 'For large teams or special requirements, our dedicated manager will propose the optimal solution.',
+    'pricing.custom.description': 'For enterprise deployments, on-premises installations, or large-scale team licensing of CodeBlue or BluePhalanx, our dedicated manager will propose the optimal solution.',
     'pricing.custom.cta': 'Request Custom Quote →',
     'pricing.recommended': 'Recommended',
     'pricing.free': 'Free',
     'pricing.custom.note': 'Custom pricing available.',
+    'pricing.blueproxy.free': 'BlueProxy is free open-source software.',
+    'pricing.blueproxy.github': 'Download on GitHub',
 
     // Contact page
     'contact.title': 'Contact | BlueSecurity',
