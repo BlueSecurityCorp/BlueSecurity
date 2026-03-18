@@ -127,9 +127,9 @@ const techIcons: Record<string, string> = {
 
       <!-- Vertical timeline -->
       <div class="relative mx-auto max-w-2xl">
-        <!-- Vertical line -->
+        <!-- Vertical line (mobile: left-aligned, desktop: center) -->
         <div
-          class="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-blue-700/60 via-blue-800/40 to-transparent"
+          class="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-blue-700/60 via-blue-800/40 to-transparent sm:left-1/2 sm:-translate-x-1/2"
         >
         </div>
 
@@ -138,22 +138,22 @@ const techIcons: Record<string, string> = {
             milestones.map((m, idx) => {
               const isLeft = idx % 2 === 0;
               return (
-                <div class={`relative flex items-center ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
+                <div class={`relative flex items-center pl-12 sm:pl-0 ${isLeft ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
                   {/* Content side */}
-                  <div class={`w-[calc(50%-2rem)] ${isLeft ? 'pr-6 text-right' : 'pl-6 text-left'}`}>
+                  <div class={`sm:w-[calc(50%-2rem)] ${isLeft ? 'sm:pr-6 sm:text-right' : 'sm:pl-6 sm:text-left'}`}>
                     <div class="inline-block rounded-xl border border-blue-900/50 bg-navy-800 px-4 py-3 card-hover">
                       <p class="text-xs font-bold text-blue-400 mb-0.5">{m.year}</p>
                       <p class="text-sm font-semibold text-white">{m.event}</p>
                     </div>
                   </div>
 
-                  {/* Center dot */}
-                  <div class="absolute left-1/2 -translate-x-1/2 flex h-8 w-8 items-center justify-center">
+                  {/* Center dot (mobile: left-aligned, desktop: center) */}
+                  <div class="absolute left-4 -translate-x-1/2 flex h-8 w-8 items-center justify-center sm:left-1/2">
                     <div class="h-3 w-3 rounded-full border-2 border-blue-400 bg-navy-900 ring-4 ring-blue-900/40" />
                   </div>
 
-                  {/* Spacer opposite side */}
-                  <div class="w-[calc(50%-2rem)]" />
+                  {/* Spacer opposite side (hidden on mobile) */}
+                  <div class="hidden sm:block sm:w-[calc(50%-2rem)]" />
                 </div>
               );
             })
