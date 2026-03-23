@@ -227,7 +227,7 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
       if (!t) return;
       widgetIdRef.current = t.render(turnstileRef.current, {
         sitekey: TURNSTILE_SITE_KEY,
-        theme: 'dark',
+        size: 'invisible',
         callback: (token: string) => { if (mounted) setTurnstileToken(token); },
         'expired-callback': () => { if (mounted) setTurnstileToken(''); },
         'error-callback': () => { if (mounted) setTurnstileToken(''); },
@@ -299,6 +299,25 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
 
     if (Object.keys(nextErrors).length > 0) return;
 
+    // Invisible Turnstile: 토큰 만료 시 재발급
+    let token = turnstileToken;
+    if (!token && widgetIdRef.current && (window as any).turnstile) {
+      (window as any).turnstile.execute(widgetIdRef.current);
+      // 토큰 발급 대기 (최대 5초)
+      token = await new Promise<string>((resolve) => {
+        const check = setInterval(() => {
+          const t = (window as any).turnstile.getResponse(widgetIdRef.current);
+          if (t) { clearInterval(check); resolve(t); }
+        }, 200);
+        setTimeout(() => { clearInterval(check); resolve(''); }, 5000);
+      });
+      if (!token) {
+        setStatus('error');
+        return;
+      }
+      setTurnstileToken(token);
+    }
+
     setStatus('loading');
 
     try {
@@ -313,7 +332,7 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
           company: form.company || '',
           inquiryType: form.inquiryType,
           message: form.message,
-          turnstileToken,
+          turnstileToken: token,
         }),
       });
 
@@ -392,7 +411,7 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
   // ------------------------------------------------------------------
 
   const isLoading = status === 'loading';
-  const canSubmit = !isLoading && !!turnstileToken;
+  const canSubmit = !isLoading;
 
   return (
     <form
