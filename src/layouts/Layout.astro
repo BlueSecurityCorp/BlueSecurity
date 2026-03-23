@@ -25,6 +25,8 @@ const ogLocale = lang === 'en' ? 'en_US' : 'ko_KR';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://contact.bluesecurity.online; frame-src 'self' https://challenges.cloudflare.com" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
@@ -49,6 +51,7 @@ const ogLocale = lang === 'en' ? 'en_US' : 'ko_KR';
       rel="stylesheet"
       as="style"
       crossorigin
+      integrity="sha384-GIdEBaqGN9mNkDkMkzMHW8EKUqtpPIe/sLj1X7DIrnc9uPtLROJgmuDlh+3rBw0j"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
     />
 
