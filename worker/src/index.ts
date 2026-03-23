@@ -3,6 +3,7 @@ import { createMimeMessage } from 'mimetext/browser';
 
 interface Env {
   SEND_EMAIL: SendEmail;
+  TURNSTILE_SECRET: string;
 }
 
 interface ContactBody {
@@ -11,12 +12,12 @@ interface ContactBody {
   company?: string;
   inquiryType: string;
   message: string;
+  turnstileToken?: string;
 }
 
 const ALLOWED_ORIGINS = [
   'https://www.bluesecurity.online',
   'https://bluesecurity.online',
-  'http://localhost:4321',
 ];
 
 function corsHeaders(origin: string): Record<string, string> {
@@ -33,6 +34,25 @@ function jsonResponse(data: unknown, status: number, origin: string): Response {
     status,
     headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
   });
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const VALID_INQUIRY_TYPES = [
+  '제품 문의', '견적 요청', '기술 지원', '기타',
+  'Product Inquiry', 'Quote Request', 'Technical Support', 'Other',
+];
+
+const MAX_LENGTHS: Record<string, number> = {
+  name: 100,
+  email: 254,
+  company: 200,
+  inquiryType: 50,
+  message: 5000,
+};
+
+function sanitizeHeaderValue(str: string): string {
+  return str.replace(/[\r\n\t]/g, ' ').trim();
 }
 
 function escapeHtml(str: string): string {
@@ -187,6 +207,11 @@ export default {
         return jsonResponse({ error: 'Method not allowed' }, 405, origin);
       }
 
+      const contentLength = parseInt(request.headers.get('Content-Length') || '0', 10);
+      if (contentLength > 10_240) {
+        return jsonResponse({ error: 'Payload too large' }, 413, origin);
+      }
+
       let body: ContactBody;
       try {
         body = await request.json();
@@ -196,6 +221,40 @@ export default {
 
       if (!body.name?.trim() || !body.email?.trim() || !body.message?.trim()) {
         return jsonResponse({ error: 'Missing required fields' }, 400, origin);
+      }
+
+      if (!EMAIL_RE.test(body.email) || body.email.length > 254) {
+        return jsonResponse({ error: 'Invalid email format' }, 400, origin);
+      }
+
+      if (!VALID_INQUIRY_TYPES.includes(body.inquiryType)) {
+        return jsonResponse({ error: 'Invalid inquiry type' }, 400, origin);
+      }
+
+      for (const [key, max] of Object.entries(MAX_LENGTHS)) {
+        const val = body[key as keyof ContactBody];
+        if (typeof val === 'string' && val.length > max) {
+          return jsonResponse({ error: `${key} exceeds maximum length` }, 400, origin);
+        }
+      }
+
+      const turnstileToken = body.turnstileToken;
+      if (!turnstileToken) {
+        return jsonResponse({ error: 'Turnstile token required' }, 400, origin);
+      }
+
+      const verifyForm = new FormData();
+      verifyForm.append('secret', env.TURNSTILE_SECRET);
+      verifyForm.append('response', turnstileToken);
+      verifyForm.append('remoteip', request.headers.get('CF-Connecting-IP') || '');
+
+      const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        body: verifyForm,
+      });
+      const verifyData = await verifyRes.json() as { success: boolean };
+      if (!verifyData.success) {
+        return jsonResponse({ error: 'Turnstile verification failed' }, 403, origin);
       }
 
       const timestamp = new Date().toLocaleString('ko-KR', {
@@ -212,7 +271,7 @@ export default {
       const msg = createMimeMessage();
       msg.setSender({ name: 'BlueSecurity Contact', addr: 'contact@contact.bluesecurity.online' });
       msg.setRecipient('blue@bluesecurity.online');
-      msg.setSubject(`[문의] ${body.inquiryType} - ${body.name}`);
+      msg.setSubject(`[문의] ${sanitizeHeaderValue(body.inquiryType)} - ${sanitizeHeaderValue(body.name)}`);
 
       // HTML version (primary)
       msg.addMessage({
@@ -235,8 +294,9 @@ export default {
 
       return jsonResponse({ ok: true }, 200, origin);
     } catch (e: any) {
+      console.error('Contact form error:', e);
       return jsonResponse(
-        { error: 'Internal server error', detail: e?.message ?? 'Unknown error' },
+        { error: 'Internal server error' },
         500,
         origin,
       );
