@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { useState, useEffect, useRef, type FormEvent, type ChangeEvent } from 'react';
 
 // ---------------------------------------------------------------------------
 // i18n (inline translations — mirrors src/i18n/ui.ts for form keys)
@@ -95,7 +95,8 @@ type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
 
 // Cloudflare Worker endpoint for contact form
 // Deploy worker first: cd worker && npm install && npm run deploy
-const WORKER_ENDPOINT = 'https://bluesecurity-contact.ljho2321.workers.dev';
+const WORKER_ENDPOINT = 'https://contact.bluesecurity.online';
+const TURNSTILE_SITE_KEY = '0x4AAAAAACu3_CKDiBUyWKSw';
 
 function getInquiryOptions(ui: typeof formUI[Locale]): InquiryType[] {
   return [ui.typeProduct, ui.typeQuote, ui.typeSupport, ui.typeOther];
@@ -212,6 +213,48 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
   const [errors, setErrors]     = useState<FormErrors>({});
   const [touched, setTouched]   = useState<Partial<Record<keyof FormData, boolean>>>({});
   const [status, setStatus]     = useState<SubmitStatus>('idle');
+  const [turnstileToken, setTurnstileToken] = useState('');
+
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | undefined>(undefined);
+
+  useEffect(() => {
+    let mounted = true;
+
+    function renderWidget() {
+      if (!mounted || !turnstileRef.current || widgetIdRef.current) return;
+      const t = (window as any).turnstile;
+      if (!t) return;
+      widgetIdRef.current = t.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: 'dark',
+        callback: (token: string) => { if (mounted) setTurnstileToken(token); },
+        'expired-callback': () => { if (mounted) setTurnstileToken(''); },
+        'error-callback': () => { if (mounted) setTurnstileToken(''); },
+      });
+    }
+
+    const existing = document.getElementById('cf-turnstile-script');
+    if (existing) {
+      renderWidget();
+    } else {
+      const script = document.createElement('script');
+      script.id = 'cf-turnstile-script';
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = renderWidget;
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      mounted = false;
+      if (widgetIdRef.current && (window as any).turnstile) {
+        (window as any).turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = undefined;
+      }
+    };
+  }, []);
 
   // ------------------------------------------------------------------
   // Handlers
@@ -270,6 +313,7 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
           company: form.company || '',
           inquiryType: form.inquiryType,
           message: form.message,
+          turnstileToken,
         }),
       });
 
@@ -278,6 +322,10 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
         setForm(INITIAL_FORM);
         setTouched({});
         setErrors({});
+        setTurnstileToken('');
+        if (widgetIdRef.current && (window as any).turnstile) {
+          (window as any).turnstile.reset(widgetIdRef.current);
+        }
       } else {
         setStatus('error');
       }
@@ -344,6 +392,7 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
   // ------------------------------------------------------------------
 
   const isLoading = status === 'loading';
+  const canSubmit = !isLoading && !!turnstileToken;
 
   return (
     <form
@@ -473,14 +522,17 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
         {ui.privacy}
       </p>
 
+      {/* Turnstile */}
+      <div ref={turnstileRef} />
+
       {/* Submit */}
       <button
         type="submit"
-        disabled={isLoading}
+        disabled={!canSubmit}
         className={
           'relative flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold ' +
           'transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:ring-offset-2 focus:ring-offset-navy-800 ' +
-          (isLoading
+          (!canSubmit
             ? 'cursor-not-allowed bg-blue-700/50 text-blue-300'
             : 'bg-blue-600 text-white shadow-lg shadow-blue-600/25 hover:bg-blue-500 hover:shadow-blue-500/30 active:scale-[0.98]')
         }
