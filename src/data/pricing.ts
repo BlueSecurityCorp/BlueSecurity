@@ -27,10 +27,10 @@ const pricingData: Record<Locale, ProductPricing[]> = {
       productId: 'codeblue',
       productName: 'CodeBlue',
       tiers: [
-        { name: 'Free', price: '0', period: '', description: '개인 프로젝트 및 오픈소스', features: ['월 5회 스캔', '기본 취약점 탐지', '커뮤니티 지원', '기본 리포트'], cta: '무료로 시작' },
-        { name: 'Starter', price: '59,000', period: '/월', description: '소규모 팀', features: ['월 50회 스캔', '전체 취약점 탐지', '이메일 지원', '상세 리포트', 'CI/CD 통합', 'SBOM 생성'], cta: '시작하기' },
-        { name: 'Team', price: '120,000', period: '/월', description: '성장하는 개발팀', features: ['무제한 스캔', '전체 취약점 탐지', '우선 지원', '커스텀 리포트', 'CI/CD 통합', 'SBOM 생성', 'ISMS-P 매핑', '팀 대시보드'], cta: '시작하기', highlighted: true },
-        { name: 'Business', price: '290,000', period: '/월', description: '엔터프라이즈', features: ['무제한 스캔', '전체 취약점 탐지', '전담 매니저', '커스텀 리포트', 'CI/CD 통합', 'SBOM 생성', 'ISMS-P 매핑', '팀 대시보드', 'On-Premise 옵션', 'SLA 보장'], cta: '문의하기' },
+        { name: 'Trial', price: '0', period: '', description: '14일 무료 체험', features: ['프로젝트 15개', '사용자 무제한', 'SAST + SCA 분석', 'SBOM 생성/비교', '의존성 그래프', 'HTML 보고서', '이메일 지원'], cta: '무료 체험 시작' },
+        { name: 'Starter', price: '99,000', period: '/월', description: '소규모 팀', features: ['프로젝트 15개', '사용자 무제한', '무제한 스캔/SBOM', 'SAST + SCA 분석', 'SBOM 생성/비교', '의존성 그래프', '공급망 위험 경고', 'HTML 보고서', '6개월 데이터 보관', '이메일 지원'], cta: '시작하기' },
+        { name: 'Pro', price: '199,000', period: '/월', description: '성장하는 개발팀', features: ['프로젝트 50개', '사용자 무제한', '납품용 PDF 보고서 무제한', 'VEX 문서 관리', '라이선스 정책 (커스텀)', 'SBOM 공유 링크', 'SAST+SCA 교차 분석', '공급망 위협 알림 (5개 생태계)', '업데이트 권고', '자동 SBOM 비교 + 변경 알림', '2년 데이터 보관', '이메일 지원 (48시간 SLA)'], cta: '시작하기', highlighted: true },
+        { name: 'Business', price: '399,000', period: '/월', description: '엔터프라이즈', features: ['프로젝트 무제한', '사용자 무제한', 'SBOM 서명/검증 (Ed25519/ES256)', 'GitHub PR 연동 (SBOM diff)', '라이선스 정책 (자동 평가 + 위반 대시보드)', 'VEX 전체 워크플로우', '5년 데이터 보관', '채팅 + 이메일 지원 (24시간 SLA)'], cta: '시작하기' },
       ],
     },
     {
@@ -70,10 +70,10 @@ const pricingData: Record<Locale, ProductPricing[]> = {
       productId: 'codeblue',
       productName: 'CodeBlue',
       tiers: [
-        { name: 'Free', price: '0', period: '', description: 'Personal & Open Source', features: ['5 scans/month', 'Basic vulnerability detection', 'Community support', 'Basic reports'], cta: 'Get Started Free' },
-        { name: 'Starter', price: '59,000', period: '/mo', description: 'Small Teams', features: ['50 scans/month', 'Full vulnerability detection', 'Email support', 'Detailed reports', 'CI/CD integration', 'SBOM generation'], cta: 'Get Started' },
-        { name: 'Team', price: '120,000', period: '/mo', description: 'Growing Dev Teams', features: ['Unlimited scans', 'Full vulnerability detection', 'Priority support', 'Custom reports', 'CI/CD integration', 'SBOM generation', 'ISMS-P mapping', 'Team dashboard'], cta: 'Get Started', highlighted: true },
-        { name: 'Business', price: '290,000', period: '/mo', description: 'Enterprise', features: ['Unlimited scans', 'Full vulnerability detection', 'Dedicated manager', 'Custom reports', 'CI/CD integration', 'SBOM generation', 'ISMS-P mapping', 'Team dashboard', 'On-Premise option', 'SLA guarantee'], cta: 'Contact Us' },
+        { name: 'Trial', price: '0', period: '', description: '14-day free trial', features: ['Up to 15 projects', 'Unlimited users', 'SAST + SCA analysis', 'SBOM generation/comparison', 'Dependency graph', 'HTML reports', 'Email support'], cta: 'Start Free Trial' },
+        { name: 'Starter', price: '99,000', period: '/mo', description: 'Small Teams', features: ['Up to 15 projects', 'Unlimited users', 'Unlimited scans/SBOM', 'SAST + SCA analysis', 'SBOM generation/comparison', 'Dependency graph', 'Supply chain risk alerts', 'HTML reports', '6-month data retention', 'Email support'], cta: 'Get Started' },
+        { name: 'Pro', price: '199,000', period: '/mo', description: 'Growing Dev Teams', features: ['Up to 50 projects', 'Unlimited users', 'Unlimited PDF reports for delivery', 'VEX document management', 'License policy (custom)', 'SBOM sharing links', 'SAST+SCA cross analysis', 'Supply chain threat alerts (5 ecosystems)', 'Update recommendations', 'Auto SBOM comparison + change alerts', '2-year data retention', 'Email support (48h SLA)'], cta: 'Get Started', highlighted: true },
+        { name: 'Business', price: '399,000', period: '/mo', description: 'Enterprise', features: ['Unlimited projects', 'Unlimited users', 'SBOM signing/verification (Ed25519/ES256)', 'GitHub PR integration (SBOM diff)', 'License policy (auto evaluation + violation dashboard)', 'Full VEX workflow', '5-year data retention', 'Chat + email support (24h SLA)'], cta: 'Get Started' },
       ],
     },
     {
@@ -118,7 +118,7 @@ export const pricing = pricingData.ko;
 
 const faqData: Record<Locale, FAQ[]> = {
   ko: [
-    { question: '무료 플랜에서 유료 플랜으로 전환 시 데이터가 유지되나요?', answer: '네, 기존 스캔 결과와 설정이 모두 유지됩니다.' },
+    { question: '무료 체험(Trial)에서 유료 플랜으로 전환 시 데이터가 유지되나요?', answer: '네, 기존 스캔 결과와 설정이 모두 유지됩니다. 체험 종료 후에는 읽기 전용으로 전환되며 데이터는 삭제되지 않습니다.' },
     { question: '결제 방식은 어떻게 되나요?', answer: '월간/연간 구독 방식이며, 연간 구독 시 20% 할인이 적용됩니다. 세금계산서 발행 가능합니다.' },
     { question: 'On-Premise 설치도 가능한가요?', answer: 'Business 플랜에서 On-Premise 설치를 지원합니다. 별도 문의해 주세요.' },
     { question: 'BluePhalanx Enterprise 견적은 어떻게 문의하나요?', answer: 'BluePhalanx Enterprise는 규모와 요구사항에 따라 맞춤 견적을 제공합니다. 문의 페이지를 통해 연락해 주세요.' },
@@ -126,7 +126,7 @@ const faqData: Record<Locale, FAQ[]> = {
     { question: '환불 정책은 어떻게 되나요?', answer: '구독 시작 후 14일 이내 전액 환불이 가능합니다.' },
   ],
   en: [
-    { question: 'Is my data preserved when upgrading from Free to a paid plan?', answer: 'Yes, all existing scan results and settings are preserved.' },
+    { question: 'Is my data preserved when upgrading from Trial to a paid plan?', answer: 'Yes, all existing scan results and settings are preserved. After the trial ends, your account switches to read-only mode and no data is deleted.' },
     { question: 'What payment methods are available?', answer: 'Monthly and annual subscriptions are available. Annual plans receive a 20% discount. Tax invoices can be issued.' },
     { question: 'Is On-Premise installation available?', answer: 'On-Premise installation is supported on the Business plan. Please contact us for details.' },
     { question: 'How do I request a BluePhalanx Enterprise quote?', answer: 'BluePhalanx Enterprise pricing is customized based on your scale and requirements. Please reach out via our contact page.' },
