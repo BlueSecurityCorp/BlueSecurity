@@ -36,7 +36,7 @@ function jsonResponse(data: unknown, status: number, origin: string): Response {
   });
 }
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_RE = /^[^\s@?#&]+@[^\s@?#&]+\.[^\s@?#&]+$/;
 
 const VALID_INQUIRY_TYPES = [
   '제품 문의', '견적 요청', '기술 지원', '기타',
@@ -61,6 +61,7 @@ function escapeHtml(str: string): string {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
     .replace(/\n/g, '<br>');
 }
 
@@ -252,9 +253,13 @@ export default {
         method: 'POST',
         body: verifyForm,
       });
-      const verifyData = await verifyRes.json() as { success: boolean };
+      const verifyData = await verifyRes.json() as { success: boolean; hostname?: string };
       if (!verifyData.success) {
         return jsonResponse({ error: 'Turnstile verification failed' }, 403, origin);
+      }
+      const allowedHosts = ['bluesecurity.online', 'www.bluesecurity.online'];
+      if (verifyData.hostname && !allowedHosts.includes(verifyData.hostname)) {
+        return jsonResponse({ error: 'Turnstile hostname mismatch' }, 403, origin);
       }
 
       const timestamp = new Date().toLocaleString('ko-KR', {
