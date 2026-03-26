@@ -1,20 +1,19 @@
 ---
 import type { Locale } from '../i18n/index';
 import { t } from '../i18n/ui';
-import { getStats, getTechHighlights } from '../data/company';
+import { getTechHighlights } from '../data/company';
 
 interface Props {
   lang?: Locale;
 }
 
 const { lang = 'ko' } = Astro.props;
-const stats = getStats(lang);
 const techHighlights = getTechHighlights(lang);
 ---
 
 <section
   class="relative overflow-hidden py-24"
-  aria-labelledby="trust-heading"
+  aria-labelledby="trust-why-heading"
 >
   <!-- Subtle background gradient -->
   <div
@@ -30,60 +29,9 @@ const techHighlights = getTechHighlights(lang);
 
   <div class="relative z-10 mx-auto max-w-6xl px-6">
 
-    <!-- Section heading -->
-    <div class="mb-16 text-center">
-      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-400">
-        {t('trust.eyebrow', lang)}
-      </p>
-      <h2
-        id="trust-heading"
-        class="text-4xl font-black text-white md:text-5xl"
-      >
-        {t('trust.heading', lang)}
-      </h2>
-    </div>
-
-    <!-- Stats row -->
-    <div class="stagger-children mb-20 grid grid-cols-1 gap-6 sm:grid-cols-3 items-stretch">
-      {stats.map((stat) => (
-        <div class="relative overflow-hidden rounded-2xl border border-slate-700/50 bg-navy-800/60 p-8 text-center backdrop-blur-sm">
-          <!-- Ambient glow -->
-          <div
-            class="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-600/5 to-transparent"
-            aria-hidden="true"
-          ></div>
-          <!-- Top highlight line -->
-          <div
-            class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
-            aria-hidden="true"
-          ></div>
-
-          <div class="relative">
-            <!-- Large stat number -->
-            <div class="mb-2 text-5xl font-black leading-none tracking-tight text-gradient md:text-6xl">
-              {stat.value}
-              <span class="text-3xl font-bold text-blue-300/80 md:text-4xl">{stat.suffix}</span>
-            </div>
-
-            <!-- Label -->
-            <div class="mt-3 text-base font-semibold text-slate-300">
-              {stat.label}
-            </div>
-
-            <!-- Optional detail -->
-            {'detail' in stat && stat.detail && (
-              <div class="mt-2 text-xs text-slate-500">
-                {stat.detail}
-              </div>
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-
     <!-- Tech highlights grid -->
     <div class="mb-4 text-center">
-      <h3 class="text-2xl font-bold text-white md:text-3xl">
+      <h3 id="trust-why-heading" class="text-2xl font-bold text-white md:text-3xl">
         {t('trust.why.heading', lang)}
       </h3>
       <p class="mt-3 text-slate-400">{t('trust.why.subtitle', lang)}</p>
