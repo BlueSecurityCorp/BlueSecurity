@@ -18,6 +18,8 @@ const careers = defineCollection({
     team: z.string(),
     published: z.boolean().default(true),
     order: z.number().default(0),
+    start_date: z.string().optional(),
+    end_date: z.string().optional(),
   }),
 });
 

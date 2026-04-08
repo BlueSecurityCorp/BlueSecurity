@@ -9,10 +9,26 @@ import { getCollection } from 'astro:content';
 const lang = 'en' as const;
 const company = getCompany(lang);
 
+const today = new Date().toISOString().split('T')[0];
 const allPositions = await getCollection('careers');
 const positions = allPositions
-  .filter((p) => p.data.published)
+  .filter((p) => {
+    if (!p.data.published) return false;
+    if (p.data.start_date && p.data.start_date > today) return false;
+    if (p.data.end_date && p.data.end_date < today) return false;
+    return true;
+  })
   .sort((a, b) => a.data.order - b.data.order);
+
+function formatPeriod(start?: string, end?: string): string {
+  if (!start && !end) return t('careers.period.open', lang);
+  const parts = [];
+  if (start) parts.push(start);
+  parts.push('~');
+  if (end) parts.push(end);
+  else parts.push(t('careers.period.open', lang));
+  return parts.join(' ');
+}
 
 const benefits = [
   {
@@ -108,6 +124,10 @@ const benefits = [
                     </span>
                     <span class="inline-flex items-center rounded-md bg-slate-800/60 border border-slate-700/50 px-2.5 py-0.5 text-xs font-medium text-slate-300">
                       {pos.data.location_en}
+                    </span>
+                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-900/30 border border-emerald-800/40 px-2.5 py-0.5 text-xs font-medium text-emerald-300">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                      {formatPeriod(pos.data.start_date, pos.data.end_date)}
                     </span>
                   </div>
                 </div>
