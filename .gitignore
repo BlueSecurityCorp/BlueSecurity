@@ -9,3 +9,6 @@ Thumbs.db
 
 # 내부 문서 (배포 제외)
 BlueSecurity_웹서비스_분석보고서.md
+
+# 채용공고 템플릿 (로컬 전용)
+src/content/careers/_template.md
