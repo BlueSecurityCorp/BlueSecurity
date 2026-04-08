@@ -147,6 +147,15 @@ const enPath = switchLocalePath(currentPath, 'en');
       </li>
 
       <li>
+        <a
+          href={localePath('/careers', lang)}
+          class:list={['nav-link', { 'nav-link--active': isActive('/careers') }]}
+        >
+          {t('nav.careers', lang)}
+        </a>
+      </li>
+
+      <li>
         <a href={localePath('/contact', lang)} class="nav-cta">{t('nav.contact', lang)}</a>
       </li>
 
@@ -202,6 +211,10 @@ const enPath = switchLocalePath(currentPath, 'en');
 
       <a href={localePath('/pricing', lang)} class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive('/pricing') }]}>
         {t('nav.pricing', lang)}
+      </a>
+
+      <a href={localePath('/careers', lang)} class:list={['mobile-nav-link', { 'mobile-nav-link--active': isActive('/careers') }]}>
+        {t('nav.careers', lang)}
       </a>
 
       <a href={localePath('/contact', lang)} class="mobile-nav-cta">
