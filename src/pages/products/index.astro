@@ -4,10 +4,10 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import type { Locale } from '../../i18n/index';
 import { t } from '../../i18n/ui';
-import { getProducts } from '../../data/products';
+import { getProductLineup } from '../../data/products';
 
 const lang = 'ko' as Locale;
-const products = getProducts(lang);
+const products = getProductLineup(lang);
 ---
 
 <Layout
@@ -42,7 +42,7 @@ const products = getProducts(lang);
 
   <!-- Products Grid -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
+    <div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2">
       {products.map((product) => (
         <a
           href={product.href}

@@ -76,14 +76,10 @@ const milestonesData: Record<Locale, Milestone[]> = {
   ko: [
     { year: 2025, event: 'BlueSecurity 설립' },
     { year: 2025, event: 'CodeBlue 베타 출시' },
-    { year: 2025, event: 'BluePhalanx 개발 착수' },
-    { year: 2026, event: 'BlueProxy 출시' },
   ],
   en: [
     { year: 2025, event: 'BlueSecurity Founded' },
     { year: 2025, event: 'CodeBlue Beta Launch' },
-    { year: 2025, event: 'BluePhalanx Development Started' },
-    { year: 2026, event: 'BlueProxy Released' },
   ],
 };
 
@@ -100,18 +96,16 @@ interface TechHighlight {
 
 const techHighlightsData: Record<Locale, TechHighlight[]> = {
   ko: [
-    { title: 'AI 기반 분석', description: 'Claude API, EMBER2024 ML 등 최신 AI 기술로 정밀한 보안 분석' },
-    { title: '다계층 방어', description: '단일 솔루션이 아닌, 6계층 파이프라인으로 위협을 다각도 탐지' },
-    { title: '한국 규정 최적화', description: 'ISMS-P, 주요통신기반시설, 전자금융감독규정 등 국내 컴플라이언스 완벽 대응' },
-    { title: '유연한 배포', description: 'SaaS, On-Premise, Air-Gap 환경 모두 지원하여 어떤 인프라에도 적합' },
-    { title: '모의해킹 서비스', description: '전문 보안 컨설턴트가 실제 공격자 관점에서 시스템 취약점을 진단하고 개선 방안을 제시' },
+    { title: '필요한 범위부터 시작', description: 'SAST, SBOM/SCA, 라이선스 점검과 보안 컨설팅을 필요한 범위부터 단계적으로 적용합니다.' },
+    { title: '개발 흐름에 맞춘 연동', description: 'GitHub, GitLab 등 기존 CI/CD 파이프라인에 보안 점검을 붙여 개발 과정에서 이슈를 확인합니다.' },
+    { title: '기준 기반 분류', description: '탐지 결과를 CWE, OWASP 등 익숙한 기준으로 정리해 우선순위 판단이 쉽도록 제공합니다.' },
+    { title: '조치 중심 결과물', description: '취약점 목록만 전달하지 않고 영향도, 재현 조건, 개선 방향을 함께 정리합니다.' },
   ],
   en: [
-    { title: 'AI-Powered Analysis', description: 'Precise security analysis using Claude API, EMBER2024 ML, and other cutting-edge AI technologies' },
-    { title: 'Multi-Layer Defense', description: 'Detect threats from multiple angles through a 6-layer pipeline, not a single solution' },
-    { title: 'Korean Compliance', description: 'Full compliance with ISMS-P, critical infrastructure, and financial regulation standards' },
-    { title: 'Flexible Deployment', description: 'Supports SaaS, On-Premise, and Air-Gap environments for any infrastructure' },
-    { title: 'Penetration Testing', description: 'Expert security consultants diagnose vulnerabilities from an attacker\'s perspective and provide remediation plans' },
+    { title: 'Start With What You Need', description: 'Apply SAST, SBOM/SCA, license checks, and security consulting step by step based on your current needs.' },
+    { title: 'Fits Development Workflows', description: 'Add security checks to existing GitHub, GitLab, and CI/CD pipelines so issues surface during development.' },
+    { title: 'Standards-Based Triage', description: 'Organize findings using familiar references such as CWE and OWASP to make prioritization easier.' },
+    { title: 'Action-Oriented Results', description: 'Deliver impact, reproduction context, and remediation guidance instead of only listing vulnerabilities.' },
   ],
 };
 

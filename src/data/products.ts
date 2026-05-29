@@ -30,54 +30,11 @@ const productsData: Record<Locale, Product[]> = {
         '한국어 상세 리포트 자동 생성',
       ],
       highlights: [
-        { label: '지원 언어', value: '22+' },
-        { label: '탐지 규칙', value: '10,000+' },
-        { label: '대응 표준', value: '3종' },
+        { label: 'SAST/SBOM 기능', value: 'SAST' },
+        { label: 'CWE 취약점 분류', value: 'CWE' },
+        { label: 'CI/CD 파이프라인 연동', value: 'CI/CD' },
       ],
       icon: 'code',
-    },
-    {
-      id: 'bluephalanx',
-      name: 'BluePhalanx',
-      tagline: '6계층 악성코드 분석 플랫폼',
-      description: '독립형 악성코드 분석 플랫폼으로, ML 모델부터 샌드박스까지 6단계 탐지 파이프라인을 통해 알려진 위협과 미지의 위협 모두를 식별합니다.',
-      category: '악성코드 분석',
-      href: '/products/bluephalanx',
-      features: [
-        '6계층 탐지: EMBER2024 ML → ClamAV → YARA-X → CAPE Sandbox → Suricata → Volatility 3',
-        'SaaS / On-Premise / Air-Gap 배포 모드',
-        '23개 AI 에이전트 기반 분석',
-        'MISP 위협 인텔리전스 연동',
-        'STIX 2.1 / TAXII 2.1 표준 호환',
-        '실시간 대시보드 및 알림',
-      ],
-      highlights: [
-        { label: '탐지 계층', value: '6단계' },
-        { label: 'AI 에이전트', value: '23개' },
-        { label: '배포 모드', value: '3종' },
-      ],
-      icon: 'shield',
-    },
-    {
-      id: 'blueproxy',
-      name: 'BlueProxy',
-      tagline: '멀티플랫폼 침투 테스트 프록시',
-      description: 'Android, iOS, Windows 환경의 TCP 트래픽을 분석하고 수정할 수 있는 침투 테스트 전용 프록시 도구입니다. 정책 기반 패킷 변조, 코덱 체인, 감사 로깅을 지원합니다.',
-      category: '모의침투 도구',
-      href: '/products/blueproxy',
-      features: [
-        'Android / iOS / Windows 멀티플랫폼 지원',
-        '정책 기반 패킷 수정 (Policy-based Modification)',
-        '코덱 체인을 통한 인코딩/디코딩 자동화',
-        '감사 로깅 및 세션 리플레이',
-        'SSL/TLS 인터셉트 지원',
-      ],
-      highlights: [
-        { label: '지원 플랫폼', value: '3종' },
-        { label: '프로토콜', value: 'TCP' },
-        { label: '용도', value: '모의침투' },
-      ],
-      icon: 'network',
     },
     {
       id: 'pentest',
@@ -95,9 +52,9 @@ const productsData: Record<Locale, Product[]> = {
         '재진단을 통한 조치 확인',
       ],
       highlights: [
-        { label: '진단 방법론', value: '국제 표준' },
-        { label: '보고서', value: '한국어' },
-        { label: '재진단', value: '포함' },
+        { label: '침투 테스트', value: 'Pentest' },
+        { label: '웹·앱 취약점 진단', value: 'Web/App' },
+        { label: '인프라 진단', value: 'Infra' },
       ],
       icon: 'pentest',
     },
@@ -119,54 +76,11 @@ const productsData: Record<Locale, Product[]> = {
         'Auto-generated detailed reports in Korean',
       ],
       highlights: [
-        { label: 'Languages', value: '22+' },
-        { label: 'Rules', value: '10,000+' },
-        { label: 'Standards', value: '3' },
+        { label: 'SAST/SBOM Features', value: 'SAST' },
+        { label: 'CWE Classification', value: 'CWE' },
+        { label: 'CI/CD Integration', value: 'CI/CD' },
       ],
       icon: 'code',
-    },
-    {
-      id: 'bluephalanx',
-      name: 'BluePhalanx',
-      tagline: '6-Layer Malware Analysis Platform',
-      description: 'A standalone malware analysis platform that identifies both known and unknown threats through a 6-stage detection pipeline, from ML models to sandboxes.',
-      category: 'Malware Analysis',
-      href: '/en/products/bluephalanx',
-      features: [
-        '6-layer detection: EMBER2024 ML → ClamAV → YARA-X → CAPE Sandbox → Suricata → Volatility 3',
-        'SaaS / On-Premise / Air-Gap deployment modes',
-        '23 AI agent-based analysis',
-        'MISP threat intelligence integration',
-        'STIX 2.1 / TAXII 2.1 standard compatible',
-        'Real-time dashboard and alerts',
-      ],
-      highlights: [
-        { label: 'Detection Layers', value: '6' },
-        { label: 'AI Agents', value: '23' },
-        { label: 'Deploy Modes', value: '3' },
-      ],
-      icon: 'shield',
-    },
-    {
-      id: 'blueproxy',
-      name: 'BlueProxy',
-      tagline: 'Multi-Platform Penetration Testing Proxy',
-      description: 'A penetration testing proxy tool for analyzing and modifying TCP traffic on Android, iOS, and Windows. Supports policy-based packet modification, codec chains, and audit logging.',
-      category: 'Pentest Tool',
-      href: '/en/products/blueproxy',
-      features: [
-        'Android / iOS / Windows multi-platform support',
-        'Policy-based packet modification',
-        'Codec chain for encoding/decoding automation',
-        'Audit logging and session replay',
-        'SSL/TLS intercept support',
-      ],
-      highlights: [
-        { label: 'Platforms', value: '3' },
-        { label: 'Protocol', value: 'TCP' },
-        { label: 'Purpose', value: 'Pentest' },
-      ],
-      icon: 'network',
     },
     {
       id: 'pentest',
@@ -184,9 +98,9 @@ const productsData: Record<Locale, Product[]> = {
         'Verification through re-assessment',
       ],
       highlights: [
-        { label: 'Methodology', value: 'Intl. Standards' },
-        { label: 'Reports', value: 'Detailed' },
-        { label: 'Re-test', value: 'Included' },
+        { label: 'Penetration Testing', value: 'Pentest' },
+        { label: 'Web/App Assessment', value: 'Web/App' },
+        { label: 'Infrastructure Assessment', value: 'Infra' },
       ],
       icon: 'pentest',
     },
@@ -195,6 +109,10 @@ const productsData: Record<Locale, Product[]> = {
 
 export function getProducts(lang: Locale = 'ko'): Product[] {
   return productsData[lang];
+}
+
+export function getProductLineup(lang: Locale = 'ko'): Product[] {
+  return productsData[lang].filter((product) => product.id === 'codeblue' || product.id === 'pentest');
 }
 
 /** @deprecated Use getProducts(lang) instead */

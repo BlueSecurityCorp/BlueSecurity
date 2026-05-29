@@ -2,14 +2,14 @@
 import type { Locale } from '../i18n/index';
 import { localePath, switchLocalePath } from '../i18n/index';
 import { t } from '../i18n/ui';
-import { getProducts } from '../data/products';
+import { getProductLineup } from '../data/products';
 
 interface Props {
   lang?: Locale;
 }
 
 const { lang = 'ko' } = Astro.props;
-const products = getProducts(lang);
+const products = getProductLineup(lang);
 const currentPath = Astro.url.pathname;
 
 function isActive(href: string) {
