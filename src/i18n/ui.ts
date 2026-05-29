@@ -28,7 +28,7 @@ const ui = {
     'trust.eyebrow': '신뢰할 수 있는 보안',
     'trust.heading': '숫자로 증명하는 기술력',
     'trust.why.heading': '왜 BlueSecurity인가?',
-    'trust.why.subtitle': '지금 필요한 보안 점검부터 현실적으로 적용합니다',
+    'trust.why.subtitle': '도구와 컨설팅을 필요한 범위부터 현실적으로 적용합니다',
 
     // CTA
     'cta.heading.prefix': '지금 바로 ',
@@ -199,7 +199,7 @@ const ui = {
     'trust.eyebrow': 'Trusted Security',
     'trust.heading': 'Proven by Numbers',
     'trust.why.heading': 'Why BlueSecurity?',
-    'trust.why.subtitle': 'Practical security checks that fit your current workflow',
+    'trust.why.subtitle': 'Practical security tools and consulting, scoped to what you need now',
 
     // CTA
     'cta.heading.prefix': 'Get Started ',

@@ -2,7 +2,7 @@
 import type { Locale } from '../i18n/index';
 import { localePath } from '../i18n/index';
 import { t } from '../i18n/ui';
-import { getCompany, getStats } from '../data/company';
+import { getCompany } from '../data/company';
 
 interface Props {
   lang?: Locale;
@@ -10,7 +10,6 @@ interface Props {
 
 const { lang = 'ko' } = Astro.props;
 const company = getCompany(lang);
-const stats = getStats(lang);
 ---
 
 <section class="border-b border-slate-800 bg-navy-900">
@@ -52,16 +51,6 @@ const stats = getStats(lang);
         </a>
       </div>
 
-      <dl class="mx-auto mt-12 grid max-w-2xl grid-cols-3 gap-px overflow-hidden rounded-lg border border-slate-800 bg-slate-800 text-left">
-        {stats.map((stat) => (
-          <div class="bg-navy-900 px-4 py-4">
-            <dt class="text-xs font-medium text-slate-500">{stat.label}</dt>
-            <dd class="mt-2 text-xl font-semibold text-white">
-              {stat.value}<span class="text-sm text-slate-400">{stat.suffix}</span>
-            </dd>
-          </div>
-        ))}
-      </dl>
     </div>
   </div>
 </section>

@@ -14,9 +14,9 @@ interface Company {
 const companyData: Record<Locale, Company> = {
   ko: {
     name: 'BlueSecurity',
-    slogan: '기업 규모가 보안 수준을 결정하지 않습니다',
-    description: '중소기업도 대기업과 동일한 수준의 보안을 합리적인 비용으로 구축할 수 있습니다.',
-    mission: '보안 서비스의 비용 장벽을 낮춰, 모든 기업이 사이버 위협에 대응할 수 있는 환경을 만듭니다.',
+    slogan: '필요한 보안부터 가볍게 시작하세요',
+    description: 'BlueSecurity는 작은 팀도 부담 없이 보안 점검을 시작할 수 있도록 돕습니다.',
+    mission: '복잡한 보안 절차보다 지금 필요한 점검부터 시작할 수 있는 환경을 만듭니다.',
     vision: '대한민국 중소기업이 보안 걱정 없이 본업에 집중할 수 있는 세상을 만들어 갑니다.',
     email: 'blue@bluesecurity.online',
     website: 'https://www.bluesecurity.online',
@@ -40,32 +40,6 @@ export function getCompany(lang: Locale = 'ko'): Company {
 
 /** @deprecated Use getCompany(lang) instead */
 export const company = companyData.ko;
-
-interface Stat {
-  label: string;
-  value: string;
-  suffix: string;
-  detail?: string;
-}
-
-const statsData: Record<Locale, Stat[]> = {
-  ko: [
-    { label: '지원 언어', value: '22+', suffix: '개' },
-    { label: '탐지 규칙', value: '10,000+', suffix: '개' },
-    { label: '보안 표준 대응', value: '3', suffix: '종', detail: 'OWASP / CWE / ISMS-P' },
-  ],
-  en: [
-    { label: 'Languages', value: '22+', suffix: '' },
-    { label: 'Detection Rules', value: '10,000+', suffix: '' },
-    { label: 'Standards', value: '3', suffix: '', detail: 'OWASP / CWE / ISMS-P' },
-  ],
-};
-
-export function getStats(lang: Locale = 'ko') {
-  return statsData[lang];
-}
-
-export const stats = statsData.ko;
 
 interface Milestone {
   year: number;
@@ -96,16 +70,16 @@ interface TechHighlight {
 
 const techHighlightsData: Record<Locale, TechHighlight[]> = {
   ko: [
-    { title: '필요한 범위부터 시작', description: 'SAST, SBOM/SCA, 라이선스 점검과 보안 컨설팅을 필요한 범위부터 단계적으로 적용합니다.' },
-    { title: '개발 흐름에 맞춘 연동', description: 'GitHub, GitLab 등 기존 CI/CD 파이프라인에 보안 점검을 붙여 개발 과정에서 이슈를 확인합니다.' },
-    { title: '기준 기반 분류', description: '탐지 결과를 CWE, OWASP 등 익숙한 기준으로 정리해 우선순위 판단이 쉽도록 제공합니다.' },
-    { title: '조치 중심 결과물', description: '취약점 목록만 전달하지 않고 영향도, 재현 조건, 개선 방향을 함께 정리합니다.' },
+    { title: '필요한 만큼 시작', description: '처음부터 큰 보안 체계를 요구하지 않고, 현재 상황에서 필요한 점검 범위부터 정리합니다.' },
+    { title: '도구와 사람이 함께 확인', description: '자동화된 점검 결과와 전문가 검토를 함께 활용해 놓치기 쉬운 위험을 줄입니다.' },
+    { title: '우선순위 중심 안내', description: '발견된 이슈를 모두 나열하는 대신, 먼저 처리해야 할 위험부터 판단할 수 있게 돕습니다.' },
+    { title: '조치 가능한 결과', description: '문제의 영향, 재현 조건, 개선 방향을 함께 제공해 실제 수정으로 이어지게 합니다.' },
   ],
   en: [
-    { title: 'Start With What You Need', description: 'Apply SAST, SBOM/SCA, license checks, and security consulting step by step based on your current needs.' },
-    { title: 'Fits Development Workflows', description: 'Add security checks to existing GitHub, GitLab, and CI/CD pipelines so issues surface during development.' },
-    { title: 'Standards-Based Triage', description: 'Organize findings using familiar references such as CWE and OWASP to make prioritization easier.' },
-    { title: 'Action-Oriented Results', description: 'Deliver impact, reproduction context, and remediation guidance instead of only listing vulnerabilities.' },
+    { title: 'Start With What You Need', description: 'We do not require a large security program upfront. We help define the right scope for your current situation.' },
+    { title: 'Tools Plus Expert Review', description: 'We combine automated checks with expert review to reduce risks that tools alone can miss.' },
+    { title: 'Priority-Driven Guidance', description: 'Instead of listing every issue equally, we help identify what should be handled first.' },
+    { title: 'Actionable Results', description: 'We provide impact, reproduction context, and remediation guidance so findings lead to real fixes.' },
   ],
 };
 
