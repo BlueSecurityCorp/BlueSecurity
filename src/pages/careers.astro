@@ -14,6 +14,7 @@ const today = new Date().toISOString().split('T')[0];
 const allPositions = await getCollection('careers');
 const positions = allPositions
   .filter((p) => {
+    if (p.id.split('/').pop()?.startsWith('_')) return false;
     if (!p.data.published) return false;
     if (p.data.start_date && p.data.start_date > today) return false;
     if (p.data.end_date && p.data.end_date < today) return false;

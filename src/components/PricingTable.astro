@@ -12,6 +12,7 @@ const { lang = 'ko' } = Astro.props;
 const products = getPricing(lang);
 
 const tierIcons: Record<string, string> = {
+  Free: '◉',
   Trial: '⬡',
   Starter: '◈',
   Pro: '◉',
@@ -30,7 +31,13 @@ const tierIcons: Record<string, string> = {
         <h2 class="mb-6 text-2xl font-bold text-white">{product.productName}</h2>
 
         {/* Tiers grid */}
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div
+          class={
+            product.tiers.length === 1
+              ? 'mx-auto grid max-w-xl grid-cols-1 gap-6'
+              : 'grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4'
+          }
+        >
           {product.tiers.map((tier) => (
             <div
               class={[
@@ -147,36 +154,4 @@ const tierIcons: Record<string, string> = {
       </div>
     ))
   }
-
-  <!-- BlueProxy free note -->
-  <div
-    class="flex items-center gap-3 rounded-xl border border-blue-900/40 bg-navy-800/60 px-5 py-4"
-  >
-    <svg
-      class="h-5 w-5 shrink-0 text-cyan-400"
-      viewBox="0 0 20 20"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.5" />
-      <path
-        d="M10 9v5M10 7v.01"
-        stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-      />
-    </svg>
-    <p class="text-sm text-slate-400">
-      <strong class="font-semibold text-slate-200">BlueProxy</strong>{' '}—{' '}
-      {t('pricing.blueproxy.free', lang)}{' '}
-      <a
-        href="https://github.com/BlueSecurityCorp/blueproxy"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-blue-400 underline underline-offset-2 hover:text-blue-300"
-      >
-        {t('pricing.blueproxy.github', lang)} →
-      </a>
-    </p>
-  </div>
 </section>
