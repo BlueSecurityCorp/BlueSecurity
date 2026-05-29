@@ -21,14 +21,14 @@ const ui = {
     'products.eyebrow': '제품 라인업',
     'products.heading': '보안의 전 단계를',
     'products.heading.accent': ' 하나로',
-    'products.subtitle': '소스코드 분석부터 악성코드 탐지, 모의해킹까지 — 중소기업에 필요한 보안을 합리적 비용으로',
+    'products.subtitle': '소스코드 보안 점검과 보안 컨설팅을 필요한 범위부터 합리적으로 적용합니다.',
     'products.card.more': '자세히 보기',
 
     // Trust indicators
     'trust.eyebrow': '신뢰할 수 있는 보안',
     'trust.heading': '숫자로 증명하는 기술력',
     'trust.why.heading': '왜 BlueSecurity인가?',
-    'trust.why.subtitle': '최신 기술과 한국 시장 최적화의 결합',
+    'trust.why.subtitle': '지금 필요한 보안 점검부터 현실적으로 적용합니다',
 
     // CTA
     'cta.heading.prefix': '지금 바로 ',
@@ -57,19 +57,17 @@ const ui = {
 
     // Pricing page
     'pricing.title': '가격 정책 | BlueSecurity',
-    'pricing.meta': 'CodeBlue 요금제를 확인하세요. 투명한 가격으로 기업급 보안을 제공합니다.',
+    'pricing.meta': 'CodeBlue는 2026년 12월 31일까지 무료로 제공합니다.',
     'pricing.heading': '가격 정책',
-    'pricing.subtitle': '숨겨진 비용 없이 투명한 가격으로 제공합니다. 팀 규모와 요구사항에 맞는 플랜을 선택하세요.',
-    'pricing.annual': '연간 구독 시 20% 할인 적용',
+    'pricing.subtitle': 'CodeBlue는 2026년 12월 31일까지 무료 서비스로 제공합니다.',
+    'pricing.annual': '2026년 12월 31일까지 무료 제공',
     'pricing.faq.heading': '자주 묻는 질문',
-    'pricing.custom.heading': '맞춤형 견적이 필요하신가요?',
-    'pricing.custom.description': 'CodeBlue 또는 BluePhalanx의 엔터프라이즈 도입, 온프레미스 배포, 대규모 팀 라이선스 등 특수 요구사항이 있으시면 전담 매니저가 최적의 솔루션을 제안해 드립니다.',
-    'pricing.custom.cta': '맞춤 견적 문의하기 →',
+    'pricing.custom.heading': '도입 문의가 필요하신가요?',
+    'pricing.custom.description': '대규모 도입, 별도 운영 환경, 보안 컨설팅이 필요한 경우 요구사항에 맞춰 안내해 드립니다.',
+    'pricing.custom.cta': '도입 문의하기 →',
     'pricing.recommended': '추천',
     'pricing.free': '무료',
     'pricing.custom.note': '맞춤 견적을 제공합니다.',
-    'pricing.blueproxy.free': 'BlueProxy는 무료 오픈소스 소프트웨어입니다.',
-    'pricing.blueproxy.github': 'GitHub에서 다운로드',
 
     // Contact page
     'contact.title': '문의하기 | BlueSecurity',
@@ -118,9 +116,9 @@ const ui = {
     'products.page.meta': 'BlueSecurity의 사이버보안 제품 및 서비스',
     'products.page.eyebrow': '제품 포트폴리오',
     'products.page.heading': '제품 소개',
-    'products.page.subtitle': '소스코드 분석, 악성코드 탐지, 모의해킹까지 중소기업에 필요한 보안 솔루션과 전문 컨설팅을 합리적 비용으로 제공합니다.',
+    'products.page.subtitle': '소스코드 보안 점검과 전문 보안 컨설팅을 합리적 비용으로 제공합니다.',
     'products.page.bundle.heading': '제품과 서비스를 함께 도입하면 더 강력합니다',
-    'products.page.bundle.description': '개발(CodeBlue) → 위협 탐지(BluePhalanx) → 모의해킹 검증으로 이어지는 완전한 보안 사이클을 합리적인 비용으로 구축하세요.',
+    'products.page.bundle.description': 'CodeBlue로 개발 단계의 보안 이슈를 확인하고, 보안 컨설팅으로 실제 환경의 취약점을 검증하세요.',
     'products.page.bundle.cta': '통합 도입 문의',
     'products.page.pricing': '요금 안내',
     'products.detail.features': '주요 기능',
@@ -194,14 +192,14 @@ const ui = {
     'products.eyebrow': 'Product Lineup',
     'products.heading': 'All Stages of Security',
     'products.heading.accent': ' in One',
-    'products.subtitle': 'From source code analysis to malware detection and penetration testing — enterprise security at a reasonable cost for SMEs',
+    'products.subtitle': 'Apply source code security checks and security consulting based on what your team needs today.',
     'products.card.more': 'Learn More',
 
     // Trust indicators
     'trust.eyebrow': 'Trusted Security',
     'trust.heading': 'Proven by Numbers',
     'trust.why.heading': 'Why BlueSecurity?',
-    'trust.why.subtitle': 'Cutting-edge technology optimized for the Korean market',
+    'trust.why.subtitle': 'Practical security checks that fit your current workflow',
 
     // CTA
     'cta.heading.prefix': 'Get Started ',
@@ -230,19 +228,17 @@ const ui = {
 
     // Pricing page
     'pricing.title': 'Pricing | BlueSecurity',
-    'pricing.meta': 'Check CodeBlue plans. Enterprise-grade security at transparent prices.',
+    'pricing.meta': 'CodeBlue is free through December 31, 2026.',
     'pricing.heading': 'Pricing',
-    'pricing.subtitle': 'Transparent pricing with no hidden costs. Choose the plan that fits your team size and requirements.',
-    'pricing.annual': '20% discount on annual subscription',
+    'pricing.subtitle': 'CodeBlue is available as a free service through December 31, 2026.',
+    'pricing.annual': 'Free through December 31, 2026',
     'pricing.faq.heading': 'Frequently Asked Questions',
-    'pricing.custom.heading': 'Need a custom quote?',
-    'pricing.custom.description': 'For enterprise deployments, on-premises installations, or large-scale team licensing of CodeBlue or BluePhalanx, our dedicated manager will propose the optimal solution.',
-    'pricing.custom.cta': 'Request Custom Quote →',
+    'pricing.custom.heading': 'Need deployment support?',
+    'pricing.custom.description': 'For large-scale adoption, separate operating environments, or security consulting needs, we will guide you based on your requirements.',
+    'pricing.custom.cta': 'Contact Us →',
     'pricing.recommended': 'Recommended',
     'pricing.free': 'Free',
     'pricing.custom.note': 'Custom pricing available.',
-    'pricing.blueproxy.free': 'BlueProxy is free open-source software.',
-    'pricing.blueproxy.github': 'Download on GitHub',
 
     // Contact page
     'contact.title': 'Contact | BlueSecurity',
@@ -291,9 +287,9 @@ const ui = {
     'products.page.meta': 'BlueSecurity cybersecurity products and services',
     'products.page.eyebrow': 'Product Portfolio',
     'products.page.heading': 'Our Products',
-    'products.page.subtitle': 'From source code analysis and malware detection to penetration testing — security solutions and expert consulting for SMEs at reasonable costs.',
+    'products.page.subtitle': 'Source code security checks and expert security consulting for SMEs at reasonable costs.',
     'products.page.bundle.heading': 'Stronger Together',
-    'products.page.bundle.description': 'Build a complete security cycle: Development (CodeBlue) → Threat Detection (BluePhalanx) → Penetration Testing at a reasonable cost.',
+    'products.page.bundle.description': 'Use CodeBlue to find security issues during development, then validate real environments through security consulting.',
     'products.page.bundle.cta': 'Inquire About Integration',
     'products.page.pricing': 'View Pricing',
     'products.detail.features': 'Key Features',
