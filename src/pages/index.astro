@@ -28,27 +28,25 @@ const company = getCompany(lang);
   <Hero lang={lang} />
 
   <!-- ── Products ──────────────────────────────────────────── -->
-  <section class="border-b border-slate-800 bg-navy-900 py-20" aria-labelledby="products-heading">
+  <section class="border-b border-slate-800 bg-navy-900 py-16" aria-labelledby="products-heading">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <!-- Section header -->
-      <div class="mb-10 max-w-3xl">
-        <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-400">
+      <div class="mb-10 grid gap-4 lg:grid-cols-[320px_1fr] lg:items-end">
+        <p class="text-sm font-semibold uppercase tracking-widest text-blue-400">
           {t('products.eyebrow', lang)}
         </p>
-        <h2
-          id="products-heading"
-          class="text-3xl font-semibold text-white md:text-4xl"
-        >
-          {t('products.heading', lang)}
-          <span class="text-blue-300">{t('products.heading.accent', lang)}</span>
-        </h2>
-        <p class="mt-4 max-w-2xl text-slate-400">
-          {t('products.subtitle', lang)}
-        </p>
+        <div>
+          <h2 id="products-heading" class="text-3xl font-semibold text-white md:text-4xl">
+            {t('products.heading', lang)}
+          </h2>
+          <p class="mt-4 max-w-2xl text-slate-400">
+            {t('products.subtitle', lang)}
+          </p>
+        </div>
       </div>
 
       <!-- Product cards grid -->
-      <div class="grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {products.map((product) => (
           <ProductCard
             lang={lang}

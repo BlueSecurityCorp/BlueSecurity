@@ -13,7 +13,7 @@ export interface Props {
   lang?: Locale;
 }
 
-const { name, tagline, href, icon, category, highlights, description, lang = 'ko' } = Astro.props;
+const { name, tagline, href, category, description, lang = 'ko' } = Astro.props;
 ---
 
 <a
@@ -21,79 +21,10 @@ const { name, tagline, href, icon, category, highlights, description, lang = 'ko
   class="group flex flex-col rounded-lg border border-slate-800 bg-navy-900 p-6 transition-colors duration-200 hover:border-slate-600 hover:bg-slate-950/40 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-navy-900"
   aria-label={`${name} - ${tagline}`}
 >
-  <!-- Icon -->
-  <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-950 text-blue-300 transition-colors duration-200 group-hover:border-blue-500">
-    {icon === 'code' && (
-      <svg
-        class="h-6 w-6"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    )}
-    {icon === 'shield' && (
-      <svg
-        class="h-6 w-6"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    )}
-    {icon === 'network' && (
-      <svg
-        class="h-6 w-6"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="5"  r="2" />
-        <circle cx="5"  cy="19" r="2" />
-        <circle cx="19" cy="19" r="2" />
-        <line x1="12" y1="7"  x2="5"  y2="17" />
-        <line x1="12" y1="7"  x2="19" y2="17" />
-        <line x1="5"  y1="19" x2="19" y2="19" />
-      </svg>
-    )}
-    {icon === 'pentest' && (
-      <svg
-        class="h-6 w-6"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M12 8v4" />
-        <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none" />
-      </svg>
-    )}
+  <div class="mb-5 flex items-center justify-between gap-4">
+    <span class="text-xs font-medium uppercase tracking-widest text-slate-500">{category}</span>
+    <span class="h-px flex-1 bg-slate-800" aria-hidden="true"></span>
   </div>
-
-  <!-- Category badge -->
-  <span class="mb-3 inline-flex w-fit items-center rounded-md border border-slate-700 px-2.5 py-1 text-xs font-medium text-slate-400">
-    {category}
-  </span>
 
   <!-- Product name -->
   <h3 class="mb-2 text-xl font-semibold text-white transition-colors duration-200 group-hover:text-blue-300">
@@ -109,16 +40,6 @@ const { name, tagline, href, icon, category, highlights, description, lang = 'ko
   <p class="mb-6 flex-1 text-sm leading-relaxed text-slate-400">
     {description}
   </p>
-
-  <!-- Highlights -->
-  <div class="mb-6 grid grid-cols-3 gap-3">
-    {highlights.map((h) => (
-      <div class="rounded-md border border-slate-800 bg-slate-950/50 px-3 py-2.5 text-center">
-        <div class="text-lg font-semibold leading-none text-white">{h.value}</div>
-        <div class="mt-1 text-[11px] text-slate-500 leading-tight">{h.label}</div>
-      </div>
-    ))}
-  </div>
 
   <!-- CTA row -->
   <div class="mt-auto flex items-center gap-2 text-sm font-semibold text-blue-300 transition-colors duration-200 group-hover:text-blue-200">
