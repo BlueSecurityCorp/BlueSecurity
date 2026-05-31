@@ -59,38 +59,40 @@ const benefits = [
   <Header slot="header" lang={lang} />
 
   <!-- Hero -->
-  <section class="relative overflow-hidden bg-grid pt-32 pb-20">
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-950/30 via-transparent to-transparent"></div>
-    <div class="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-      <p class="mb-3 text-sm font-semibold tracking-[0.2em] text-blue-400 uppercase">
+  <section class="border-b border-slate-800 bg-navy-900 pt-28 pb-14">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-300">
         {t('careers.eyebrow', lang)}
       </p>
-      <h1 class="mb-5 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+      <h1 class="max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
         {t('careers.heading', lang)}
       </h1>
-      <p class="mx-auto max-w-2xl text-lg text-slate-400 leading-relaxed">
+      <p class="mt-5 max-w-2xl text-base leading-7 text-slate-400">
         {t('careers.subtitle', lang)}
       </p>
     </div>
   </section>
 
   <!-- Why Join Us -->
-  <section class="py-20">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-12 text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{t('careers.why.heading', lang)}</h2>
-        <p class="mt-3 text-slate-400">{t('careers.why.subtitle', lang)}</p>
+  <section class="border-b border-slate-800 bg-navy-900 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-10 grid gap-4 lg:grid-cols-[320px_1fr] lg:items-end">
+        <p class="text-sm font-semibold uppercase tracking-widest text-blue-300">Team</p>
+        <div>
+          <h2 class="text-3xl font-semibold text-white sm:text-4xl">{t('careers.why.heading', lang)}</h2>
+          <p class="mt-3 max-w-2xl text-slate-400">{t('careers.why.subtitle', lang)}</p>
+        </div>
       </div>
 
-      <div class="grid gap-6 sm:grid-cols-2">
+      <div class="grid gap-4 sm:grid-cols-2">
         {benefits.map((b) => (
-          <div class="group flex gap-4 rounded-2xl border border-blue-900/50 bg-navy-800 p-6 card-hover">
-            <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-blue-900/60 text-blue-400 group-hover:bg-blue-800/80 transition-colors duration-200">
+          <div class="flex gap-4 rounded-lg border border-slate-800 bg-navy-900 p-6">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-slate-800 text-blue-300">
               <Fragment set:html={b.icon} />
             </div>
             <div>
-              <h3 class="mb-1.5 font-bold text-white">{t(`careers.benefit.${b.key}`, lang)}</h3>
-              <p class="text-sm text-slate-400 leading-relaxed">{t(`careers.benefit.${b.key}.desc`, lang)}</p>
+              <h3 class="mb-1.5 font-semibold text-white">{t(`careers.benefit.${b.key}`, lang)}</h3>
+              <p class="text-sm leading-6 text-slate-400">{t(`careers.benefit.${b.key}.desc`, lang)}</p>
             </div>
           </div>
         ))}
@@ -99,34 +101,37 @@ const benefits = [
   </section>
 
   <!-- Open Positions -->
-  <section class="py-20 bg-navy-800/40 border-t border-blue-900/30">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-12 text-center">
-        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">{t('careers.positions.heading', lang)}</h2>
-        <p class="mt-3 text-slate-400">
-          {positions.length > 0 ? t('careers.positions.subtitle', lang) : t('careers.positions.empty', lang)}
-        </p>
+  <section class="border-b border-slate-800 bg-slate-950/40 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mb-10 grid gap-4 lg:grid-cols-[320px_1fr] lg:items-end">
+        <p class="text-sm font-semibold uppercase tracking-widest text-blue-300">Open Roles</p>
+        <div>
+          <h2 class="text-3xl font-semibold text-white sm:text-4xl">{t('careers.positions.heading', lang)}</h2>
+          <p class="mt-3 max-w-2xl text-slate-400">
+            {positions.length > 0 ? t('careers.positions.subtitle', lang) : t('careers.positions.empty', lang)}
+          </p>
+        </div>
       </div>
 
       {positions.length > 0 && (
         <div class="space-y-4">
           {positions.map((pos) => (
-            <div class="group rounded-2xl border border-blue-900/50 bg-navy-800 p-6 card-hover transition-all duration-200">
+            <div class="rounded-lg border border-slate-800 bg-navy-900 p-6">
               <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div class="flex-1 min-w-0">
                   <h3 class="text-lg font-bold text-white mb-2">{pos.data.title_en}</h3>
                   <p class="text-sm text-slate-400 leading-relaxed mb-3" set:html={pos.data.description_en.trim().replace(/\n/g, '<br>')} />
                   <div class="flex flex-wrap gap-2">
-                    <span class="inline-flex items-center rounded-md bg-blue-900/40 border border-blue-800/50 px-2.5 py-0.5 text-xs font-medium text-blue-300">
+                    <span class="inline-flex items-center rounded-md border border-slate-800 px-2.5 py-0.5 text-xs font-medium text-blue-300">
                       {pos.data.team}
                     </span>
-                    <span class="inline-flex items-center rounded-md bg-cyan-900/40 border border-cyan-800/50 px-2.5 py-0.5 text-xs font-medium text-cyan-300">
+                    <span class="inline-flex items-center rounded-md border border-slate-800 px-2.5 py-0.5 text-xs font-medium text-slate-300">
                       {pos.data.type_en}
                     </span>
-                    <span class="inline-flex items-center rounded-md bg-slate-800/60 border border-slate-700/50 px-2.5 py-0.5 text-xs font-medium text-slate-300">
+                    <span class="inline-flex items-center rounded-md border border-slate-800 px-2.5 py-0.5 text-xs font-medium text-slate-300">
                       {pos.data.location_en}
                     </span>
-                    <span class="inline-flex items-center gap-1 rounded-md bg-emerald-900/30 border border-emerald-800/40 px-2.5 py-0.5 text-xs font-medium text-emerald-300">
+                    <span class="inline-flex items-center gap-1 rounded-md border border-slate-800 px-2.5 py-0.5 text-xs font-medium text-slate-300">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                       {formatPeriod(pos.data.start_date, pos.data.end_date)}
                     </span>
@@ -135,7 +140,7 @@ const benefits = [
                 <div class="flex flex-col items-start gap-1.5 shrink-0 sm:items-center sm:self-center">
                   <a
                     href={`mailto:${company.email}?subject=[Application] ${pos.data.title_en}`}
-                    class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-900/50 transition-all duration-200 hover:bg-blue-500"
+                    class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-500"
                   >
                     {t('careers.apply', lang)}
                   </a>
@@ -153,31 +158,23 @@ const benefits = [
   </section>
 
   <!-- CTA -->
-  <section class="py-16">
-    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div class="relative overflow-hidden rounded-2xl border border-blue-700/40 bg-navy-700 p-10 text-center glow-blue">
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-700/10 via-transparent to-cyan-700/10"></div>
-        <div class="relative">
-          <h2 class="mb-3 text-2xl font-extrabold text-white sm:text-3xl">
+  <section class="bg-navy-900 py-16">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="grid items-center gap-6 rounded-lg border border-slate-800 bg-slate-950/50 p-8 md:grid-cols-[1fr_auto]">
+        <div>
+          <h2 class="text-2xl font-semibold text-white">
             {t('careers.apply.cta.heading', lang)}
           </h2>
-          <p class="mb-6 text-slate-400">
+          <p class="mt-3 max-w-2xl text-slate-400">
             {t('careers.apply.cta.description', lang)}
           </p>
+        </div>
           <a
             href={`mailto:${company.email}?subject=[Career Application]`}
-            class="inline-flex rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-900/50 transition-all duration-200 hover:bg-blue-500"
+            class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-500"
           >
             {t('careers.apply.cta.button', lang)}
           </a>
-          <p class="mt-3 flex items-center justify-center gap-1.5 text-sm text-slate-400">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
-            Apply to: {company.email}
-          </p>
-          <p class="mt-4 text-sm text-slate-500">
-            {t('careers.apply.cta.note', lang)}
-          </p>
-        </div>
       </div>
     </div>
   </section>
