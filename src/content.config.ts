@@ -23,4 +23,15 @@ const careers = defineCollection({
   }),
 });
 
-export const collections = { careers };
+const notices = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/notices' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    date: z.string(),
+    published: z.boolean().default(true),
+    lang: z.enum(['ko', 'en']).default('ko'),
+  }),
+});
+
+export const collections = { careers, notices };

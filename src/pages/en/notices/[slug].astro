@@ -1,0 +1,124 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import type { Locale } from '../../../i18n/index';
+import { localePath } from '../../../i18n/index';
+import { t } from '../../../i18n/ui';
+
+const lang = 'en' as Locale;
+
+export async function getStaticPaths() {
+  const notices = await getCollection('notices');
+  return notices
+    .filter((notice) => {
+      if (notice.id.split('/').pop()?.startsWith('_')) return false;
+      return notice.data.published && notice.data.lang === 'en';
+    })
+    .map((notice) => ({
+      params: { slug: notice.id.replace(/\.mdx?$/, '') },
+      props: { notice },
+    }));
+}
+
+const { notice } = Astro.props;
+const { Content } = await render(notice);
+
+function formatDate(date: string): string {
+  return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date));
+}
+---
+
+<Layout title={`${notice.data.title} | BlueSecurity`} description={notice.data.description ?? notice.data.title}>
+  <Header slot="header" lang={lang} />
+
+  <section class="border-b border-slate-800 bg-navy-900 pt-28 pb-12">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <a href={localePath('/notices', lang)} class="inline-flex items-center gap-2 text-sm font-semibold text-blue-300 hover:text-blue-200">
+        <span aria-hidden="true">←</span>
+        {t('notices.back', lang)}
+      </a>
+      <p class="mt-8 text-sm font-semibold uppercase tracking-widest text-blue-300">
+        {t('notices.eyebrow', lang)}
+      </p>
+      <h1 class="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">
+        {notice.data.title}
+      </h1>
+      <time datetime={notice.data.date} class="mt-5 block text-sm text-slate-500">
+        {t('notices.publishedAt', lang)} · {formatDate(notice.data.date)}
+      </time>
+    </div>
+  </section>
+
+  <main class="bg-slate-950/40 py-16">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8">
+      <article class="notice-content rounded-lg border border-slate-800 bg-navy-900 p-6 sm:p-10">
+        <Content />
+      </article>
+    </div>
+  </main>
+
+  <Footer slot="footer" lang={lang} />
+</Layout>
+
+<style>
+  .notice-content {
+    color: rgb(203 213 225);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .notice-content :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .notice-content :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 650;
+  }
+
+  .notice-content :global(p),
+  .notice-content :global(ul),
+  .notice-content :global(ol) {
+    margin: 1rem 0;
+  }
+
+  .notice-content :global(a) {
+    color: rgb(147 197 253);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .notice-content :global(ul),
+  .notice-content :global(ol) {
+    padding-left: 1.5rem;
+  }
+
+  .notice-content :global(li + li) {
+    margin-top: 0.4rem;
+  }
+
+  .notice-content :global(blockquote) {
+    margin: 1.5rem 0;
+    border-left: 3px solid rgb(59 130 246);
+    padding-left: 1rem;
+    color: rgb(148 163 184);
+  }
+
+  .notice-content :global(code) {
+    border-radius: 0.375rem;
+    background: rgb(15 23 42);
+    padding: 0.15rem 0.35rem;
+    color: rgb(226 232 240);
+    font-size: 0.9em;
+  }
+</style>

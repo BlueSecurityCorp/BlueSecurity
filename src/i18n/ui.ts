@@ -8,6 +8,7 @@ const ui = {
     'nav.products.lineup': '제품 라인업',
     'nav.pricing': '가격',
     'nav.pricing.view': '가격 보기',
+    'nav.notices': '공지사항',
     'nav.contact': '문의하기',
     'nav.home': 'BlueSecurity 홈',
 
@@ -73,6 +74,16 @@ const ui = {
     'pricing.recommended': '추천',
     'pricing.free': '무료',
     'pricing.custom.note': '맞춤 견적을 제공합니다.',
+
+    // Notices page
+    'notices.title': '공지사항 | BlueSecurity',
+    'notices.meta': 'BlueSecurity의 공지사항과 서비스 업데이트를 확인하세요.',
+    'notices.eyebrow': 'Notices',
+    'notices.heading': '공지사항',
+    'notices.subtitle': 'BlueSecurity의 서비스 안내와 업데이트를 확인하세요.',
+    'notices.empty': '현재 등록된 공지사항이 없습니다.',
+    'notices.back': '공지사항 목록',
+    'notices.publishedAt': '게시일',
 
     // Contact page
     'contact.title': '문의하기 | BlueSecurity',
@@ -184,6 +195,7 @@ const ui = {
     'nav.products.lineup': 'Product Lineup',
     'nav.pricing': 'Pricing',
     'nav.pricing.view': 'View Pricing',
+    'nav.notices': 'Notices',
     'nav.contact': 'Contact',
     'nav.home': 'BlueSecurity Home',
 
@@ -249,6 +261,16 @@ const ui = {
     'pricing.recommended': 'Recommended',
     'pricing.free': 'Free',
     'pricing.custom.note': 'Custom pricing available.',
+
+    // Notices page
+    'notices.title': 'Notices | BlueSecurity',
+    'notices.meta': 'Read BlueSecurity announcements and service updates.',
+    'notices.eyebrow': 'Notices',
+    'notices.heading': 'Notices',
+    'notices.subtitle': 'Read service announcements and updates from BlueSecurity.',
+    'notices.empty': 'No notices have been posted yet.',
+    'notices.back': 'Back to Notices',
+    'notices.publishedAt': 'Published',
 
     // Contact page
     'contact.title': 'Contact | BlueSecurity',
