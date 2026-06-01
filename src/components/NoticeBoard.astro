@@ -1,0 +1,306 @@
+---
+import type { Locale } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getNoticeCategoryOptions } from '../data/notices';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = {
+  empty: t('notices.empty', lang),
+  noResults: t('notices.noResults', lang),
+  searchLabel: t('notices.search', lang),
+  searchPlaceholder: t('notices.search.placeholder', lang),
+  filterLabel: t('notices.filter.label', lang),
+  allLabel: t('notices.filter.all', lang),
+  countLabel: t('notices.count', lang),
+  prevLabel: t('notices.pagination.prev', lang),
+  nextLabel: t('notices.pagination.next', lang),
+};
+const categories = getNoticeCategoryOptions(lang);
+---
+
+<section class="bg-slate-950/40 py-10">
+  <div
+    class="mx-auto max-w-7xl px-6 lg:px-8"
+    data-notice-board
+    data-pagefind-body
+    data-lang={lang}
+    data-page-size="6"
+    data-copy={JSON.stringify(copy)}
+    data-categories={JSON.stringify(categories)}
+  >
+    <div class="mb-5 grid gap-4 rounded-lg border border-slate-800 bg-navy-900 p-4 md:grid-cols-[minmax(0,1fr)_260px] md:items-end">
+      <label class="block">
+        <span class="mb-2 block text-sm font-semibold text-slate-300">{copy.searchLabel}</span>
+        <input
+          type="search"
+          data-notice-search
+          placeholder={copy.searchPlaceholder}
+          class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-blue-500"
+        />
+      </label>
+
+      <label class="block">
+        <span class="mb-2 block text-sm font-semibold text-slate-300">{copy.filterLabel}</span>
+        <select
+          data-notice-category-select
+          class="w-full rounded-lg border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-500"
+        ></select>
+      </label>
+    </div>
+
+    <div class="mb-3 flex min-h-5 items-center justify-between gap-4 text-sm text-slate-500">
+      <p data-notice-count></p>
+    </div>
+
+    <div class="space-y-3" data-notice-list></div>
+
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-2" data-notice-pagination></div>
+  </div>
+</section>
+
+<script>
+  const normalizePath = (url) => {
+    try {
+      const pathname = new URL(url, window.location.origin).pathname;
+      return pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname;
+    } catch {
+      return String(url).replace(/\/$/, '');
+    }
+  };
+
+  const escapeHtml = (value) =>
+    String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+  const formatDate = (date, lang) =>
+    new Intl.DateTimeFormat(lang === 'ko' ? 'ko-KR' : 'en-US', { dateStyle: 'medium' }).format(new Date(date));
+
+  let pagefindPromise;
+
+  async function getPagefind() {
+    if (!pagefindPromise) {
+      const pagefindPath = '/pagefind/pagefind.js';
+      pagefindPromise = import(/* @vite-ignore */ pagefindPath)
+        .then(async (pagefind) => {
+          if (typeof pagefind.init === 'function') await pagefind.init();
+          return pagefind;
+        })
+        .catch(() => null);
+    }
+
+    return pagefindPromise;
+  }
+
+  function createNoticeCard(notice, lang) {
+    return `
+      <a
+        href="${escapeHtml(notice.url)}"
+        class="group block rounded-lg border border-slate-800 bg-navy-900 p-5 transition-colors hover:border-blue-500/50"
+      >
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div class="min-w-0">
+            <div class="mb-2 flex flex-wrap items-center gap-2">
+              <span class="inline-flex rounded-md border border-slate-700 px-2.5 py-1 text-xs font-semibold text-blue-300">
+                ${escapeHtml(notice.categoryLabel)}
+              </span>
+            </div>
+            <h2 class="text-xl font-semibold text-white group-hover:text-blue-200">
+              ${escapeHtml(notice.title)}
+            </h2>
+            ${
+              notice.description
+                ? `<p class="mt-2 max-w-3xl text-sm leading-6 text-slate-400">${escapeHtml(notice.description)}</p>`
+                : ''
+            }
+          </div>
+          <time datetime="${escapeHtml(notice.date)}" class="shrink-0 text-sm text-slate-500">
+            ${escapeHtml(formatDate(notice.date, lang))}
+          </time>
+        </div>
+      </a>
+    `;
+  }
+
+  function createPageButton(page, currentPage) {
+    const active = page === currentPage;
+    return `
+      <button
+        type="button"
+        data-page="${page}"
+        aria-current="${active ? 'page' : 'false'}"
+        class="flex h-9 min-w-9 items-center justify-center rounded-lg border px-3 text-sm font-semibold transition-colors ${
+          active
+            ? 'border-blue-500 bg-blue-600 text-white'
+            : 'border-slate-700 bg-navy-900 text-slate-300 hover:border-blue-500/60'
+        }"
+      >
+        ${page}
+      </button>
+    `;
+  }
+
+  function mergeCategories(defaultCategories, notices, allLabel) {
+    const map = new Map(defaultCategories.map((category) => [category.id, category.label]));
+    for (const notice of notices) {
+      if (!map.has(notice.category)) map.set(notice.category, notice.categoryLabel);
+    }
+
+    return [
+      { id: 'all', label: allLabel },
+      ...Array.from(map, ([id, label]) => ({ id, label })),
+    ];
+  }
+
+  function initNoticeBoard(board) {
+    const lang = board.dataset.lang;
+    const pageSize = Number(board.dataset.pageSize ?? 6);
+    const copy = JSON.parse(board.dataset.copy ?? '{}');
+    const defaultCategories = JSON.parse(board.dataset.categories ?? '[]');
+    const searchInput = board.querySelector('[data-notice-search]');
+    const categorySelect = board.querySelector('[data-notice-category-select]');
+    const listRoot = board.querySelector('[data-notice-list]');
+    const paginationRoot = board.querySelector('[data-notice-pagination]');
+    const countRoot = board.querySelector('[data-notice-count]');
+
+    const state = {
+      notices: [],
+      category: 'all',
+      query: '',
+      page: 1,
+      searchUrls: null,
+    };
+
+    const getFilteredNotices = () => {
+      const byUrl = new Map(state.notices.map((notice) => [normalizePath(notice.url), notice]));
+      const base = state.searchUrls
+        ? state.searchUrls.map((url) => byUrl.get(normalizePath(url))).filter(Boolean)
+        : state.notices;
+
+      return base.filter((notice) => state.category === 'all' || notice.category === state.category);
+    };
+
+    const render = () => {
+      const categories = mergeCategories(defaultCategories, state.notices, copy.allLabel);
+      categorySelect.innerHTML = categories
+        .map(
+          (category) => `
+            <option value="${escapeHtml(category.id)}" ${category.id === state.category ? 'selected' : ''}>
+              ${escapeHtml(category.label)}
+            </option>
+          `,
+        )
+        .join('');
+
+      const filtered = getFilteredNotices();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+      state.page = Math.min(Math.max(state.page, 1), totalPages);
+      const start = (state.page - 1) * pageSize;
+      const pageItems = filtered.slice(start, start + pageSize);
+
+      countRoot.textContent = `${filtered.length} ${copy.countLabel}`;
+
+      if (state.notices.length === 0) {
+        listRoot.innerHTML = `<div class="rounded-lg border border-slate-800 bg-navy-900 p-6 text-center text-slate-400">${escapeHtml(copy.empty)}</div>`;
+      } else if (filtered.length === 0) {
+        listRoot.innerHTML = `<div class="rounded-lg border border-slate-800 bg-navy-900 p-6 text-center text-slate-400">${escapeHtml(copy.noResults)}</div>`;
+      } else {
+        listRoot.innerHTML = pageItems.map((notice) => createNoticeCard(notice, lang)).join('');
+      }
+
+      const pagination = [];
+      pagination.push(`
+        <button
+          type="button"
+          data-page="${state.page - 1}"
+          ${state.page <= 1 ? 'disabled' : ''}
+          class="rounded-lg border border-slate-700 bg-navy-900 px-3 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-blue-500/60 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          ${escapeHtml(copy.prevLabel)}
+        </button>
+      `);
+      for (let page = 1; page <= totalPages; page += 1) pagination.push(createPageButton(page, state.page));
+      pagination.push(`
+        <button
+          type="button"
+          data-page="${state.page + 1}"
+          ${state.page >= totalPages ? 'disabled' : ''}
+          class="rounded-lg border border-slate-700 bg-navy-900 px-3 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-blue-500/60 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          ${escapeHtml(copy.nextLabel)}
+        </button>
+      `);
+      paginationRoot.innerHTML = totalPages > 1 ? pagination.join('') : '';
+    };
+
+    const runSearch = async () => {
+      const query = state.query.trim();
+      state.page = 1;
+
+      if (!query) {
+        state.searchUrls = null;
+        render();
+        return;
+      }
+
+      const pagefind = await getPagefind();
+      if (!pagefind) {
+        const lowerQuery = query.toLowerCase();
+        state.searchUrls = state.notices
+          .filter((notice) => `${notice.title} ${notice.description}`.toLowerCase().includes(lowerQuery))
+          .map((notice) => notice.url);
+        render();
+        return;
+      }
+
+      const result = await pagefind.search(query);
+      const resultData = await Promise.all(result.results.map((item) => item.data()));
+      const currentPrefix = lang === 'ko' ? '/notices/' : `/${lang}/notices/`;
+      state.searchUrls = resultData
+        .map((item) => normalizePath(item.url))
+        .filter((url) => `${url}/`.startsWith(currentPrefix));
+      render();
+    };
+
+    let searchTimer;
+    searchInput.addEventListener('input', () => {
+      state.query = searchInput.value;
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(runSearch, 180);
+    });
+
+    categorySelect.addEventListener('change', () => {
+      state.category = categorySelect.value;
+      state.page = 1;
+      render();
+    });
+
+    paginationRoot.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-page]');
+      if (!button || button.disabled) return;
+      state.page = Number(button.dataset.page);
+      render();
+      board.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    fetch('/notices.json')
+      .then((response) => response.json())
+      .then((items) => {
+        state.notices = items.filter((item) => item.lang === lang);
+        render();
+      })
+      .catch(() => {
+        state.notices = [];
+        render();
+      });
+  }
+
+  document.querySelectorAll('[data-notice-board]').forEach(initNoticeBoard);
+</script>

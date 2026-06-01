@@ -1,81 +1,32 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import NoticeBoard from '../../../components/NoticeBoard.astro';
 import type { Locale } from '../../../i18n/index';
-import { localePath } from '../../../i18n/index';
 import { t } from '../../../i18n/ui';
 
 const lang = 'en' as Locale;
-const allNotices = await getCollection('notices');
-const notices = allNotices
-  .filter((notice) => {
-    if (notice.id.split('/').pop()?.startsWith('_')) return false;
-    return notice.data.published && notice.data.lang === lang;
-  })
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-
-function slugFromId(id: string): string {
-  return id.replace(/\.mdx?$/, '');
-}
-
-function formatDate(date: string): string {
-  return new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(date));
-}
 ---
 
-<Layout title={t('notices.title', lang)} description={t('notices.meta', lang)}>
+<Layout title={t('notices.title', lang)} description={t('notices.meta', lang)} lang={lang}>
   <Header slot="header" lang={lang} />
 
-  <section class="border-b border-slate-800 bg-navy-900 pt-28 pb-14">
+  <section class="border-b border-slate-800 bg-navy-900 pt-24 pb-10">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-300">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300">
         {t('notices.eyebrow', lang)}
       </p>
       <h1 class="max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
         {t('notices.heading', lang)}
       </h1>
-      <p class="mt-5 max-w-2xl text-base leading-7 text-slate-400">
+      <p class="mt-4 max-w-2xl text-base leading-7 text-slate-400">
         {t('notices.subtitle', lang)}
       </p>
     </div>
   </section>
 
-  <section class="bg-slate-950/40 py-16">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      {notices.length > 0 ? (
-        <div class="space-y-4">
-          {notices.map((notice) => (
-            <a
-              href={localePath(`/notices/${slugFromId(notice.id)}`, lang)}
-              class="group block rounded-lg border border-slate-800 bg-navy-900 p-6 transition-colors hover:border-blue-500/50"
-            >
-              <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                <div class="min-w-0">
-                  <h2 class="text-xl font-semibold text-white group-hover:text-blue-200">
-                    {notice.data.title}
-                  </h2>
-                  {notice.data.description && (
-                    <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
-                      {notice.data.description}
-                    </p>
-                  )}
-                </div>
-                <time datetime={notice.data.date} class="shrink-0 text-sm text-slate-500">
-                  {formatDate(notice.data.date)}
-                </time>
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <div class="rounded-lg border border-slate-800 bg-navy-900 p-8 text-center text-slate-400">
-          {t('notices.empty', lang)}
-        </div>
-      )}
-    </div>
-  </section>
+  <NoticeBoard lang={lang} />
 
   <Footer slot="footer" lang={lang} />
 </Layout>

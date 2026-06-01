@@ -31,6 +31,7 @@ const notices = defineCollection({
     date: z.string(),
     published: z.boolean().default(true),
     lang: z.enum(['ko', 'en']).default('ko'),
+    category: z.string().default('bluesecurity'),
   }),
 });
 

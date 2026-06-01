@@ -82,8 +82,16 @@ const ui = {
     'notices.heading': '공지사항',
     'notices.subtitle': 'BlueSecurity의 서비스 안내와 업데이트를 확인하세요.',
     'notices.empty': '현재 등록된 공지사항이 없습니다.',
+    'notices.noResults': '조건에 맞는 공지사항이 없습니다.',
     'notices.back': '공지사항 목록',
     'notices.publishedAt': '게시일',
+    'notices.search': '공지사항 검색',
+    'notices.search.placeholder': '제목 또는 본문 검색',
+    'notices.filter.all': '전체',
+    'notices.filter.label': '구분',
+    'notices.count': '건',
+    'notices.pagination.prev': '이전',
+    'notices.pagination.next': '다음',
 
     // Contact page
     'contact.title': '문의하기 | BlueSecurity',
@@ -269,8 +277,16 @@ const ui = {
     'notices.heading': 'Notices',
     'notices.subtitle': 'Read service announcements and updates from BlueSecurity.',
     'notices.empty': 'No notices have been posted yet.',
+    'notices.noResults': 'No notices match your filters.',
     'notices.back': 'Back to Notices',
     'notices.publishedAt': 'Published',
+    'notices.search': 'Search notices',
+    'notices.search.placeholder': 'Search title or body',
+    'notices.filter.all': 'All',
+    'notices.filter.label': 'Category',
+    'notices.count': 'results',
+    'notices.pagination.prev': 'Previous',
+    'notices.pagination.next': 'Next',
 
     // Contact page
     'contact.title': 'Contact | BlueSecurity',
