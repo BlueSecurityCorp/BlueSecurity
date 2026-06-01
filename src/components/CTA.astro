@@ -10,9 +10,9 @@ interface Props {
 const { lang = 'ko' } = Astro.props;
 ---
 
-<section class="bg-navy-900 py-20" aria-labelledby="cta-heading">
+<section class="bg-navy-900 py-14" aria-labelledby="cta-heading">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="grid items-center gap-8 rounded-lg border border-slate-800 bg-slate-950/50 p-8 md:grid-cols-[1fr_auto] md:p-10">
+    <div class="grid items-center gap-6 rounded-lg border border-slate-800 bg-slate-950/50 p-6 md:grid-cols-[1fr_auto] md:p-8">
       <div>
         <h2 id="cta-heading" class="text-3xl font-semibold text-white md:text-4xl">
           {t('cta.heading.prefix', lang)}<span class="text-blue-300">{t('cta.heading.accent', lang)}</span>
