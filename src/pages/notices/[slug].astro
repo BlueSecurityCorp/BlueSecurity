@@ -32,7 +32,12 @@ function formatDate(date: string): string {
 }
 ---
 
-<Layout title={`${notice.data.title} | BlueSecurity`} description={notice.data.description ?? notice.data.title} lang={lang}>
+<Layout
+  title={`${notice.data.title} | BlueSecurity`}
+  description={notice.data.description ?? notice.data.title}
+  lang={lang}
+  alternateLanguages={false}
+>
   <Header slot="header" lang={lang} />
 
   <div data-pagefind-body>
