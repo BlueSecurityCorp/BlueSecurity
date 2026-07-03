@@ -9,7 +9,7 @@ export interface Product {
   href: string;
   features: string[];
   highlights: { label: string; value: string }[];
-  icon: 'code' | 'shield' | 'network' | 'pentest';
+  icon: 'code' | 'shield' | 'network';
 }
 
 const productsData: Record<Locale, Product[]> = {
