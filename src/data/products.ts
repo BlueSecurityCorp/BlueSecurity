@@ -9,7 +9,7 @@ export interface Product {
   href: string;
   features: string[];
   highlights: { label: string; value: string }[];
-  icon: 'code' | 'shield' | 'network' | 'pentest';
+  icon: 'code' | 'shield' | 'network';
 }
 
 const productsData: Record<Locale, Product[]> = {
@@ -36,28 +36,6 @@ const productsData: Record<Locale, Product[]> = {
       ],
       icon: 'code',
     },
-    {
-      id: 'pentest',
-      name: '모의해킹 서비스',
-      tagline: '실제 공격자 관점의 보안 진단',
-      description: '전문 보안 컨설턴트가 실제 공격자의 관점에서 웹 애플리케이션, 네트워크, 인프라의 취약점을 진단합니다. 체계적인 시나리오 기반 테스트와 상세한 개선 보고서를 제공하여 실질적인 보안 강화를 지원합니다.',
-      category: '보안 컨설팅',
-      href: '/contact',
-      features: [
-        '웹/모바일 애플리케이션 모의침투 테스트',
-        '내부/외부 네트워크 침투 테스트',
-        '시나리오 기반 공격 시뮬레이션',
-        'OWASP / PTES / OSSTMM 방법론 준수',
-        '한국어 상세 진단 보고서 및 개선 권고안',
-        '재진단을 통한 조치 확인',
-      ],
-      highlights: [
-        { label: '침투 테스트', value: 'Pentest' },
-        { label: '웹·앱 취약점 진단', value: 'Web/App' },
-        { label: '인프라 진단', value: 'Infra' },
-      ],
-      icon: 'pentest',
-    },
   ],
   en: [
     {
@@ -82,28 +60,6 @@ const productsData: Record<Locale, Product[]> = {
       ],
       icon: 'code',
     },
-    {
-      id: 'pentest',
-      name: 'Penetration Testing Service',
-      tagline: 'Security Assessment from an Attacker\'s Perspective',
-      description: 'Our expert security consultants assess vulnerabilities in web applications, networks, and infrastructure from a real attacker\'s perspective. We provide systematic scenario-based testing and detailed remediation reports.',
-      category: 'Security Consulting',
-      href: '/en/contact',
-      features: [
-        'Web/mobile application penetration testing',
-        'Internal/external network penetration testing',
-        'Scenario-based attack simulation',
-        'OWASP / PTES / OSSTMM methodology compliance',
-        'Detailed assessment reports with remediation guidance',
-        'Verification through re-assessment',
-      ],
-      highlights: [
-        { label: 'Penetration Testing', value: 'Pentest' },
-        { label: 'Web/App Assessment', value: 'Web/App' },
-        { label: 'Infrastructure Assessment', value: 'Infra' },
-      ],
-      icon: 'pentest',
-    },
   ],
 };
 
@@ -112,7 +68,7 @@ export function getProducts(lang: Locale = 'ko'): Product[] {
 }
 
 export function getProductLineup(lang: Locale = 'ko'): Product[] {
-  return productsData[lang].filter((product) => product.id === 'codeblue' || product.id === 'pentest');
+  return productsData[lang].filter((product) => product.id === 'codeblue');
 }
 
 /** @deprecated Use getProducts(lang) instead */
