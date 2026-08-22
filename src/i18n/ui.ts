@@ -39,10 +39,9 @@ const ui = {
     // CTA
     'cta.heading.prefix': '지금 바로 ',
     'cta.heading.accent': '시작하세요',
-    'cta.description': 'CodeBlue로 코드 보안 점검을 먼저 시작하거나, 현재 서비스 환경에 맞는 진단 범위를 문의해 주세요.',
-    'cta.trust': '2026년 12월 31일까지 CodeBlue 무료 제공 · 컨설팅 범위 별도 협의',
-    'cta.button.start': 'CodeBlue 무료 체험',
-    'cta.button.consult': '전문가 상담 요청',
+    'cta.description': 'CodeBlue로 소스코드 보안 취약점과 오픈소스 구성 요소 위험을 먼저 확인하세요.',
+    'cta.trust': '2026년 12월 31일까지 CodeBlue 무료 제공',
+    'cta.button.start': 'CodeBlue 시작하기',
     'cta.compliance': 'OWASP Top 10 · CWE · ISMS-P 기준 완벽 대응',
 
     // About page
@@ -68,8 +67,8 @@ const ui = {
     'pricing.subtitle': 'CodeBlue는 2026년 12월 31일까지 무료 서비스로 제공합니다.',
     'pricing.annual': '2026년 12월 31일까지 무료 제공',
     'pricing.faq.heading': '자주 묻는 질문',
-    'pricing.custom.heading': '도입 문의가 필요하신가요?',
-    'pricing.custom.description': '대규모 도입, 별도 운영 환경, 보안 컨설팅이 필요한 경우 요구사항에 맞춰 안내해 드립니다.',
+    'pricing.custom.heading': 'CodeBlue 도입 문의가 필요하신가요?',
+    'pricing.custom.description': 'CI/CD 연동, 사용 환경, 계정과 프로젝트 범위가 궁금하시면 요구사항에 맞춰 안내해 드립니다.',
     'pricing.custom.cta': '도입 문의하기 →',
     'pricing.recommended': '추천',
     'pricing.free': '무료',
@@ -234,10 +233,9 @@ const ui = {
     // CTA
     'cta.heading.prefix': 'Get Started ',
     'cta.heading.accent': 'Today',
-    'cta.description': 'Start with CodeBlue code security checks, or contact us to scope an assessment for your current service environment.',
-    'cta.trust': 'CodeBlue is free through December 31, 2026 · Consulting scope discussed separately',
-    'cta.button.start': 'Try CodeBlue Free',
-    'cta.button.consult': 'Request Consultation',
+    'cta.description': 'Use CodeBlue to check source code vulnerabilities and open-source component risks first.',
+    'cta.trust': 'CodeBlue is free through December 31, 2026',
+    'cta.button.start': 'Start CodeBlue',
     'cta.compliance': 'Full compliance with OWASP Top 10 · CWE · ISMS-P',
 
     // About page
@@ -263,8 +261,8 @@ const ui = {
     'pricing.subtitle': 'CodeBlue is available as a free service through December 31, 2026.',
     'pricing.annual': 'Free through December 31, 2026',
     'pricing.faq.heading': 'Frequently Asked Questions',
-    'pricing.custom.heading': 'Need deployment support?',
-    'pricing.custom.description': 'For large-scale adoption, separate operating environments, or security consulting needs, we will guide you based on your requirements.',
+    'pricing.custom.heading': 'Need CodeBlue deployment support?',
+    'pricing.custom.description': 'Contact us about CI/CD integration, operating environments, accounts, and project scope.',
     'pricing.custom.cta': 'Contact Us →',
     'pricing.recommended': 'Recommended',
     'pricing.free': 'Free',

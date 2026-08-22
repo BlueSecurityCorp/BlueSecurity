@@ -12,21 +12,23 @@ const lang = 'en' as Locale;
 <Layout title={t('notices.title', lang)} description={t('notices.meta', lang)} lang={lang}>
   <Header slot="header" lang={lang} />
 
-  <section class="border-b border-slate-800 bg-navy-900 pt-24 pb-10">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300">
-        {t('notices.eyebrow', lang)}
-      </p>
-      <h1 class="max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
-        {t('notices.heading', lang)}
-      </h1>
-      <p class="mt-4 max-w-2xl text-base leading-7 text-slate-400">
-        {t('notices.subtitle', lang)}
-      </p>
-    </div>
-  </section>
+  <div data-pagefind-body>
+    <section class="border-b border-slate-800 bg-navy-900 pt-24 pb-10">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300">
+          {t('notices.eyebrow', lang)}
+        </p>
+        <h1 class="max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+          {t('notices.heading', lang)}
+        </h1>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-slate-400">
+          {t('notices.subtitle', lang)}
+        </p>
+      </div>
+    </section>
 
-  <NoticeBoard lang={lang} />
+    <NoticeBoard lang={lang} />
+  </div>
 
   <Footer slot="footer" lang={lang} />
 </Layout>

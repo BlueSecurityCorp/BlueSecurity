@@ -1,13 +1,13 @@
 ---
-title: "BlueSecurity 공지사항 예시"
-description: "BlueSecurity 회사 소식과 서비스 운영 안내를 전달하는 공지사항 예시입니다."
+title: "BlueSecurity 서비스 안내"
+description: "BlueSecurity 회사 소식과 서비스 운영 안내를 전달합니다."
 date: "2026-06-01"
-published: true
+published: false
 lang: "ko"
 category: "bluesecurity"
 ---
 
-BlueSecurity의 회사 소식, 서비스 운영 정책, 고객 안내 사항을 공지하는 예시 문서입니다.
+BlueSecurity의 회사 소식, 서비스 운영 정책, 고객 안내 사항을 전달합니다.
 
 ## 안내 내용
 

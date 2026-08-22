@@ -1,13 +1,13 @@
 ---
-title: "CodeBlue 공지사항 예시"
-description: "CodeBlue 기능 업데이트와 점검 안내를 전달하는 공지사항 예시입니다."
+title: "CodeBlue 서비스 안내"
+description: "CodeBlue 기능 업데이트와 점검 안내를 전달합니다."
 date: "2026-06-01"
-published: true
+published: false
 lang: "ko"
 category: "codeblue"
 ---
 
-CodeBlue의 기능 업데이트, 점검 일정, 사용 환경 변경 사항을 공지하는 예시 문서입니다.
+CodeBlue의 기능 업데이트, 점검 일정, 사용 환경 변경 사항을 전달합니다.
 
 ## 안내 내용
 
