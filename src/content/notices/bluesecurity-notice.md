@@ -2,7 +2,7 @@
 title: "BlueSecurity 서비스 안내"
 description: "BlueSecurity 회사 소식과 서비스 운영 안내를 전달합니다."
 date: "2026-06-01"
-published: false
+published: true
 lang: "ko"
 category: "bluesecurity"
 ---
