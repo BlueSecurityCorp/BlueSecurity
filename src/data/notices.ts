@@ -15,13 +15,6 @@ export const noticeCategories = [
       en: 'CodeBlue',
     },
   },
-  {
-    id: 'consulting',
-    label: {
-      ko: '보안컨설팅',
-      en: 'Security Consulting',
-    },
-  },
 ] as const;
 
 export function getNoticeCategoryLabel(category: string, lang: Locale): string {

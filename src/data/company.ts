@@ -15,7 +15,7 @@ const companyData: Record<Locale, Company> = {
   ko: {
     name: 'BlueSecurity',
     slogan: '필요한 보안부터 가볍게 시작하세요',
-    description: 'BlueSecurity는 중소기업을 위한 소스코드 보안 점검, SAST/SBOM 분석, 모의해킹과 보안 컨설팅을 합리적으로 제공합니다.',
+    description: 'BlueSecurity는 중소기업을 위한 소스코드 보안 점검, SAST/SBOM 분석, 모의해킹 서비스를을 합리적으로 제공합니다.',
     mission: '복잡한 보안 절차보다 지금 필요한 점검부터 시작할 수 있는 환경을 만듭니다.',
     vision: '대한민국 중소기업이 보안 걱정 없이 본업에 집중할 수 있는 세상을 만들어 갑니다.',
     email: 'blue@bluesecurity.online',
@@ -25,7 +25,7 @@ const companyData: Record<Locale, Company> = {
   en: {
     name: 'BlueSecurity',
     slogan: 'Company Size Should Not Determine Security Level',
-    description: 'BlueSecurity provides source code security checks, SAST/SBOM analysis, penetration testing, and security consulting for SMEs at a practical cost.',
+    description: 'BlueSecurity provides source code security checks, SAST/SBOM analysis, penetration testing for SMEs at a practical cost.',
     mission: 'We lower the cost barriers of security services so that every company can defend against cyber threats.',
     vision: 'We are building a world where Korean SMEs can focus on their core business without worrying about security.',
     email: 'blue@bluesecurity.online',
