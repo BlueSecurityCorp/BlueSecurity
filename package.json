@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "sync:news-templates": "node scripts/sync-news-templates.mjs",
+    "dev": "npm run sync:news-templates && astro dev",
+    "build": "npm run sync:news-templates && astro build && pagefind --site dist",
     "preview": "astro preview"
   },
   "dependencies": {

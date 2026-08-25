@@ -1,0 +1,367 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import type { Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+import { getNewsCategoryLabel, getNewsTemplateLabel } from '../data/news';
+
+interface Props {
+  news: CollectionEntry<'news'>;
+  lang: Locale;
+}
+
+const { news, lang } = Astro.props;
+const { Content } = await render(news);
+const categoryLabel = getNewsCategoryLabel(news.data.category, lang);
+const templateLabel = getNewsTemplateLabel(news.data.template, lang);
+const locale = lang === 'ko' ? 'ko-KR' : 'en-US';
+
+function formatDate(date: string): string {
+  return new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(new Date(date));
+}
+
+function slugFromId(id: string): string {
+  return id.replace(/\.mdx?$/, '');
+}
+
+const relatedNews = (await getCollection('news'))
+  .filter((item) => {
+    if (item.id === news.id || item.id.split('/').pop()?.startsWith('_')) return false;
+    return item.data.published && item.data.lang === lang;
+  })
+  .sort((a, b) => {
+    const aMatches = a.data.category === news.data.category ? 1 : 0;
+    const bMatches = b.data.category === news.data.category ? 1 : 0;
+    return bMatches - aMatches || new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+  })
+  .slice(0, 3);
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: news.data.title,
+  description: news.data.description,
+  datePublished: news.data.date,
+  dateModified: news.data.updated ?? news.data.date,
+  inLanguage: lang,
+  mainEntityOfPage: canonicalURL,
+  publisher: { '@type': 'Organization', name: 'BlueSecurity' },
+  ...(news.data.image ? { image: new URL(news.data.image, Astro.site ?? Astro.url.origin).toString() } : {}),
+};
+---
+
+<div data-pagefind-body>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+  <section class="article-head">
+    <div class="head-glow" aria-hidden="true"></div>
+    <div class="article-container head-inner">
+      <a href={localePath('/news', lang)} class="back-link">
+        <span aria-hidden="true">←</span>
+        {t('news.back', lang)}
+      </a>
+
+      <div class="article-labels">
+        <span class="category-label">{templateLabel}</span>
+        {news.data.newsletterIssue && <span class="issue-label">Newsletter #{news.data.newsletterIssue}</span>}
+      </div>
+
+      <h1>{news.data.title}</h1>
+      <p class="article-summary">{news.data.description}</p>
+
+      <div class="article-meta">
+        <time datetime={news.data.date}>{t('news.publishedAt', lang)} · {formatDate(news.data.date)}</time>
+        {news.data.updated && <time datetime={news.data.updated}>{t('news.updatedAt', lang)} · {formatDate(news.data.updated)}</time>}
+        <button type="button" class="share-button" data-share-button data-share-label={t('news.share', lang)} data-copied-label={t('news.copied', lang)}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="18" cy="5" r="2.5" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="18" cy="19" r="2.5" stroke="currentColor" stroke-width="1.5" />
+            <path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5" stroke="currentColor" stroke-width="1.5" />
+          </svg>
+          <span>{t('news.share', lang)}</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main class="article-main">
+    <div class="article-container article-layout">
+      <article class="article-content">
+        {news.data.image && (
+          <figure class="article-cover">
+            <img src={news.data.image} alt="" />
+          </figure>
+        )}
+        <Content />
+
+        {news.data.source && (
+          <div class="source-card">
+            <div>
+              <span>{t('news.source', lang)}</span>
+              <strong>{news.data.source.name}</strong>
+            </div>
+            <a href={news.data.source.url} target="_blank" rel="noopener noreferrer">
+              {lang === 'ko' ? '원문 보기' : 'View source'}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        )}
+      </article>
+
+      <aside class="article-aside" aria-label={lang === 'ko' ? '기사 정보' : 'Article information'}>
+        <div class="aside-card">
+          <p>{lang === 'ko' ? '콘텐츠 정보' : 'Article info'}</p>
+          <dl>
+            <div>
+              <dt>{t('news.filter.template', lang)}</dt>
+              <dd>{templateLabel}</dd>
+            </div>
+            <div>
+              <dt>{lang === 'ko' ? '카테고리' : 'Category'}</dt>
+              <dd>{categoryLabel}</dd>
+            </div>
+            <div>
+              <dt>{t('news.publishedAt', lang)}</dt>
+              <dd>{formatDate(news.data.date)}</dd>
+            </div>
+          </dl>
+          {news.data.tags.length > 0 && (
+            <div class="aside-tags">
+              {news.data.tags.map((tag) => <span>#{tag}</span>)}
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  {relatedNews.length > 0 && (
+    <section class="related-section" aria-labelledby="related-heading">
+      <div class="article-container">
+        <div class="related-heading-row">
+          <div>
+            <span>MORE FROM BLUESECURITY</span>
+            <h2 id="related-heading">{t('news.related', lang)}</h2>
+          </div>
+          <a href={localePath('/news', lang)}>{t('news.back', lang)} <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="related-grid">
+          {relatedNews.map((item) => (
+            <a href={localePath(`/news/${slugFromId(item.id)}`, lang)} class="related-card">
+              <span>{getNewsCategoryLabel(item.data.category, lang)}</span>
+              <h3>{item.data.title}</h3>
+              <time datetime={item.data.date}>{formatDate(item.data.date)}</time>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const label = button.querySelector('span');
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: document.title, url: window.location.href });
+          return;
+        }
+        await navigator.clipboard.writeText(window.location.href);
+        label.textContent = button.dataset.copiedLabel;
+        window.setTimeout(() => { label.textContent = button.dataset.shareLabel; }, 1800);
+      } catch (error) {
+        if (error?.name !== 'AbortError') {
+          label.textContent = button.dataset.shareLabel;
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .article-container { width: min(980px, calc(100% - 3rem)); margin: 0 auto; }
+
+  .article-head {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.55);
+    background: #0a0f1c;
+    padding: 3.5rem 0 3.8rem;
+  }
+
+  .head-glow {
+    position: absolute;
+    top: -260px;
+    left: 40%;
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.1);
+    filter: blur(80px);
+  }
+
+  .head-inner { position: relative; }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #718096;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover { color: #93c5fd; }
+  .article-labels { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.2rem; }
+
+  .category-label,
+  .issue-label {
+    display: inline-flex;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.08);
+    padding: 0.35rem 0.68rem;
+    color: #93c5fd;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .issue-label { border-color: #273249; background: #0d1423; color: #718096; }
+
+  h1 {
+    max-width: 860px;
+    margin: 1.15rem 0 0;
+    color: #f8fafc;
+    font-size: clamp(2rem, 5vw, 3.65rem);
+    font-weight: 680;
+    line-height: 1.2;
+    letter-spacing: -0.04em;
+  }
+
+  .article-summary {
+    max-width: 740px;
+    margin: 1.3rem 0 0;
+    color: #8a99af;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem 1.2rem;
+    margin-top: 1.8rem;
+    color: #5f6e84;
+    font-size: 0.75rem;
+  }
+
+  .share-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    border: 1px solid #273249;
+    border-radius: 0.5rem;
+    background: #0d1423;
+    padding: 0.48rem 0.7rem;
+    color: #8795aa;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .share-button:hover { border-color: rgba(96, 165, 250, 0.45); color: #93c5fd; }
+
+  .article-main { background: #080d18; padding: 3.5rem 0 5rem; }
+  .article-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+
+  .article-content {
+    min-width: 0;
+    color: #bac6d6;
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  .article-cover {
+    overflow: hidden;
+    margin: 0 0 2.5rem;
+    border: 1px solid #253047;
+    border-radius: 0.8rem;
+  }
+
+  .article-cover img { display: block; width: 100%; height: auto; }
+  .article-content :global(h2) { margin: 2.8rem 0 1rem; color: #f1f5f9; font-size: 1.65rem; font-weight: 680; line-height: 1.4; letter-spacing: -0.025em; }
+  .article-content :global(h3) { margin: 2.2rem 0 0.8rem; color: #e2e8f0; font-size: 1.25rem; font-weight: 650; }
+  .article-content :global(p), .article-content :global(ul), .article-content :global(ol), .article-content :global(blockquote) { margin: 1.15rem 0; }
+  .article-content :global(ul), .article-content :global(ol) { padding-left: 1.35rem; }
+  .article-content :global(li + li) { margin-top: 0.45rem; }
+  .article-content :global(strong) { color: #e2e8f0; font-weight: 650; }
+  .article-content :global(a) { color: #93c5fd; text-decoration-color: rgba(147, 197, 253, 0.4); text-underline-offset: 3px; }
+  .article-content :global(blockquote) { border-left: 2px solid #3b82f6; background: rgba(59, 130, 246, 0.05); padding: 0.9rem 1.2rem; color: #94a3b8; }
+  .article-content :global(code) { border: 1px solid #273249; border-radius: 0.3rem; background: #0d1423; padding: 0.12rem 0.34rem; color: #cbd5e1; font-size: 0.88em; }
+  .article-content :global(pre) { overflow-x: auto; border: 1px solid #273249; border-radius: 0.7rem; background: #070b13; padding: 1rem; }
+  .article-content :global(pre code) { border: 0; background: transparent; padding: 0; }
+  .article-content :global(img) { max-width: 100%; border-radius: 0.65rem; }
+
+  .source-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    border: 1px solid #263148;
+    border-radius: 0.7rem;
+    background: #0c1220;
+    padding: 1rem 1.1rem;
+  }
+
+  .source-card div { display: flex; flex-direction: column; gap: 0.2rem; }
+  .source-card div span { color: #59677d; font-size: 0.68rem; font-weight: 650; }
+  .source-card strong { color: #cbd5e1; font-size: 0.85rem; }
+  .source-card a { flex: 0 0 auto; color: #7faef5; font-size: 0.75rem; font-weight: 650; text-decoration: none; }
+
+  .article-aside { display: none; }
+  .aside-card { position: sticky; top: 88px; border-left: 1px solid #263148; padding-left: 1.4rem; }
+  .aside-card > p { margin: 0 0 1rem; color: #526078; font-size: 0.68rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; }
+  .aside-card dl, .aside-card dl div { display: flex; flex-direction: column; gap: 0.22rem; }
+  .aside-card dl { gap: 1rem; margin: 0; }
+  .aside-card dt { color: #526078; font-size: 0.68rem; }
+  .aside-card dd { margin: 0; color: #94a3b8; font-size: 0.78rem; }
+  .aside-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1.2rem; }
+  .aside-tags span { border-radius: 0.35rem; background: #0e1626; padding: 0.28rem 0.42rem; color: #607089; font-size: 0.65rem; }
+
+  .related-section { border-top: 1px solid rgba(51, 65, 85, 0.55); background: #0a0f1c; padding: 3.5rem 0 5rem; }
+  .related-heading-row { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  .related-heading-row div > span { color: #526078; font-size: 0.62rem; font-weight: 750; letter-spacing: 0.12em; }
+  .related-heading-row h2 { margin: 0.4rem 0 0; color: #f1f5f9; font-size: 1.5rem; font-weight: 650; }
+  .related-heading-row > a { color: #64748b; font-size: 0.75rem; font-weight: 650; text-decoration: none; }
+  .related-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+  .related-card { display: flex; flex-direction: column; min-height: 150px; border: 1px solid #202a3d; border-radius: 0.7rem; background: #0c1220; padding: 1.1rem; color: inherit; text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease; }
+  .related-card:hover { transform: translateY(-2px); border-color: rgba(96, 165, 250, 0.38); }
+  .related-card > span { color: #60a5fa; font-size: 0.68rem; font-weight: 650; }
+  .related-card h3 { margin: 0.65rem 0; color: #dbe4ef; font-size: 0.95rem; font-weight: 620; line-height: 1.5; }
+  .related-card time { margin-top: auto; color: #526078; font-size: 0.68rem; }
+
+  @media (min-width: 800px) {
+    .article-layout { grid-template-columns: minmax(0, 1fr) 185px; gap: 3.5rem; }
+    .article-aside { display: block; }
+    .related-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 639px) {
+    .article-container { width: min(100% - 2rem, 980px); }
+    .article-head { padding: 2.5rem 0 3rem; }
+    .article-main { padding-top: 2.5rem; }
+    .share-button { width: 100%; justify-content: center; margin-top: 0.4rem; margin-left: 0; }
+    .source-card { align-items: flex-start; flex-direction: column; }
+  }
+</style>

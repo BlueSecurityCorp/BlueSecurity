@@ -15,7 +15,8 @@ const koPath = switchLocalePath(currentPath, 'ko');
 const enPath = switchLocalePath(currentPath, 'en');
 
 function isActive(path: string) {
-  return path === '/' ? currentPath === '/' : currentPath.startsWith(path);
+  const localizedPath = currentPath.replace(/^\/en(?=\/|$)/, '') || '/';
+  return path === '/' ? localizedPath === '/' : localizedPath.startsWith(path);
 }
 ---
 
@@ -49,6 +50,7 @@ function isActive(path: string) {
       </div>
 
       <a href={localePath('/pricing', lang)} class:list={['nav-link', { active: isActive('/pricing') }]}>{t('nav.pricing', lang)}</a>
+      <a href={localePath('/news', lang)} class:list={['nav-link', { active: isActive('/news') }]}>{t('nav.news', lang)}</a>
       <a href={localePath('/notices', lang)} class:list={['nav-link', { active: isActive('/notices') }]}>{t('nav.notices', lang)}</a>
       <a href={localePath('/careers', lang)} class:list={['nav-link', { active: isActive('/careers') }]}>{t('nav.careers', lang)}</a>
       <a href={localePath('/contact', lang)} class="nav-cta">{t('nav.contact', lang)}</a>

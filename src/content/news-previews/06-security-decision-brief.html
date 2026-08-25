@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light only">
+  <title>[SECURITY DECISION 013] NOW 1건 · MFA 복구 절차를 점검하세요</title>
+  <style>
+    html,body{margin:0!important;padding:0!important;width:100%!important;background:#e6e7eb}table{border-spacing:0;border-collapse:collapse}a{text-decoration:none}
+    .frame{width:680px;max-width:680px}.pad{padding-left:46px;padding-right:46px}.decision-title{font-size:45px}.signal-cell{width:33.333%}.split-cell{width:50%}.control-meta{width:25%}.timeline-mark{width:112px}.response-cell{width:50%}
+    @media only screen and (max-width:720px){
+      .frame{width:calc(100vw - 24px)!important;max-width:calc(100vw - 24px)!important}.pad{padding-left:23px!important;padding-right:23px!important}.decision-title{font-size:34px!important;line-height:1.16!important}
+      .signal-cell,.split-cell,.control-meta,.response-cell{display:block!important;width:100%!important;box-sizing:border-box!important;border-right:0!important}
+      .signal-cell,.split-cell,.control-meta{border-bottom:1px solid #454a55!important}.signal-cell:last-child,.split-cell:last-child,.control-meta:last-child{border-bottom:0!important}
+      .timeline-mark{width:78px!important}.header-meta{display:none!important}.mobile-border{border-top:1px solid #ccd0d8!important}.response-cell{border-bottom:1px solid #ccd0d8!important}.response-cell:last-child{border-bottom:0!important}
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#e6e7eb;color:#13161c;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">위험 점수, 지난주 변화, 관제 로그와 경영진 보고 문장을 5분 안에 확인하세요.</div>
+  <table role="presentation" width="100%" style="width:100%;table-layout:fixed;background:#e6e7eb;"><tr><td align="center" style="padding:34px 12px;">
+    <table role="presentation" width="680" class="frame" style="width:680px;max-width:680px;background:#f7f6f2;box-shadow:0 18px 60px rgba(17,20,28,.14);">
+      <tr><td class="pad" style="padding-top:22px;padding-bottom:22px;background:#11141b;color:#fff;border-bottom:1px solid #373b45;">
+        <table role="presentation" width="100%"><tr><td><table role="presentation"><tr><td style="width:30px;height:30px;background:#5065ff;color:#fff;text-align:center;font-size:11px;font-weight:950;">S/</td><td style="padding-left:11px;font-size:12px;font-weight:850;letter-spacing:1.5px;">SECURITY SIGNAL</td></tr></table></td><td class="header-meta" align="right" style="font-family:Consolas,'Courier New',monospace;font-size:10px;line-height:1.6;color:#8e95a5;">DECISION_EDITION=013<br>FRI_21_AUG_2026</td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:45px;padding-bottom:43px;background:#5065ff;color:#fff;">
+        <p style="margin:0 0 17px;color:#dce1ff;font-size:11px;font-weight:900;letter-spacing:2.1px;">SECURITY DECISION / 05 MIN</p>
+        <h1 class="decision-title" style="margin:0;font-size:45px;line-height:1.12;letter-spacing:-1.9px;font-weight:880;">이번 주 판단은<br>세 가지입니다</h1>
+        <p style="margin:22px 0 0;max-width:500px;color:#e4e7ff;font-size:14px;line-height:1.75;">즉시 조치할 것, 72시간 안에 계획할 것, 그리고 아직 지켜볼 것을 분리했습니다.</p>
+      </td></tr>
+      <tr><td style="background:#11141b;color:#fff;border-bottom:1px solid #373b45;">
+        <table role="presentation" width="100%"><tr>
+          <td class="signal-cell" valign="top" style="width:33.333%;padding:23px 22px 25px 46px;border-right:1px solid #373b45;">
+            <p style="margin:0 0 14px;color:#ff7155;font-size:10px;font-weight:950;letter-spacing:1.5px;">NOW</p>
+            <p style="margin:0;font-family:Consolas,monospace;font-size:35px;line-height:1;font-weight:900;">8<span style="color:#717887;font-size:17px;">/9</span></p>
+            <p style="margin:13px 0 0;font-size:12px;line-height:1.55;color:#d5d8df;">원격접속 장비<br>오늘 확인</p>
+          </td>
+          <td class="signal-cell" valign="top" style="width:33.333%;padding:23px 22px;border-right:1px solid #373b45;">
+            <p style="margin:0 0 14px;color:#ffd05a;font-size:10px;font-weight:950;letter-spacing:1.5px;">72H</p>
+            <p style="margin:0;font-family:Consolas,monospace;font-size:35px;line-height:1;font-weight:900;">5<span style="color:#717887;font-size:17px;">/9</span></p>
+            <p style="margin:13px 0 0;font-size:12px;line-height:1.55;color:#d5d8df;">MFA 복구 절차<br>담당자 지정</p>
+          </td>
+          <td class="signal-cell" valign="top" style="width:33.333%;padding:23px 46px 25px 22px;">
+            <p style="margin:0 0 14px;color:#88a1ff;font-size:10px;font-weight:950;letter-spacing:1.5px;">WATCH</p>
+            <p style="margin:0;font-family:Consolas,monospace;font-size:35px;line-height:1;font-weight:900;">2<span style="color:#717887;font-size:17px;">/9</span></p>
+            <p style="margin:13px 0 0;font-size:12px;line-height:1.55;color:#d5d8df;">브라우저 취약점<br>악용 신호 관찰</p>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:36px;padding-bottom:34px;">
+        <p style="margin:0 0 10px;color:#5065ff;font-size:10px;font-weight:950;letter-spacing:1.6px;">THE FIRST DECISION</p>
+        <h2 style="margin:0 0 17px;font-size:26px;line-height:1.38;letter-spacing:-.8px;">외부 노출 원격접속 장비를<br>오늘 첫 번째 변경 작업으로 지정하세요</h2>
+        <p style="margin:0 0 20px;font-size:14px;line-height:1.85;color:#595d67;">무인증 공격 조건과 실제 악용 가능성이 함께 존재한다는 가상 사례입니다. 공개 점수보다 우리 자산의 노출 여부가 의사결정의 핵심입니다.</p>
+        <table role="presentation" width="100%" style="border-top:1px solid #bfc3cb;border-bottom:1px solid #bfc3cb;">
+          <tr><td style="padding:14px 0;width:38%;color:#777c87;font-size:10px;font-weight:900;letter-spacing:1px;">EXPLOITATION</td><td style="padding:14px 0;font-size:12px;font-weight:850;">3 / 3 · 실제 악용 확인</td></tr>
+          <tr><td style="padding:14px 0;border-top:1px solid #d7d9de;color:#777c87;font-size:10px;font-weight:900;letter-spacing:1px;">EXPOSURE</td><td style="padding:14px 0;border-top:1px solid #d7d9de;font-size:12px;font-weight:850;">2 / 3 · 외부 노출 가능</td></tr>
+          <tr><td style="padding:14px 0;border-top:1px solid #d7d9de;color:#777c87;font-size:10px;font-weight:900;letter-spacing:1px;">BUSINESS IMPACT</td><td style="padding:14px 0;border-top:1px solid #d7d9de;font-size:12px;font-weight:850;">3 / 3 · 관리자 권한 영향</td></tr>
+        </table>
+        <p style="margin:20px 0 0;font-size:13px;line-height:1.85;color:#30333a;"><strong>오늘의 순서</strong>&nbsp; 자산 식별 → 외부 접근 제한 → 수정 버전 적용 → 최근 관리자 활동 조사</p>
+        <p style="margin:18px 0 0;"><a href="https://example.com" style="display:inline-block;padding-bottom:4px;border-bottom:2px solid #5065ff;color:#13161c;font-size:12px;font-weight:950;">공식 권고문 확인&nbsp; ↗</a></p>
+      </td></tr>
+      <tr><td style="background:#ececf0;border-top:1px solid #ccd0d8;border-bottom:1px solid #ccd0d8;">
+        <table role="presentation" width="100%"><tr>
+          <td class="split-cell" valign="top" style="width:50%;padding:30px 25px 31px 46px;border-right:1px solid #ccd0d8;">
+            <p style="margin:0 0 15px;color:#a14432;font-size:10px;font-weight:950;letter-spacing:1.6px;">NO PANIC / HEADLINE</p>
+            <p style="margin:0;font-size:19px;line-height:1.5;font-weight:850;">“수십만 대의 장비가 즉시 위험하다”</p>
+          </td>
+          <td class="split-cell" valign="top" style="width:50%;padding:30px 46px 31px 25px;">
+            <p style="margin:0 0 15px;color:#5065ff;font-size:10px;font-weight:950;letter-spacing:1.6px;">ACTUAL CONDITION</p>
+            <p style="margin:0 0 10px;font-size:16px;line-height:1.5;font-weight:850;">특정 버전 + 관리 화면 외부 노출</p>
+            <p style="margin:0;font-size:12px;line-height:1.7;color:#686c75;">제품을 보유했다는 사실만으로 동일한 위험이 되지는 않습니다.</p>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="background:#cfff4c;border-bottom:1px solid #9ac52d;">
+        <table role="presentation" width="100%"><tr><td class="pad" style="padding-top:31px;padding-bottom:24px;">
+          <p style="margin:0 0 10px;font-size:10px;font-weight:950;letter-spacing:1.6px;">ONE CONTROL / THIS WEEK</p>
+          <h2 style="margin:0 0 18px;font-size:24px;line-height:1.35;letter-spacing:-.7px;">MFA 재등록 본인확인 절차</h2>
+          <p style="margin:0;font-size:14px;line-height:1.8;">모든 MFA 재등록 요청에 요청자가 제공하지 않은 채널을 통한 독립적인 2차 확인과 승인 기록을 남깁니다.</p>
+        </td></tr></table>
+        <table role="presentation" width="100%" style="border-top:1px solid #9ac52d;"><tr>
+          <td class="control-meta" valign="top" style="width:25%;padding:18px 14px 20px 46px;border-right:1px solid #9ac52d;"><p style="margin:0 0 7px;font-size:9px;font-weight:950;letter-spacing:1px;">OWNER</p><p style="margin:0;font-size:12px;font-weight:850;">IT 지원팀</p></td>
+          <td class="control-meta" valign="top" style="width:25%;padding:18px 14px;border-right:1px solid #9ac52d;"><p style="margin:0 0 7px;font-size:9px;font-weight:950;letter-spacing:1px;">TIME</p><p style="margin:0;font-size:12px;font-weight:850;">30분</p></td>
+          <td class="control-meta" valign="top" style="width:25%;padding:18px 14px;border-right:1px solid #9ac52d;"><p style="margin:0 0 7px;font-size:9px;font-weight:950;letter-spacing:1px;">EVIDENCE</p><p style="margin:0;font-size:12px;font-weight:850;">승인 기록</p></td>
+          <td class="control-meta" valign="top" style="width:25%;padding:18px 46px 20px 14px;"><p style="margin:0 0 7px;font-size:9px;font-weight:950;letter-spacing:1px;">DUE</p><p style="margin:0;font-size:12px;font-weight:850;">금요일</p></td>
+        </tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:36px;padding-bottom:38px;background:#11141b;color:#fff;">
+        <table role="presentation" width="100%"><tr><td valign="top" style="width:112px;"><p style="margin:0;color:#8fa2ff;font-family:Consolas,monospace;font-size:10px;font-weight:900;line-height:1.6;">ONE_LOG<br>IAM_EVENT</p></td><td><h2 style="margin:0 0 13px;font-size:20px;">이번 주 확인할 데이터</h2><p style="margin:0 0 17px;font-size:12px;line-height:1.7;color:#aeb4c0;">조회 기간 · 최근 14일 / 데이터 · IAM, VPN, 관리자 감사 로그</p></td></tr></table>
+        <table role="presentation" width="100%" style="background:#1c202a;border-left:4px solid #5065ff;"><tr><td style="padding:20px 21px;color:#e0e4ed;font-family:Consolas,'Courier New',monospace;font-size:12px;line-height:2;">MFA_METHOD_CHANGED<br><span style="color:#7f8798;">└─ within 30m →</span> NEW_DEVICE_LOGIN<br><span style="color:#7f8798;">&nbsp;&nbsp;&nbsp;└─ followed by →</span> ROLE_CHANGED</td></tr></table>
+        <p style="margin:14px 0 0;font-size:11px;line-height:1.7;color:#8c93a2;">이 패턴은 침해 확정 조건이 아니라 조사를 시작할 우선순위입니다.</p>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:35px;padding-bottom:34px;">
+        <p style="margin:0 0 22px;color:#5065ff;font-size:10px;font-weight:950;letter-spacing:1.6px;">LAST SIGNAL / WHAT CHANGED</p>
+        <table role="presentation" width="100%" style="border-top:1px solid #bfc3cb;border-bottom:1px solid #bfc3cb;"><tr>
+          <td class="timeline-mark" valign="top" style="width:112px;padding:22px 0;"><span style="display:block;color:#7d828e;font-size:10px;font-weight:900;">LAST WEEK</span><strong style="display:block;margin-top:7px;font-size:19px;">72H</strong></td>
+          <td valign="middle" align="center" style="width:42px;color:#9da1aa;font-size:18px;">→</td>
+          <td class="timeline-mark" valign="top" style="width:112px;padding:22px 0;"><span style="display:block;color:#a14432;font-size:10px;font-weight:900;">THIS WEEK</span><strong style="display:block;margin-top:7px;font-size:19px;">NOW</strong></td>
+          <td style="padding:22px 0 22px 18px;font-size:12px;line-height:1.75;color:#5b5f68;">PoC 공개 단계에서 실제 악용 확인 단계로 근거가 바뀌어 우선순위를 상향했습니다.</td>
+        </tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:33px;padding-bottom:34px;background:#eee5cf;border-top:1px solid #d5c9a9;border-bottom:1px solid #d5c9a9;">
+        <p style="margin:0 0 13px;color:#76643a;font-size:10px;font-weight:950;letter-spacing:1.6px;">BOARD LINE / COPY & SHARE</p>
+        <p style="margin:0;font-size:21px;line-height:1.55;letter-spacing:-.4px;font-weight:850;">“이번 이슈의 핵심은 새로운 공격 기술이 아니라 외부에 노출된 관리 자산을 제때 식별할 수 있는가입니다.”</p>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:33px;padding-bottom:19px;">
+        <h2 style="margin:0 0 8px;font-size:20px;">이번 호를 읽고 무엇을 하셨나요?</h2>
+        <p style="margin:0 0 19px;color:#747882;font-size:12px;">응답은 다음 호의 우선순위를 개선하는 데 사용합니다.</p>
+        <table role="presentation" width="100%" style="border:1px solid #ccd0d8;"><tr>
+          <td class="response-cell" style="width:50%;border-right:1px solid #ccd0d8;border-bottom:1px solid #ccd0d8;"><a href="https://example.com" style="display:block;padding:16px 17px;color:#13161c;font-size:12px;font-weight:850;">우리 환경에 해당해요&nbsp; ↗</a></td>
+          <td class="response-cell" style="width:50%;border-bottom:1px solid #ccd0d8;"><a href="https://example.com" style="display:block;padding:16px 17px;color:#13161c;font-size:12px;font-weight:850;">조치 완료했어요&nbsp; ↗</a></td>
+        </tr><tr>
+          <td class="response-cell" style="width:50%;border-right:1px solid #ccd0d8;"><a href="https://example.com" style="display:block;padding:16px 17px;color:#13161c;font-size:12px;font-weight:850;">다음 점검에 넣었어요&nbsp; ↗</a></td>
+          <td class="response-cell" style="width:50%;"><a href="https://example.com" style="display:block;padding:16px 17px;color:#13161c;font-size:12px;font-weight:850;">경영진에게 공유했어요&nbsp; ↗</a></td>
+        </tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:18px;padding-bottom:28px;"><p style="margin:0;font-size:10px;line-height:1.7;color:#888c95;">SIGNAL SCORE는 공개 자료와 편집 기준을 바탕으로 한 우선순위 지표입니다. 조직의 환경에 따라 실제 위험은 달라질 수 있습니다.</p></td></tr>
+      <tr><td class="pad" style="padding-top:23px;padding-bottom:23px;background:#11141b;color:#fff;"><table role="presentation" width="100%"><tr><td style="color:#7f8798;font-size:10px;">SAMPLE DATA · UPDATED 2026.08.21 09:00 KST</td><td align="right" style="color:#8fa2ff;font-family:Consolas,monospace;font-size:10px;">SECURITY SIGNAL © 2026</td></tr></table></td></tr>
+    </table>
+  </td></tr></table>
+</body>
+</html>

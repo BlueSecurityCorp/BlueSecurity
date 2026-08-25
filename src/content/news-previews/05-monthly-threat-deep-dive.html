@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light only">
+  <title>[Deep Dive 04] 헬프데스크 사칭은 어떻게 계정을 장악하는가</title>
+  <style>
+    html,body{margin:0!important;padding:0!important;width:100%!important;background:#e6e8eb}table{border-spacing:0;border-collapse:collapse}a{text-decoration:none}
+    .frame{width:680px;max-width:680px}.pad{padding-left:48px;padding-right:48px}.cover-title{font-size:45px}.chapter-no{width:92px}.flow-cell{width:33.333%}.signal-table td,.signal-table th{padding:13px 10px}
+    @media only screen and (max-width:720px){.frame{width:calc(100vw - 24px)!important;max-width:calc(100vw - 24px)!important}.pad{padding-left:24px!important;padding-right:24px!important}.cover-title{font-size:34px!important;line-height:1.18!important}.chapter-no{width:54px!important;font-size:30px!important}.flow-cell{display:block!important;width:100%!important;box-sizing:border-box!important;border-right:0!important;border-bottom:1px solid #566174!important}.flow-cell:last-child{border-bottom:0!important}.signal-table td,.signal-table th{padding:10px 5px!important;font-size:10px!important}.header-meta{display:none!important}}
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#e6e8eb;color:#14171d;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">공격 흐름, 관찰 신호, 방어 우선순위를 하나의 서사로 분석했습니다.</div>
+  <table role="presentation" width="100%" style="width:100%;table-layout:fixed;background:#e6e8eb;"><tr><td align="center" style="padding:34px 12px;">
+    <table role="presentation" width="680" class="frame" style="width:680px;max-width:680px;background:#fbfaf6;box-shadow:0 18px 60px rgba(20,23,29,.14);">
+      <tr><td class="pad" style="padding-top:23px;padding-bottom:23px;background:#10141d;color:#fff;border-bottom:1px solid #3e4655;">
+        <table role="presentation" width="100%"><tr><td><table role="presentation"><tr><td style="width:30px;height:30px;background:#b7ff52;color:#10141d;text-align:center;font-size:11px;font-weight:950;">S/</td><td style="padding-left:11px;font-size:12px;font-weight:850;letter-spacing:1.5px;">SECURITY SIGNAL</td></tr></table></td><td class="header-meta" align="right" style="font-size:10px;line-height:1.6;color:#8992a3;">LONGFORM · 04<br>08 MIN READ</td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:47px;padding-bottom:50px;background:#10141d;color:#fff;">
+        <table role="presentation" width="100%"><tr><td valign="top" style="width:28px;"><div style="width:5px;height:154px;background:#b7ff52;"></div></td><td style="padding-left:22px;">
+          <p style="margin:0 0 17px;color:#b7ff52;font-size:11px;font-weight:900;letter-spacing:2.1px;">DEEP DIVE / IDENTITY</p>
+          <h1 class="cover-title" style="margin:0;font-size:45px;line-height:1.13;letter-spacing:-2px;font-weight:880;">헬프데스크 사칭은<br>어떻게 계정을<br>장악하는가</h1>
+          <p style="margin:23px 0 0;color:#a9b0bd;font-size:13px;line-height:1.7;">공격 흐름 · 관찰 신호 · 방어 우선순위</p>
+        </td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:30px;padding-bottom:30px;background:#b7ff52;border-bottom:1px solid #8fcf37;">
+        <p style="margin:0 0 8px;font-size:10px;font-weight:950;letter-spacing:1.5px;">THE THESIS</p>
+        <p style="margin:0;font-size:20px;line-height:1.48;letter-spacing:-.45px;font-weight:850;">강한 MFA도 계정 복구 절차가 허술하면 우회됩니다. 기술과 사람의 확인 절차를 하나의 방어선으로 설계해야 합니다.</p>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:38px;padding-bottom:18px;">
+        <table role="presentation" width="100%"><tr><td class="chapter-no" valign="top" style="width:92px;color:#d1d2ce;font-size:44px;line-height:1;font-weight:900;">01</td><td><p style="margin:0 0 9px;color:#596071;font-size:10px;font-weight:900;letter-spacing:1.5px;">WHY THIS MATTERS</p><h2 style="margin:0 0 15px;font-size:24px;line-height:1.4;letter-spacing:-.7px;">비밀번호가 아니라<br>예외 처리 과정을 노립니다</h2><p style="margin:0;font-size:14px;line-height:1.9;color:#585c65;">공격자는 인증 기술을 직접 깨는 대신 지원 조직을 속여 인증 수단을 새로 등록합니다. 아래 내용은 화면 시안을 위한 가상 분석이지만, 방어자가 확인해야 할 구조는 실제 업무에 적용할 수 있습니다.</p></td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:32px;padding-bottom:18px;">
+        <table role="presentation" width="100%"><tr><td class="chapter-no" valign="top" style="width:92px;color:#d1d2ce;font-size:44px;line-height:1;font-weight:900;">02</td><td><p style="margin:0 0 9px;color:#596071;font-size:10px;font-weight:900;letter-spacing:1.5px;">ATTACK SEQUENCE</p><h2 style="margin:0;font-size:24px;line-height:1.4;letter-spacing:-.7px;">공격은 세 번의 신뢰 이동으로 완성됩니다</h2></td></tr></table>
+      </td></tr>
+      <tr><td style="padding-top:18px;padding-bottom:30px;background:#263044;color:#fff;">
+        <table role="presentation" width="100%"><tr>
+          <td class="flow-cell" valign="top" style="width:33.333%;padding:25px 22px 25px 48px;border-right:1px solid #566174;"><p style="margin:0 0 18px;color:#b7ff52;font-family:Consolas,monospace;font-size:11px;font-weight:900;">01 / RECON</p><h3 style="margin:0 0 10px;font-size:17px;">절차를 배웁니다</h3><p style="margin:0;font-size:12px;line-height:1.7;color:#c1c7d1;">직원 이름, 조직 구조, 지원 창구를 수집합니다.</p></td>
+          <td class="flow-cell" valign="top" style="width:33.333%;padding:25px 22px;border-right:1px solid #566174;"><p style="margin:0 0 18px;color:#b7ff52;font-family:Consolas,monospace;font-size:11px;font-weight:900;">02 / PRETEXT</p><h3 style="margin:0 0 10px;font-size:17px;">긴급함을 만듭니다</h3><p style="margin:0;font-size:12px;line-height:1.7;color:#c1c7d1;">출장·기기 분실을 가장해 MFA 변경을 요청합니다.</p></td>
+          <td class="flow-cell" valign="top" style="width:33.333%;padding:25px 48px 25px 22px;"><p style="margin:0 0 18px;color:#b7ff52;font-family:Consolas,monospace;font-size:11px;font-weight:900;">03 / CONTROL</p><h3 style="margin:0 0 10px;font-size:17px;">세션을 장악합니다</h3><p style="margin:0;font-size:12px;line-height:1.7;color:#c1c7d1;">새 인증 수단으로 중요 시스템에 접근합니다.</p></td>
+        </tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:36px;padding-bottom:16px;">
+        <table role="presentation" width="100%"><tr><td class="chapter-no" valign="top" style="width:92px;color:#d1d2ce;font-size:44px;line-height:1;font-weight:900;">03</td><td><p style="margin:0 0 9px;color:#596071;font-size:10px;font-weight:900;letter-spacing:1.5px;">THE SHIFT</p><h2 style="margin:0 0 15px;font-size:24px;line-height:1.4;letter-spacing:-.7px;">무엇이 달라졌나</h2><table role="presentation" width="100%" style="border-top:1px solid #b9bbb8;border-bottom:1px solid #b9bbb8;"><tr><td style="width:80px;padding:14px 0;color:#8b8d88;font-size:10px;font-weight:900;letter-spacing:1px;">BEFORE</td><td style="padding:14px 0;font-size:13px;">가짜 로그인 페이지로 비밀번호 탈취</td></tr><tr><td style="padding:14px 0;border-top:1px solid #deded9;color:#11151d;font-size:10px;font-weight:900;letter-spacing:1px;">NOW</td><td style="padding:14px 0;border-top:1px solid #deded9;font-size:13px;font-weight:850;">지원 절차로 인증 수단 자체를 변경</td></tr></table></td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:37px;padding-bottom:18px;">
+        <table role="presentation" width="100%"><tr><td class="chapter-no" valign="top" style="width:92px;color:#d1d2ce;font-size:44px;line-height:1;font-weight:900;">04</td><td><p style="margin:0 0 9px;color:#596071;font-size:10px;font-weight:900;letter-spacing:1.5px;">DETECTION SURFACE</p><h2 style="margin:0;font-size:24px;line-height:1.4;letter-spacing:-.7px;">방어자가 볼 수 있는 신호</h2></td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:15px;padding-bottom:34px;">
+        <table role="presentation" width="100%" class="signal-table" style="table-layout:fixed;border-top:2px solid #14171d;border-bottom:1px solid #14171d;">
+          <tr><th align="left" style="font-size:9px;letter-spacing:1.1px;color:#747984;">MOMENT</th><th align="left" style="font-size:9px;letter-spacing:1.1px;color:#747984;">SIGNAL</th><th align="left" style="font-size:9px;letter-spacing:1.1px;color:#747984;">DATA</th></tr>
+          <tr><td style="border-top:1px solid #d6d7d3;font-size:11px;font-weight:850;">복구</td><td style="border-top:1px solid #d6d7d3;font-size:11px;">비정상 시간 MFA 변경</td><td style="border-top:1px solid #d6d7d3;font-size:11px;">Helpdesk · IAM</td></tr>
+          <tr><td style="border-top:1px solid #d6d7d3;font-size:11px;font-weight:850;">접근</td><td style="border-top:1px solid #d6d7d3;font-size:11px;">새 기기·지역 로그인</td><td style="border-top:1px solid #d6d7d3;font-size:11px;">Identity · VPN</td></tr>
+          <tr><td style="border-top:1px solid #d6d7d3;font-size:11px;font-weight:850;">활동</td><td style="border-top:1px solid #d6d7d3;font-size:11px;">권한 변경·대량 조회</td><td style="border-top:1px solid #d6d7d3;font-size:11px;">Cloud · DLP</td></tr>
+        </table>
+        <p style="margin:12px 0 0;font-size:11px;line-height:1.7;color:#7a7d84;">단일 신호는 침해의 확정 증거가 아닙니다. 계정 맥락과 전후 행위를 함께 확인합니다.</p>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:35px;padding-bottom:39px;background:#10141d;color:#fff;">
+        <p style="margin:0 0 22px;color:#b7ff52;font-size:11px;font-weight:900;letter-spacing:1.7px;">FIELD ORDERS / THIS WEEK</p>
+        <table role="presentation" width="100%" style="border-top:1px solid #414958;"><tr><td style="width:34px;padding:17px 0;color:#b7ff52;font-family:Consolas,monospace;font-size:12px;">01</td><td style="padding:17px 0;color:#fff;font-size:14px;font-weight:800;">모든 MFA 재등록에 독립적인 2차 확인을 요구합니다.</td></tr><tr><td style="padding:17px 0;border-top:1px solid #414958;color:#b7ff52;font-family:Consolas,monospace;font-size:12px;">02</td><td style="padding:17px 0;border-top:1px solid #414958;color:#fff;font-size:14px;font-weight:800;">MFA 변경 직후 새 지역 로그인을 연계 탐지합니다.</td></tr><tr><td style="padding:17px 0;border-top:1px solid #414958;color:#b7ff52;font-family:Consolas,monospace;font-size:12px;">03</td><td style="padding:17px 0;border-top:1px solid #414958;color:#fff;font-size:14px;font-weight:800;">헬프데스크 사칭 시나리오를 분기 훈련에 넣습니다.</td></tr></table>
+        <table role="presentation" style="margin-top:25px;"><tr><td style="background:#b7ff52;"><a href="https://example.com" style="display:inline-block;padding:13px 18px;color:#10141d;font-size:12px;font-weight:950;">실무 체크리스트 열기&nbsp; ↗</a></td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:25px;padding-bottom:25px;background:#eeeee9;border-top:1px solid #d2d3cf;"><table role="presentation" width="100%"><tr><td style="font-size:10px;line-height:1.6;color:#747772;">SAMPLE ANALYSIS · UPDATED 2026.08.21 09:00 KST</td><td align="right" style="font-size:10px;color:#747772;">SECURITY SIGNAL © 2026</td></tr></table></td></tr>
+    </table>
+  </td></tr></table>
+</body>
+</html>

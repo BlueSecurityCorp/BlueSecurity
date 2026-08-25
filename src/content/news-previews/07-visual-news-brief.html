@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light only">
+  <title>[VISUAL BRIEF 014] 원격접속 장비 긴급 점검 외 3건</title>
+  <style>
+    html,body{margin:0!important;padding:0!important;width:100%!important;background:#e7e5e0}table{border-spacing:0;border-collapse:collapse}a{text-decoration:none}img{border:0;outline:none;text-decoration:none}
+    .frame{width:680px;max-width:680px}.pad{padding-left:46px;padding-right:46px}.visual-title{font-size:44px}.card-cell{width:50%}.side-image{width:42%}.side-copy{width:58%}
+    @media only screen and (max-width:720px){
+      .frame{width:calc(100vw - 24px)!important;max-width:calc(100vw - 24px)!important}.pad{padding-left:23px!important;padding-right:23px!important}.visual-title{font-size:34px!important;line-height:1.16!important}
+      .card-cell,.side-image,.side-copy{display:block!important;width:100%!important;box-sizing:border-box!important;border-right:0!important}.card-cell:first-child{border-bottom:1px solid #d4d1ca!important}
+      .card-cell-pad{padding-left:23px!important;padding-right:23px!important}.side-copy{padding:26px 23px 30px!important}.header-meta{display:none!important}.mobile-image{width:100%!important;height:auto!important}
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#e7e5e0;color:#15171c;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">이번 주 핵심 보안 이슈를 이미지, 위험 조건과 대응 순서로 정리했습니다.</div>
+  <table role="presentation" width="100%" style="width:100%;table-layout:fixed;background:#e7e5e0;"><tr><td align="center" style="padding:34px 12px;">
+    <table role="presentation" width="680" class="frame" style="width:680px;max-width:680px;background:#faf9f5;box-shadow:0 18px 60px rgba(21,23,28,.14);">
+      <tr><td style="height:7px;background:#ff5b35;font-size:0;line-height:0;">&nbsp;</td></tr>
+      <tr><td class="pad" style="padding-top:22px;padding-bottom:22px;background:#faf9f5;border-bottom:1px solid #d4d1ca;">
+        <table role="presentation" width="100%"><tr><td><table role="presentation"><tr><td style="width:30px;height:30px;background:#15171c;color:#fff;text-align:center;font-size:11px;font-weight:950;">S/</td><td style="padding-left:11px;font-size:12px;font-weight:850;letter-spacing:1.5px;">SECURITY SIGNAL</td></tr></table></td><td class="header-meta" align="right" style="font-size:10px;line-height:1.6;color:#77766f;">VISUAL EDITION · 014<br>21 AUG 2026 · KST</td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:41px;padding-bottom:38px;background:#faf9f5;">
+        <p style="margin:0 0 15px;color:#ff5b35;font-size:11px;font-weight:950;letter-spacing:2.1px;">VISUAL SECURITY BRIEF / 06 MIN</p>
+        <h1 class="visual-title" style="margin:0;font-size:44px;line-height:1.14;letter-spacing:-1.8px;font-weight:880;">이번 주 보안을<br>네 장면으로 봅니다</h1>
+        <p style="margin:20px 0 0;color:#686970;font-size:13px;line-height:1.75;">핵심 이슈 4 · 실행 항목 3 · 모든 이미지는 시안용 자체 제작</p>
+      </td></tr>
+      <tr><td style="background:#11141b;">
+        <a href="https://example.com" aria-label="외부 노출 원격접속 장비 공식 권고문 보기"><img src="assets/visual-remote-access.png" width="680" class="mobile-image" alt="어두운 네트워크 격자 위에서 외부 연결이 원격접속 게이트웨이로 이어지고 경고가 표시된 보안 도식" style="display:block;width:680px;max-width:100%;height:auto;"></a>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:13px;padding-bottom:14px;background:#eceae4;border-bottom:1px solid #d4d1ca;color:#74736d;font-size:10px;line-height:1.6;">외부 연결에서 관리 인터페이스로 이어지는 노출 경로를 표현한 도식 · 이미지: SECURITY SIGNAL 자체 제작</td></tr>
+      <tr><td class="pad" style="padding-top:34px;padding-bottom:36px;">
+        <p style="margin:0 0 9px;color:#ff5b35;font-size:10px;font-weight:950;letter-spacing:1.7px;">COVER STORY / ACT NOW</p>
+        <h2 style="margin:0 0 16px;font-size:27px;line-height:1.37;letter-spacing:-.8px;">외부 노출 원격접속 장비를<br>오늘 첫 번째로 확인하세요</h2>
+        <p style="margin:0 0 19px;font-size:14px;line-height:1.85;color:#5b5c62;">인증 이전 단계에서 악용될 수 있는 취약점이 공개됐다는 가상 사례입니다. 같은 제품을 보유했더라도 외부 노출과 영향 버전이 함께 존재할 때 우선순위가 높아집니다.</p>
+        <table role="presentation" width="100%" style="background:#fff;border:1px solid #d7d4cd;"><tr><td style="padding:17px 19px;font-size:12px;line-height:1.9;color:#33353a;"><strong>영향 조건</strong>&nbsp; 특정 버전 + 관리 화면 외부 노출 + 수정 버전 미적용<br><strong>오늘의 순서</strong>&nbsp; 자산 식별 → 접근 제한 → 패치 → 최근 관리자 활동 점검</td></tr></table>
+        <p style="margin:19px 0 0;"><a href="https://example.com" style="display:inline-block;padding-bottom:4px;border-bottom:2px solid #ff5b35;color:#15171c;font-size:12px;font-weight:950;">공식 권고문 보기&nbsp; ↗</a></p>
+      </td></tr>
+      <tr><td style="border-top:1px solid #d4d1ca;border-bottom:1px solid #d4d1ca;">
+        <table role="presentation" width="100%"><tr>
+          <td class="card-cell" valign="top" style="width:50%;border-right:1px solid #d4d1ca;">
+            <a href="https://example.com" aria-label="MFA 계정 복구 절차 뉴스 원문 보기"><img src="assets/visual-identity-mfa.png" width="340" class="mobile-image" alt="사용자, 헬프데스크, 인증 장치가 연결되고 독립적인 확인 지점이 강조된 MFA 복구 도식" style="display:block;width:340px;max-width:100%;height:auto;"></a>
+            <div class="card-cell-pad" style="padding:12px 24px 28px 46px;">
+              <p style="margin:0 0 18px;color:#77766f;font-size:9px;line-height:1.55;">계정 복구 과정의 신뢰 이동 · 자체 제작</p>
+              <p style="margin:0 0 10px;color:#5065ff;font-size:10px;font-weight:950;letter-spacing:1.5px;">SIGNAL 02 / IDENTITY</p>
+              <h3 style="margin:0 0 12px;font-size:19px;line-height:1.45;">MFA보다 복구 절차를 먼저 점검할 때</h3>
+              <p style="margin:0 0 14px;font-size:12px;line-height:1.75;color:#64656b;">독립적인 2차 확인이 없다면 공격자는 지원 절차를 통해 인증 수단을 바꿀 수 있습니다.</p>
+              <p style="margin:0 0 15px;font-size:11px;line-height:1.65;"><strong>이번 주 행동</strong><br>재등록 승인 기록 표본 10건 점검</p>
+              <a href="https://example.com" style="color:#5065ff;font-size:11px;font-weight:900;">원문 보기 →</a>
+            </div>
+          </td>
+          <td class="card-cell" valign="top" style="width:50%;">
+            <a href="https://example.com" aria-label="협력사 계정 공급망 뉴스 원문 보기"><img src="assets/visual-supply-chain.png" width="340" class="mobile-image" alt="조직과 협력사 시스템이 연결되고 만료되지 않은 외부 계정에 경고가 표시된 공급망 접근권한 도식" style="display:block;width:340px;max-width:100%;height:auto;"></a>
+            <div class="card-cell-pad" style="padding:12px 46px 28px 24px;">
+              <p style="margin:0 0 18px;color:#77766f;font-size:9px;line-height:1.55;">계약과 접근권한 생명주기를 표현한 도식 · 자체 제작</p>
+              <p style="margin:0 0 10px;color:#2f705a;font-size:10px;font-weight:950;letter-spacing:1.5px;">SIGNAL 03 / SUPPLY CHAIN</p>
+              <h3 style="margin:0 0 12px;font-size:19px;line-height:1.45;">협력사 계정에는 만료일이 있는가</h3>
+              <p style="margin:0 0 14px;font-size:12px;line-height:1.75;color:#64656b;">계약 종료와 권한 회수가 분리되어 있으면 장기 미사용 계정이 공격 표면으로 남습니다.</p>
+              <p style="margin:0 0 15px;font-size:11px;line-height:1.65;"><strong>이번 주 행동</strong><br>90일 미사용 외부 계정 목록 생성</p>
+              <a href="https://example.com" style="color:#2f705a;font-size:11px;font-weight:900;">점검 기준 보기 →</a>
+            </div>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td>
+        <table role="presentation" width="100%"><tr>
+          <td class="side-image" valign="top" style="width:42%;background:#2b2354;"><a href="https://example.com" aria-label="브라우저 보안 업데이트 뉴스 원문 보기"><img src="assets/visual-browser-patch.png" width="286" class="mobile-image" alt="브라우저 창 안의 방패에 보안 업데이트 완료 표시가 나타난 패치 도식" style="display:block;width:286px;max-width:100%;height:auto;"></a></td>
+          <td class="side-copy" valign="middle" style="width:58%;padding:28px 46px 29px 28px;background:#f0edf8;">
+            <p style="margin:0 0 8px;color:#6750cb;font-size:10px;font-weight:950;letter-spacing:1.5px;">SIGNAL 04 / WATCH</p>
+            <h3 style="margin:0 0 11px;font-size:20px;line-height:1.45;">브라우저 취약점,<br>무엇이 확인되면 NOW가 되는가</h3>
+            <p style="margin:0 0 13px;font-size:12px;line-height:1.75;color:#62606b;">현재는 악용 신호를 관찰하는 단계입니다. 공식 악용 확인 또는 관심 자산의 노출이 확인되면 우선순위를 다시 평가합니다.</p>
+            <p style="margin:0 0 14px;color:#777383;font-size:9px;line-height:1.55;">브라우저 패치 상태를 표현한 도식 · 자체 제작</p>
+            <a href="https://example.com" style="color:#6750cb;font-size:11px;font-weight:900;">변경사항 보기 →</a>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:32px;padding-bottom:34px;background:#15171c;color:#fff;">
+        <table role="presentation" width="100%"><tr><td valign="top" style="width:135px;"><p style="margin:0;color:#ff7659;font-size:10px;font-weight:950;line-height:1.6;letter-spacing:1.4px;">WEEKLY<br>ACTION LIST</p></td><td style="font-size:13px;line-height:2;color:#e0e1e4;">□ 외부 노출 원격접속 장비 확인<br>□ MFA 재등록 승인 기록 표본 점검<br>□ 90일 미사용 협력사 계정 식별</td></tr></table>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:27px;padding-bottom:29px;background:#eceae4;border-top:1px solid #d4d1ca;">
+        <p style="margin:0 0 13px;color:#5f5e59;font-size:10px;font-weight:950;letter-spacing:1.4px;">IMAGE CREDITS</p>
+        <p style="margin:0;font-size:10px;line-height:1.85;color:#77766f;">01 Remote Access · 02 Identity Recovery · 03 Supply Chain · 04 Browser Patch<br>모든 이미지는 템플릿 시연을 위해 제작된 SVG 일러스트이며 실제 제품 화면이나 사건 자료가 아닙니다.</p>
+      </td></tr>
+      <tr><td class="pad" style="padding-top:22px;padding-bottom:22px;background:#faf9f5;border-top:1px solid #d4d1ca;"><table role="presentation" width="100%"><tr><td style="font-size:10px;color:#85847e;">SAMPLE DATA · VISUAL BRIEF 014</td><td align="right" style="font-size:10px;color:#85847e;">SECURITY SIGNAL © 2026</td></tr></table></td></tr>
+    </table>
+  </td></tr></table>
+</body>
+</html>

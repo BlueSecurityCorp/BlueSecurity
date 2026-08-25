@@ -1,0 +1,80 @@
+---
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import type { Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import { t } from '../i18n/ui';
+import type { previewNews } from '../data/previewNews';
+
+interface Props {
+  article: (typeof previewNews)[number];
+  lang: Locale;
+}
+
+const { article, lang } = Astro.props;
+const sourcePath = resolve(process.cwd(), 'src', 'content', 'news-previews', article.file);
+const sourceHTML = readFileSync(sourcePath, 'utf8');
+const styleMatch = sourceHTML.match(/<style>([\s\S]*?)<\/style>/i);
+const bodyMatch = sourceHTML.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+const previewStyles = (styleMatch?.[1] ?? '').replace(/html,body\{[^}]*\}/i, '');
+const articleHTML = (bodyMatch?.[1] ?? '')
+  .replaceAll('src="assets/', 'src="/news-preview-assets/')
+  .replaceAll('href="https://example.com"', `href="${localePath('/news', lang)}"`);
+
+function formatDate(date: string): string {
+  return new Intl.DateTimeFormat(lang === 'ko' ? 'ko-KR' : 'en-US', { dateStyle: 'long' }).format(new Date(date));
+}
+---
+
+<div data-pagefind-body>
+  <div class="article-toolbar">
+    <div class="toolbar-inner">
+      <a href={localePath('/news', lang)}>← {t('news.back', lang)}</a>
+      <time datetime={article.date}>{t('news.publishedAt', lang)} · {formatDate(article.date)}</time>
+    </div>
+  </div>
+
+  <main class="newsletter-render" aria-label={article.title}>
+    <style is:global set:html={previewStyles}></style>
+    <Fragment set:html={articleHTML} />
+  </main>
+</div>
+
+<style>
+  .article-toolbar {
+    border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+    background: #0a0f1c;
+  }
+
+  .toolbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: min(1200px, calc(100% - 3rem));
+    min-height: 58px;
+    margin: 0 auto;
+  }
+
+  .toolbar-inner a {
+    color: #93c5fd;
+    font-size: 0.78rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .toolbar-inner time { color: #64748b; font-size: 0.7rem; }
+
+  .newsletter-render {
+    min-height: 70vh;
+    overflow-x: hidden;
+    background: #e8e6e1;
+    color: #17191e;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', Arial, sans-serif;
+  }
+
+  @media (max-width: 639px) {
+    .toolbar-inner { width: min(100% - 2rem, 1200px); }
+    .toolbar-inner time { display: none; }
+  }
+</style>

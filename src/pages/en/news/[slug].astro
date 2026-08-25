@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import NewsArticle from '../../../components/NewsArticle.astro';
+import type { Locale } from '../../../i18n/index';
+
+const lang = 'en' as Locale;
+
+export async function getStaticPaths() {
+  const items = await getCollection('news');
+  return items
+    .filter((item) => {
+      if (item.id.split('/').pop()?.startsWith('_')) return false;
+      return item.data.published && item.data.lang === 'en';
+    })
+    .map((news) => ({
+      params: { slug: news.id.replace(/\.mdx?$/, '') },
+      props: { news },
+    }));
+}
+
+const { news } = Astro.props;
+---
+
+<Layout
+  title={`${news.data.title} | BlueSecurity`}
+  description={news.data.description}
+  ogImage={news.data.image}
+  lang={lang}
+  alternateLanguages={false}
+>
+  <Header slot="header" lang={lang} />
+  <NewsArticle news={news} lang={lang} />
+  <Footer slot="footer" lang={lang} />
+</Layout>
