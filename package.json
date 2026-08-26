@@ -10,16 +10,16 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@bluesecuritycorp/tokens": "2.0.0",
+    "@astrojs/react": "^6.0.4",
+    "@astrojs/sitemap": "^3.7.3",
     "@bluesecuritycorp/brand": "1.0.0",
-    "astro": "^5.7.10",
-    "@astrojs/react": "^4.2.1",
-    "@astrojs/sitemap": "^3.3.1",
+    "@bluesecuritycorp/tokens": "2.0.0",
+    "@tailwindcss/vite": "^4.1.4",
+    "astro": "^7.2.7",
+    "framer-motion": "^12.7.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "framer-motion": "^12.7.4",
-    "tailwindcss": "^4.1.4",
-    "@tailwindcss/vite": "^4.1.4"
+    "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
     "@types/react": "^19.1.2",

@@ -16,7 +16,7 @@ export default defineConfig({
     react(),
     sitemap(),
   ],
-  experimental: {
+  security: {
     csp: {
       algorithm: 'SHA-256',
       scriptDirective: {
