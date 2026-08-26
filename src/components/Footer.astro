@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../i18n/index';
+import blueSecurityWordmark from '@bluesecuritycorp/brand/bluesecurity-wordmark.png';
 import { localePath } from '../i18n/index';
 import { t } from '../i18n/ui';
 import { getCompany } from '../data/company';
@@ -54,23 +55,14 @@ const socialLinks = [
     <div class="footer-grid">
       <div class="footer-brand">
         <a href={localePath('/', lang)} class="footer-logo" aria-label={t('nav.home', lang)}>
-          <span class="footer-logo-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 2L4 7v7c0 5.5 4.3 10.6 10 11.9C19.7 24.6 24 19.5 24 14V7L14 2z" stroke="url(#footer-shield-grad)" stroke-width="1.8" stroke-linejoin="round" fill="none" />
-              <path d="M10 14l3 3 5-5" stroke="url(#footer-check-grad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-              <defs>
-                <linearGradient id="footer-shield-grad" x1="4" y1="2" x2="24" y2="26" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#60a5fa" />
-                  <stop offset="100%" stop-color="#22d3ee" />
-                </linearGradient>
-                <linearGradient id="footer-check-grad" x1="10" y1="14" x2="18" y2="17" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#60a5fa" />
-                  <stop offset="100%" stop-color="#22d3ee" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </span>
-          <span class="footer-logo-text">Blue<span class="footer-logo-accent">Security</span></span>
+          <img
+            class="footer-logo-image"
+            src={blueSecurityWordmark.src}
+            alt=""
+            width="160"
+            height="32"
+            loading="lazy"
+          />
         </a>
 
         <p class="footer-slogan">{company.slogan}</p>
@@ -197,29 +189,14 @@ const socialLinks = [
   .footer-logo {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
     width: fit-content;
     text-decoration: none;
   }
 
-  .footer-logo-icon {
-    display: flex;
-    align-items: center;
-    filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.35));
-  }
-
-  .footer-logo-text {
-    font-size: 1.0625rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--bs-color-text-primary);
-  }
-
-  .footer-logo-accent {
-    background: linear-gradient(135deg, var(--bs-color-primary), var(--bs-color-tertiary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .footer-logo-image {
+    display: block;
+    width: 10rem;
+    height: auto;
   }
 
   .footer-slogan {

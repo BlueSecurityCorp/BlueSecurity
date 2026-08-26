@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../i18n/index';
+import blueSecurityWordmark from '@bluesecuritycorp/brand/bluesecurity-wordmark.png';
 import { localePath, switchLocalePath } from '../i18n/index';
 import { t } from '../i18n/ui';
 import { getProductLineup } from '../data/products';
@@ -23,8 +24,14 @@ function isActive(path: string) {
 <header class="site-header">
   <nav class="nav-inner">
     <a href={localePath('/', lang)} class="brand" aria-label={t('nav.home', lang)}>
-      <span class="brand-mark" aria-hidden="true">◆</span>
-      <span>Blue<span>Security</span></span>
+      <img
+        class="brand-logo"
+        src={blueSecurityWordmark.src}
+        alt=""
+        width="160"
+        height="32"
+        fetchpriority="high"
+      />
     </a>
 
     <input id="mobile-menu-toggle" class="menu-checkbox" type="checkbox" aria-hidden="true" />
@@ -110,15 +117,13 @@ function isActive(path: string) {
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    color: var(--bs-color-text-primary);
-    font-weight: 700;
     text-decoration: none;
   }
 
-  .brand span span,
-  .brand-mark {
-    color: var(--bs-color-primary);
+  .brand-logo {
+    display: block;
+    width: 10rem;
+    height: auto;
   }
 
   .nav-links {

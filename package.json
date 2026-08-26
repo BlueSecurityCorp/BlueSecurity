@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@bluesecuritycorp/tokens": "2.0.0",
+    "@bluesecuritycorp/brand": "1.0.0",
     "astro": "^5.7.10",
     "@astrojs/react": "^4.2.1",
     "@astrojs/sitemap": "^3.3.1",
