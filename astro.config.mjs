@@ -16,6 +16,28 @@ export default defineConfig({
     react(),
     sitemap(),
   ],
+  experimental: {
+    csp: {
+      algorithm: 'SHA-256',
+      scriptDirective: {
+        resources: ["'self'", 'https://challenges.cloudflare.com'],
+      },
+      styleDirective: {
+        resources: ["'self'", "'unsafe-inline'"],
+      },
+      directives: [
+        "default-src 'self'",
+        "font-src 'self'",
+        "img-src 'self' data:",
+        "connect-src 'self' https://contact.bluesecurity.online",
+        "frame-src 'self' https://challenges.cloudflare.com",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self' https://contact.bluesecurity.online",
+        'upgrade-insecure-requests',
+      ],
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

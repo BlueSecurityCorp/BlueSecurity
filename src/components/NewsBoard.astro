@@ -319,8 +319,8 @@ function formatDate(date: string): string {
 
 <style>
   .news-section {
-    border-top: 1px solid rgba(51, 65, 85, 0.55);
-    background: #080d18;
+    border-top: 1px solid var(--bs-color-border-default);
+    background: var(--bs-color-surface-canvas);
     padding: 2.5rem 0 6rem;
   }
 
@@ -333,24 +333,24 @@ function formatDate(date: string): string {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    border-bottom: 1px solid rgba(51, 65, 85, 0.65);
+    border-bottom: 1px solid var(--bs-color-border-default);
     padding-bottom: 1.5rem;
   }
 
   .filter-field {
     display: grid;
     min-height: 52px;
-    border: 1px solid #263148;
-    border-radius: 0.7rem;
-    background: #0c1220;
+    border: 1px solid var(--bs-color-border-default);
+    border-radius: var(--bs-radius-lg);
+    background: var(--bs-color-surface-default);
     padding: 0.38rem 0.75rem 0.35rem;
-    color: #64748b;
+    color: var(--bs-color-text-tertiary);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .filter-field:focus-within {
-    border-color: rgba(96, 165, 250, 0.7);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+    border-color: var(--bs-color-focus-ring);
+    box-shadow: 0 0 0 3px var(--bs-color-primary-subtle);
   }
 
   .filter-field > span {
@@ -365,7 +365,7 @@ function formatDate(date: string): string {
     border: 0;
     outline: 0;
     background: transparent;
-    color: #dbe5f3;
+    color: var(--bs-color-text-primary);
     font: inherit;
     font-size: 0.78rem;
     color-scheme: dark;
@@ -392,16 +392,16 @@ function formatDate(date: string): string {
 
   .date-separator {
     flex: 0 0 auto;
-    color: #526078;
+    color: var(--bs-color-text-tertiary);
   }
 
   .filter-reset {
     min-height: 52px;
-    border: 1px solid #263148;
-    border-radius: 0.7rem;
+    border: 1px solid var(--bs-color-border-default);
+    border-radius: var(--bs-radius-lg);
     background: transparent;
     padding: 0 1rem;
-    color: #8190a6;
+    color: var(--bs-color-text-secondary);
     font: inherit;
     font-size: 0.76rem;
     font-weight: 650;
@@ -410,32 +410,32 @@ function formatDate(date: string): string {
   }
 
   .filter-reset:hover {
-    border-color: rgba(96, 165, 250, 0.5);
-    background: rgba(59, 130, 246, 0.08);
-    color: #bfdbfe;
+    border-color: var(--bs-color-primary);
+    background: var(--bs-color-primary-subtle);
+    color: var(--bs-color-primary);
   }
 
   .published-heading { margin-bottom: 1.7rem; }
-  .published-heading p { margin: 0 0 0.55rem; color: #60a5fa; font-size: 0.66rem; font-weight: 750; letter-spacing: 0.14em; text-transform: uppercase; }
-  .published-heading h2 { margin: 0; color: #f1f5f9; font-size: 1.7rem; font-weight: 650; letter-spacing: -0.025em; }
-  .published-heading span { display: block; margin-top: 0.55rem; color: #718096; font-size: 0.85rem; line-height: 1.6; }
+  .published-heading p { margin: 0 0 0.55rem; color: var(--bs-color-primary); font-size: var(--bs-font-size-body-4); font-weight: var(--bs-font-weight-bold); letter-spacing: 0.14em; text-transform: uppercase; }
+  .published-heading h2 { margin: 0; color: var(--bs-color-text-primary); font-size: var(--bs-font-size-title-1); font-weight: var(--bs-font-weight-title); letter-spacing: -0.025em; }
+  .published-heading span { display: block; margin-top: 0.55rem; color: var(--bs-color-text-secondary); font-size: var(--bs-font-size-body-3); line-height: var(--bs-line-height-body); }
 
   .search-field {
     display: flex;
     align-items: center;
     gap: 0.65rem;
     width: 100%;
-    border: 1px solid #263148;
-    border-radius: 0.7rem;
-    background: #0c1220;
+    border: 1px solid var(--bs-color-border-default);
+    border-radius: var(--bs-radius-lg);
+    background: var(--bs-color-surface-default);
     padding: 0 0.9rem;
-    color: #64748b;
+    color: var(--bs-color-text-tertiary);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .search-field:focus-within {
-    border-color: rgba(96, 165, 250, 0.7);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+    border-color: var(--bs-color-focus-ring);
+    box-shadow: 0 0 0 3px var(--bs-color-primary-subtle);
   }
 
   .search-field input {
@@ -444,13 +444,13 @@ function formatDate(date: string): string {
     outline: 0;
     background: transparent;
     padding: 0.8rem 0;
-    color: #e2e8f0;
+    color: var(--bs-color-text-primary);
     font: inherit;
     font-size: 0.875rem;
   }
 
   .search-field input::placeholder {
-    color: #526078;
+    color: var(--bs-color-text-tertiary);
   }
 
   .news-summary {
@@ -459,7 +459,7 @@ function formatDate(date: string): string {
     gap: 0.5rem;
     min-height: 1.25rem;
     margin: 1.5rem 0 1rem;
-    color: #64748b;
+    color: var(--bs-color-text-tertiary);
     font-size: 0.78rem;
     font-weight: 600;
   }
@@ -468,8 +468,7 @@ function formatDate(date: string): string {
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: #3b82f6;
-    box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+    background: var(--bs-color-primary);
   }
 
   .news-grid {
@@ -480,17 +479,17 @@ function formatDate(date: string): string {
 
   .news-card {
     min-width: 0;
-    border: 1px solid #202a3d;
-    border-radius: 0.85rem;
-    background: #0c1220;
+    border: 1px solid var(--bs-color-border-default);
+    border-radius: var(--bs-radius-xl);
+    background: var(--bs-color-surface-default);
     overflow: hidden;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    transition: transform var(--bs-duration-normal) var(--bs-ease-standard), border-color var(--bs-duration-normal) var(--bs-ease-standard), box-shadow var(--bs-duration-normal) var(--bs-ease-standard);
   }
 
   .news-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(59, 130, 246, 0.42);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+    border-color: var(--bs-color-primary);
+    box-shadow: var(--bs-shadow-md);
   }
 
   .news-card[hidden] {
@@ -512,14 +511,14 @@ function formatDate(date: string): string {
     justify-content: center;
     min-height: 170px;
     overflow: hidden;
-    border-bottom: 1px solid rgba(51, 65, 85, 0.55);
-    background: linear-gradient(145deg, #101b32, #0b1323);
-    color: #60a5fa;
+    border-bottom: 1px solid var(--bs-color-border-default);
+    background: var(--bs-color-primary-subtle);
+    color: var(--bs-color-primary);
   }
 
-  .news-visual.category-industry { color: #22d3ee; background: linear-gradient(145deg, #0c2330, #0a1621); }
-  .news-visual.category-product { color: #818cf8; background: linear-gradient(145deg, #171831, #0e1224); }
-  .news-visual.category-newsletter { color: #38bdf8; background: linear-gradient(145deg, #101e35, #0b1424); }
+  .news-visual.category-industry { color: var(--bs-color-tertiary); background: var(--bs-color-tertiary-subtle); }
+  .news-visual.category-product { color: var(--bs-color-primary-active); background: var(--bs-color-surface-subtle); }
+  .news-visual.category-newsletter { color: var(--bs-color-feedback-info-text); background: var(--bs-color-feedback-info-surface); }
 
   .news-visual img {
     position: absolute;
@@ -535,7 +534,7 @@ function formatDate(date: string): string {
     place-items: center;
     width: 100%;
     min-height: 170px;
-    background-image: linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+    background-image: linear-gradient(color-mix(in srgb, var(--bs-color-border-default) 45%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--bs-color-border-default) 45%, transparent) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -573,18 +572,18 @@ function formatDate(date: string): string {
     position: absolute;
     z-index: 3;
     top: 0.85rem;
-    border: 1px solid rgba(148, 163, 184, 0.18);
+    border: 1px solid var(--bs-color-border-default);
     border-radius: 999px;
-    background: rgba(8, 13, 24, 0.72);
+    background: color-mix(in srgb, var(--bs-color-surface-raised) 88%, transparent);
     padding: 0.32rem 0.58rem;
-    color: #cbd5e1;
+    color: var(--bs-color-text-primary);
     font-size: 0.68rem;
     font-weight: 650;
     backdrop-filter: blur(8px);
   }
 
   .visual-category { left: 0.85rem; }
-  .featured-badge { right: 0.85rem; color: #93c5fd; }
+  .featured-badge { right: 0.85rem; color: var(--bs-color-primary); }
 
   .news-card-body {
     display: flex;
@@ -598,25 +597,25 @@ function formatDate(date: string): string {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
-    color: #607089;
+    color: var(--bs-color-text-tertiary);
     font-size: 0.7rem;
     font-weight: 600;
   }
 
-  .news-meta > span:first-child { color: #60a5fa; }
+  .news-meta > span:first-child { color: var(--bs-color-primary); }
 
   .meta-divider {
     width: 3px;
     height: 3px;
     border-radius: 50%;
-    background: #334155;
+    background: var(--bs-color-border-strong);
   }
 
   .news-card h3 {
     margin: 0.8rem 0 0;
-    color: #f1f5f9;
-    font-size: 1.12rem;
-    font-weight: 650;
+    color: var(--bs-color-text-primary);
+    font-size: var(--bs-font-size-title-3);
+    font-weight: var(--bs-font-weight-title);
     line-height: 1.45;
     letter-spacing: -0.025em;
   }
@@ -625,9 +624,9 @@ function formatDate(date: string): string {
     display: -webkit-box;
     margin: 0.65rem 0 0;
     overflow: hidden;
-    color: #8190a6;
-    font-size: 0.84rem;
-    line-height: 1.65;
+    color: var(--bs-color-text-secondary);
+    font-size: var(--bs-font-size-body-3);
+    line-height: var(--bs-line-height-relaxed);
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
@@ -645,7 +644,7 @@ function formatDate(date: string): string {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
-    color: #526078;
+    color: var(--bs-color-text-tertiary);
     font-size: 0.68rem;
   }
 
@@ -654,13 +653,13 @@ function formatDate(date: string): string {
     flex: 0 0 auto;
     align-items: center;
     gap: 0.35rem;
-    color: #64748b;
+    color: var(--bs-color-text-tertiary);
     font-size: 0.72rem;
     font-weight: 650;
     transition: color 0.2s ease;
   }
 
-  .news-card:hover .read-more { color: #93c5fd; }
+  .news-card:hover .read-more { color: var(--bs-color-primary); }
   .news-card:hover .read-more span { transform: translateX(2px); }
 
   .empty-state {
@@ -669,10 +668,10 @@ function formatDate(date: string): string {
     align-items: center;
     justify-content: center;
     min-height: 260px;
-    border: 1px dashed #263148;
-    border-radius: 0.85rem;
-    background: rgba(12, 18, 32, 0.6);
-    color: #64748b;
+    border: 1px dashed var(--bs-color-border-strong);
+    border-radius: var(--bs-radius-xl);
+    background: var(--bs-color-surface-default);
+    color: var(--bs-color-text-tertiary);
     text-align: center;
   }
 
@@ -684,10 +683,10 @@ function formatDate(date: string): string {
     width: 58px;
     height: 58px;
     margin-bottom: 0.8rem;
-    border: 1px solid #263148;
+    border: 1px solid var(--bs-color-border-default);
     border-radius: 50%;
-    background: #0a1020;
-    color: #526078;
+    background: var(--bs-color-surface-subtle);
+    color: var(--bs-color-text-tertiary);
   }
 
   .empty-state p { margin: 0; font-size: 0.9rem; }
@@ -715,10 +714,10 @@ function formatDate(date: string): string {
     justify-content: center;
     min-width: 38px;
     height: 38px;
-    border: 1px solid #263148;
+    border: 1px solid var(--bs-color-border-default);
     border-radius: 0.55rem;
-    background: #0c1220;
-    color: #8190a6;
+    background: var(--bs-color-surface-default);
+    color: var(--bs-color-text-secondary);
     font: inherit;
     font-size: 0.75rem;
     font-weight: 650;
@@ -734,9 +733,9 @@ function formatDate(date: string): string {
   .pagination-direction:hover:not(:disabled),
   .pagination-page:hover,
   .pagination-page.active {
-    border-color: rgba(96, 165, 250, 0.55);
-    background: rgba(59, 130, 246, 0.12);
-    color: #bfdbfe;
+    border-color: var(--bs-color-primary);
+    background: var(--bs-color-primary-subtle);
+    color: var(--bs-color-primary);
   }
 
   .pagination-direction:disabled {
@@ -761,7 +760,7 @@ function formatDate(date: string): string {
     .news-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .news-card.featured { grid-column: span 2; }
     .news-card.featured > a { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
-    .news-card.featured .news-visual { min-height: 310px; border-right: 1px solid rgba(51, 65, 85, 0.55); border-bottom: 0; }
+    .news-card.featured .news-visual { min-height: 310px; border-right: 1px solid var(--bs-color-border-default); border-bottom: 0; }
     .news-card.featured .visual-art { min-height: 310px; }
     .news-card.featured .news-card-body { padding: 1.6rem; }
     .news-card.featured h3 { font-size: 1.45rem; }

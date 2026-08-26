@@ -1,53 +1,106 @@
+@import "@bluesecuritycorp/tokens/tokens.css";
+@import "@bluesecuritycorp/tokens/marketing.css";
 @import "tailwindcss";
 
-@theme {
-  /* Brand Colors */
-  --color-blue-50: #eff6ff;
-  --color-blue-100: #dbeafe;
-  --color-blue-200: #bfdbfe;
-  --color-blue-300: #93c5fd;
-  --color-blue-400: #60a5fa;
-  --color-blue-500: #3b82f6;
-  --color-blue-600: #2563eb;
-  --color-blue-700: #1d4ed8;
-  --color-blue-800: #1e40af;
-  --color-blue-900: #1e3a8a;
-  --color-blue-950: #0f1d3d;
-
-  --color-navy-900: #0a0e1a;
-  --color-navy-800: #0f1629;
-  --color-navy-700: #151d38;
-  --color-navy-600: #1c2647;
-
-  --color-cyan-400: #22d3ee;
-  --color-cyan-500: #06b6d4;
-
-  /* Fonts */
-  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
+  font-display: swap;
+  font-weight: 45 920;
+  font-style: normal;
 }
 
-/* Dark theme base */
+@theme {
+  /* Compatibility mapping for existing Tailwind markup. New CSS uses --bs-* directly. */
+  --color-white: var(--bs-color-text-primary);
+  --color-blue-50: var(--bs-color-primary-subtle);
+  --color-blue-100: var(--bs-color-primary-subtle);
+  --color-blue-200: var(--bs-color-primary);
+  --color-blue-300: var(--bs-color-primary);
+  --color-blue-400: var(--bs-color-primary);
+  --color-blue-500: var(--bs-color-primary-hover);
+  --color-blue-600: var(--bs-color-primary);
+  --color-blue-700: var(--bs-color-primary-active);
+  --color-blue-800: var(--bs-color-primary-active);
+  --color-blue-900: var(--bs-color-primary-active);
+  --color-blue-950: var(--bs-color-primary-subtle);
+
+  --color-navy-900: var(--bs-color-surface-canvas);
+  --color-navy-800: var(--bs-color-surface-default);
+  --color-navy-700: var(--bs-color-surface-raised);
+  --color-navy-600: var(--bs-color-surface-subtle);
+
+  --color-slate-50: var(--bs-color-text-primary);
+  --color-slate-100: var(--bs-color-text-primary);
+  --color-slate-200: var(--bs-color-text-primary);
+  --color-slate-300: var(--bs-color-text-secondary);
+  --color-slate-400: var(--bs-color-text-secondary);
+  --color-slate-500: var(--bs-color-text-tertiary);
+  --color-slate-600: var(--bs-color-text-disabled);
+  --color-slate-700: var(--bs-color-border-strong);
+  --color-slate-800: var(--bs-color-border-default);
+  --color-slate-900: var(--bs-color-surface-raised);
+  --color-slate-950: var(--bs-color-surface-default);
+
+  --color-cyan-400: var(--bs-color-tertiary);
+  --color-cyan-500: var(--bs-color-tertiary-hover);
+
+  --color-red-400: var(--bs-color-error-text);
+  --color-red-500: var(--bs-color-error);
+  --color-red-600: var(--bs-color-error);
+  --color-red-700: var(--bs-color-error-active);
+  --color-green-400: var(--bs-color-feedback-success-text);
+  --color-green-500: var(--bs-color-feedback-success);
+  --color-amber-400: var(--bs-color-feedback-warning-text);
+  --color-amber-500: var(--bs-color-feedback-warning);
+
+  --font-sans: var(--bs-font-family-ui);
+  --font-mono: var(--bs-font-family-code);
+
+  --text-xs: var(--bs-font-size-body-4);
+  --text-sm: var(--bs-font-size-body-3);
+  --text-base: var(--bs-font-size-body-2);
+  --text-lg: var(--bs-font-size-body-1);
+  --text-xl: var(--bs-font-size-title-3);
+  --text-2xl: var(--bs-font-size-title-2);
+  --text-3xl: var(--bs-font-size-title-1);
+  --text-4xl: var(--bs-font-size-display-4);
+  --text-5xl: var(--bs-font-size-display-2);
+  --text-6xl: var(--bs-font-size-display-1);
+
+  --radius-sm: var(--bs-radius-sm);
+  --radius-md: var(--bs-radius-md);
+  --radius-lg: var(--bs-radius-lg);
+  --radius-xl: var(--bs-radius-xl);
+}
+
 html {
-  color-scheme: dark;
+  background: var(--bs-color-surface-canvas);
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-navy-900);
-  color: #e2e8f0;
-  font-family: var(--font-sans);
+  background-color: var(--bs-color-surface-canvas);
+  color: var(--bs-color-text-primary);
+  font-family: var(--bs-font-family-ui);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+::selection {
+  color: var(--bs-color-on-primary);
+  background: var(--bs-color-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--bs-color-focus-ring);
+  outline-offset: 3px;
 }
 
 /* Gradient text utility */
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-blue-400), var(--color-cyan-400));
+  color: var(--bs-color-primary);
+  background: linear-gradient(135deg, var(--bs-color-primary), var(--bs-color-tertiary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -55,21 +108,21 @@ html {
 
 /* Glow effects */
 .glow-blue {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 60px rgba(59, 130, 246, 0.1);
+  box-shadow: var(--bs-shadow-action-primary);
 }
 
 .glow-cyan {
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 60px rgba(6, 182, 212, 0.1);
+  box-shadow: var(--bs-shadow-md);
 }
 
 /* Card hover effect */
 .card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--bs-duration-normal) var(--bs-ease-standard), box-shadow var(--bs-duration-normal) var(--bs-ease-standard);
 }
 
 .card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--bs-shadow-md);
 }
 
 /* Fade-in animation */
@@ -102,8 +155,8 @@ html {
 /* Grid pattern background */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--bs-color-border-default) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--bs-color-border-default) 55%, transparent) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -124,6 +177,19 @@ html {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid var(--color-blue-400);
+  border: 2px solid var(--bs-color-primary);
   animation: pulse-ring 2s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

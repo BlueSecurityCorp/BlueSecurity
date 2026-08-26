@@ -28,11 +28,17 @@ function isActive(path: string) {
     </a>
 
     <input id="mobile-menu-toggle" class="menu-checkbox" type="checkbox" aria-hidden="true" />
-    <label class="menu-toggle" for="mobile-menu-toggle" aria-label="메뉴 열기">
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="메뉴 열기"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+    >
       <span></span><span></span><span></span>
-    </label>
+    </button>
 
-    <div class="nav-links">
+    <div id="primary-navigation" class="nav-links">
       <a href={localePath('/about', lang)} class:list={['nav-link', { active: isActive('/about') }]}>{t('nav.about', lang)}</a>
 
       <div class="products-menu">
@@ -53,7 +59,7 @@ function isActive(path: string) {
       <a href={localePath('/news', lang)} class:list={['nav-link', { active: isActive('/news') }]}>{t('nav.news', lang)}</a>
       <a href={localePath('/notices', lang)} class:list={['nav-link', { active: isActive('/notices') }]}>{t('nav.notices', lang)}</a>
       <a href={localePath('/careers', lang)} class:list={['nav-link', { active: isActive('/careers') }]}>{t('nav.careers', lang)}</a>
-      <a href={localePath('/contact', lang)} class="nav-cta">{t('nav.contact', lang)}</a>
+      <a href={localePath('/contact', lang)} class="nav-cta bs-marketing-action bs-marketing-action--primary">{t('nav.contact', lang)}</a>
 
       <div class="lang-switch" aria-label="Language">
         <a href={koPath} class:list={[{ active: lang === 'ko' }]} hreflang="ko">KO</a>
@@ -64,13 +70,30 @@ function isActive(path: string) {
   </nav>
 </header>
 
+<script>
+  const menuCheckbox = document.querySelector<HTMLInputElement>('#mobile-menu-toggle');
+  const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+
+  if (menuCheckbox && menuToggle) {
+    const syncMenuState = () => {
+      menuToggle.setAttribute('aria-expanded', String(menuCheckbox.checked));
+      menuToggle.setAttribute('aria-label', menuCheckbox.checked ? '메뉴 닫기' : '메뉴 열기');
+    };
+
+    menuToggle.addEventListener('click', () => {
+      menuCheckbox.checked = !menuCheckbox.checked;
+      syncMenuState();
+    });
+  }
+</script>
+
 <style>
   .site-header {
     position: sticky;
     top: 0;
     z-index: 50;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.12);
-    background: color-mix(in srgb, var(--color-navy-900) 88%, transparent);
+    border-bottom: 1px solid var(--bs-color-border-default);
+    background: color-mix(in srgb, var(--bs-color-surface-default) 92%, transparent);
     backdrop-filter: blur(12px);
   }
 
@@ -88,14 +111,14 @@ function isActive(path: string) {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    color: #e2e8f0;
+    color: var(--bs-color-text-primary);
     font-weight: 700;
     text-decoration: none;
   }
 
   .brand span span,
   .brand-mark {
-    color: #60a5fa;
+    color: var(--bs-color-primary);
   }
 
   .nav-links {
@@ -112,27 +135,17 @@ function isActive(path: string) {
   }
 
   .nav-link {
-    border-radius: 0.5rem;
-    padding: 0.5rem 0.875rem;
-    color: #94a3b8;
-    font-size: 0.9rem;
-    font-weight: 500;
+    border-radius: var(--bs-radius-lg);
+    padding: var(--bs-space-2) var(--bs-space-3);
+    color: var(--bs-color-text-secondary);
+    font-size: var(--bs-font-size-body-3);
+    font-weight: var(--bs-font-weight-medium);
   }
 
   .nav-link:hover,
   .nav-link.active {
-    background: rgba(59, 130, 246, 0.1);
-    color: #60a5fa;
-  }
-
-  .nav-cta {
-    border: 1px solid rgba(96, 165, 250, 0.3);
-    border-radius: 0.5rem;
-    background: linear-gradient(135deg, #2563eb, #0891b2);
-    padding: 0.5rem 1.125rem;
-    color: #fff;
-    font-size: 0.9rem;
-    font-weight: 600;
+    background: var(--bs-color-primary-subtle);
+    color: var(--bs-color-primary);
   }
 
   .products-menu {
@@ -146,11 +159,11 @@ function isActive(path: string) {
     display: none;
     width: 300px;
     transform: translateX(-50%);
-    border: 1px solid rgba(59, 130, 246, 0.18);
-    border-radius: 0.75rem;
-    background: var(--color-navy-800);
-    padding: 0.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--bs-color-border-default);
+    border-radius: var(--bs-radius-xl);
+    background: var(--bs-color-surface-raised);
+    padding: var(--bs-space-2);
+    box-shadow: var(--bs-shadow-lg);
   }
 
   .products-menu:hover .products-dropdown,
@@ -161,9 +174,9 @@ function isActive(path: string) {
   .products-dropdown p {
     margin: 0;
     padding: 0.35rem 0.6rem;
-    color: #475569;
-    font-size: 0.7rem;
-    font-weight: 700;
+    color: var(--bs-color-text-tertiary);
+    font-size: var(--bs-font-size-body-4);
+    font-weight: var(--bs-font-weight-bold);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -172,25 +185,25 @@ function isActive(path: string) {
     display: flex;
     flex-direction: column;
     gap: 0.1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--bs-radius-lg);
     padding: 0.65rem 0.75rem;
-    color: #cbd5e1;
+    color: var(--bs-color-text-primary);
   }
 
   .product-link:hover {
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--bs-color-primary-subtle);
   }
 
   .product-link span {
-    color: #64748b;
-    font-size: 0.75rem;
+    color: var(--bs-color-text-tertiary);
+    font-size: var(--bs-font-size-body-4);
   }
 
   .pricing-link {
     margin-top: 0.35rem;
-    border-top: 1px solid rgba(59, 130, 246, 0.1);
-    color: #60a5fa;
-    font-size: 0.8rem;
+    border-top: 1px solid var(--bs-color-border-default);
+    color: var(--bs-color-primary);
+    font-size: var(--bs-font-size-body-4);
   }
 
   .lang-switch {
@@ -202,13 +215,13 @@ function isActive(path: string) {
 
   .lang-switch a,
   .lang-switch span {
-    color: #64748b;
-    font-size: 0.75rem;
-    font-weight: 600;
+    color: var(--bs-color-text-tertiary);
+    font-size: var(--bs-font-size-body-4);
+    font-weight: var(--bs-font-weight-semibold);
   }
 
   .lang-switch a.active {
-    color: #60a5fa;
+    color: var(--bs-color-primary);
   }
 
   .menu-checkbox,
@@ -221,6 +234,9 @@ function isActive(path: string) {
       display: flex;
       flex-direction: column;
       gap: 5px;
+      border: 0;
+      background: transparent;
+      padding: 0;
       cursor: pointer;
     }
 
@@ -229,7 +245,7 @@ function isActive(path: string) {
       width: 22px;
       height: 2px;
       border-radius: 2px;
-      background: #94a3b8;
+      background: var(--bs-color-text-secondary);
     }
 
     .nav-links {
@@ -240,8 +256,8 @@ function isActive(path: string) {
       display: none;
       flex-direction: column;
       align-items: stretch;
-      border-top: 1px solid rgba(59, 130, 246, 0.1);
-      background: var(--color-navy-900);
+      border-top: 1px solid var(--bs-color-border-default);
+      background: var(--bs-color-surface-default);
       padding: 1rem;
     }
 

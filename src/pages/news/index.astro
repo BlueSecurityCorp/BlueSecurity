@@ -51,8 +51,8 @@ const lang = 'ko' as Locale;
   .news-hero {
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
-    background: #0a0f1c;
+    border-bottom: 1px solid var(--bs-color-border-default);
+    background: var(--bs-color-surface-default);
     padding: 5.5rem 0 4.75rem;
   }
 
@@ -60,7 +60,7 @@ const lang = 'ko' as Locale;
     position: absolute;
     inset: 0;
     opacity: 0.55;
-    background-image: linear-gradient(rgba(59, 130, 246, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.035) 1px, transparent 1px);
+    background-image: linear-gradient(color-mix(in srgb, var(--bs-color-border-default) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--bs-color-border-default) 55%, transparent) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: linear-gradient(to right, black, transparent 75%);
   }
@@ -72,7 +72,7 @@ const lang = 'ko' as Locale;
     width: 520px;
     height: 520px;
     border-radius: 50%;
-    background: rgba(37, 99, 235, 0.11);
+    background: var(--bs-color-primary-subtle);
     filter: blur(70px);
   }
 
@@ -92,9 +92,9 @@ const lang = 'ko' as Locale;
     align-items: center;
     gap: 0.65rem;
     margin: 0 0 1.25rem;
-    color: #60a5fa;
-    font-size: 0.7rem;
-    font-weight: 750;
+    color: var(--bs-color-primary);
+    font-size: var(--bs-font-size-body-4);
+    font-weight: var(--bs-font-weight-bold);
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
@@ -103,25 +103,25 @@ const lang = 'ko' as Locale;
     display: block;
     width: 1.7rem;
     height: 1px;
-    background: linear-gradient(90deg, #3b82f6, #22d3ee);
+    background: linear-gradient(90deg, var(--bs-color-primary), var(--bs-color-tertiary));
   }
 
   h1 {
     max-width: 680px;
     margin: 0;
-    color: #f8fafc;
-    font-size: clamp(2.35rem, 5vw, 4.15rem);
-    font-weight: 680;
-    line-height: 1.15;
+    color: var(--bs-color-text-primary);
+    font-size: var(--bs-font-size-display-1);
+    font-weight: var(--bs-font-weight-display);
+    line-height: var(--bs-line-height-display);
     letter-spacing: -0.045em;
   }
 
   .hero-description {
     max-width: 580px;
     margin: 1.4rem 0 0;
-    color: #8795aa;
-    font-size: 1rem;
-    line-height: 1.75;
+    color: var(--bs-color-text-secondary);
+    font-size: var(--bs-font-size-body-1);
+    line-height: var(--bs-line-height-relaxed);
   }
 
   .briefing-mark { display: none; }
@@ -137,12 +137,12 @@ const lang = 'ko' as Locale;
       width: 250px;
       height: 250px;
       justify-self: end;
-      color: #60a5fa;
+      color: var(--bs-color-primary);
     }
 
     .mark-orbit {
       position: absolute;
-      border: 1px solid rgba(96, 165, 250, 0.14);
+      border: 1px solid var(--bs-color-border-default);
       border-radius: 50%;
     }
 
@@ -155,18 +155,18 @@ const lang = 'ko' as Locale;
       place-items: center;
       width: 100px;
       height: 100px;
-      border: 1px solid rgba(96, 165, 250, 0.32);
+      border: 1px solid var(--bs-color-primary);
       border-radius: 50%;
-      background: rgba(37, 99, 235, 0.08);
-      box-shadow: 0 0 45px rgba(37, 99, 235, 0.15);
+      background: var(--bs-color-primary-subtle);
+      box-shadow: var(--bs-shadow-md);
     }
 
     .mark-label {
       position: absolute;
       right: -12px;
       bottom: 38px;
-      color: #526078;
-      font-family: var(--font-mono);
+      color: var(--bs-color-text-tertiary);
+      font-family: var(--bs-font-family-code);
       font-size: 0.55rem;
       line-height: 1.45;
       letter-spacing: 0.12em;

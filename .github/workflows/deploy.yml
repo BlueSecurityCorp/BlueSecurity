@@ -8,6 +8,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  packages: read
 
 concurrency:
   group: pages
@@ -23,8 +24,12 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: '@bluesecuritycorp'
 
       - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm audit --audit-level=critical
       - run: npm run build
 

@@ -42,8 +42,8 @@ function formatDate(date: string): string {
 
 <style>
   .article-toolbar {
-    border-bottom: 1px solid rgba(51, 65, 85, 0.6);
-    background: #0a0f1c;
+    border-bottom: 1px solid var(--bs-color-border-default);
+    background: var(--bs-color-surface-default);
   }
 
   .toolbar-inner {
@@ -57,13 +57,13 @@ function formatDate(date: string): string {
   }
 
   .toolbar-inner a {
-    color: #93c5fd;
-    font-size: 0.78rem;
-    font-weight: 650;
+    color: var(--bs-color-text-link);
+    font-size: var(--bs-font-size-body-4);
+    font-weight: var(--bs-font-weight-semibold);
     text-decoration: none;
   }
 
-  .toolbar-inner time { color: #64748b; font-size: 0.7rem; }
+  .toolbar-inner time { color: var(--bs-color-text-tertiary); font-size: var(--bs-font-size-body-4); }
 
   .newsletter-render {
     min-height: 70vh;

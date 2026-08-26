@@ -49,7 +49,7 @@ const tierIcons: Record<string, string> = {
               {/* Popular badge */}
               {tier.highlighted && (
                 <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span class="inline-flex items-center gap-1 rounded-md bg-blue-600 px-3 py-1 text-xs font-semibold tracking-wide text-white">
+                  <span class="inline-flex items-center gap-1 rounded-md bg-blue-600 px-3 py-1 text-xs font-semibold tracking-wide text-[var(--bs-color-on-primary)]">
                     {t('pricing.recommended', lang)}
                   </span>
                 </div>
@@ -137,12 +137,12 @@ const tierIcons: Record<string, string> = {
                     : 'noopener noreferrer'
                 }
                 class={[
-                  'mt-auto block rounded-xl px-4 py-2.5 text-center text-sm font-semibold transition-all duration-200',
+                  'bs-marketing-action mt-auto w-full',
                   tier.highlighted
-                    ? 'bg-blue-600 text-white hover:bg-blue-500'
+                    ? 'bs-marketing-action--primary'
                     : tier.cta === '문의하기' || tier.cta === 'Contact Us'
-                      ? 'border border-slate-700 text-blue-300 hover:bg-slate-900'
-                      : 'border border-slate-700 text-slate-200 hover:border-slate-500 hover:text-white',
+                      ? 'bs-marketing-action--secondary'
+                      : 'bs-marketing-action--secondary',
                 ].join(' ')}
               >
                 {tier.cta}

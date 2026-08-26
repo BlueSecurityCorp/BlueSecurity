@@ -51,14 +51,13 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="naver-site-verification" content="82d96ff45ecb1d22075e35781f7fda300d0950e0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self' https://contact.bluesecurity.online; frame-src 'self' https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' https://contact.bluesecurity.online; upgrade-insecure-requests" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonicalURL} />
     {alternateLanguages && (
@@ -87,15 +86,6 @@ const structuredData = {
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-
-    <!-- Pretendard Font -->
-    <link
-      rel="stylesheet"
-      as="style"
-      crossorigin
-      integrity="sha384-GIdEBaqGN9mNkDkMkzMHW8EKUqtpPIe/sLj1X7DIrnc9uPtLROJgmuDlh+3rBw0j"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-    />
 
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

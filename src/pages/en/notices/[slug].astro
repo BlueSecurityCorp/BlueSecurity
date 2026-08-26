@@ -78,26 +78,26 @@ function formatDate(date: string): string {
 
 <style>
   .notice-content {
-    color: rgb(203 213 225);
-    font-size: 1rem;
-    line-height: 1.8;
+    color: var(--bs-color-text-secondary);
+    font-size: var(--bs-font-size-body-2);
+    line-height: var(--bs-line-height-relaxed);
   }
 
   .notice-content :global(h2) {
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 650;
-    line-height: 1.35;
+    color: var(--bs-color-text-primary);
+    font-size: var(--bs-font-size-title-2);
+    font-weight: var(--bs-font-weight-title);
+    line-height: var(--bs-line-height-title);
   }
 
   .notice-content :global(h3) {
     margin-top: 1.75rem;
     margin-bottom: 0.75rem;
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 650;
+    color: var(--bs-color-text-primary);
+    font-size: var(--bs-font-size-title-3);
+    font-weight: var(--bs-font-weight-title);
   }
 
   .notice-content :global(p),
@@ -107,7 +107,7 @@ function formatDate(date: string): string {
   }
 
   .notice-content :global(a) {
-    color: rgb(147 197 253);
+    color: var(--bs-color-text-link);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -123,16 +123,17 @@ function formatDate(date: string): string {
 
   .notice-content :global(blockquote) {
     margin: 1.5rem 0;
-    border-left: 3px solid rgb(59 130 246);
+    border-left: 3px solid var(--bs-color-primary);
     padding-left: 1rem;
-    color: rgb(148 163 184);
+    color: var(--bs-color-text-secondary);
   }
 
   .notice-content :global(code) {
     border-radius: 0.375rem;
-    background: rgb(15 23 42);
+    background: var(--bs-color-surface-subtle);
     padding: 0.15rem 0.35rem;
-    color: rgb(226 232 240);
+    color: var(--bs-color-text-primary);
+    font-family: var(--bs-font-family-code);
     font-size: 0.9em;
   }
 </style>

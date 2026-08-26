@@ -396,7 +396,7 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
         <button
           type="button"
           onClick={handleReset}
-          className="mt-2 rounded-lg border border-slate-700 bg-slate-950/50 px-6 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-slate-500 hover:text-white"
+          className="bs-marketing-action bs-marketing-action--secondary mt-2"
         >
           {ui.successReset}
         </button>
@@ -546,13 +546,9 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
       <button
         type="submit"
         disabled={!canSubmit}
-        className={
-          'relative flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold ' +
-          'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/60 focus:ring-offset-2 focus:ring-offset-navy-800 ' +
-          (!canSubmit
-            ? 'cursor-not-allowed bg-blue-700/50 text-blue-300'
-            : 'bg-blue-600 text-white hover:bg-blue-500')
-        }
+        className={`bs-marketing-action bs-marketing-action--primary relative ${
+          !canSubmit ? 'cursor-not-allowed opacity-50' : ''
+        }`}
       >
         {isLoading ? (
           <>
