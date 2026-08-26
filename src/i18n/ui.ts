@@ -195,6 +195,10 @@ const ui = {
     'footer.privacy': '개인정보처리방침',
     'footer.terms': '이용약관',
     'footer.founded': '설립',
+    'footer.businessInfo': '사업자 정보',
+    'footer.address': '회사 주소',
+    'footer.representative': '대표',
+    'footer.businessNumber': '사업자등록번호',
 
     // Careers page
     'nav.careers': '채용공고',
@@ -422,6 +426,10 @@ const ui = {
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
     'footer.founded': 'Founded',
+    'footer.businessInfo': 'Business information',
+    'footer.address': 'Address',
+    'footer.representative': 'Representative',
+    'footer.businessNumber': 'Business registration number',
 
     // Careers page
     'nav.careers': 'Careers',

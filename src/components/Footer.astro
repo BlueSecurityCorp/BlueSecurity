@@ -34,6 +34,23 @@ const socialLinks = [
   <div class="footer-border-gradient" aria-hidden="true"></div>
 
   <div class="footer-container">
+    <section class="footer-business" aria-label={t('footer.businessInfo', lang)}>
+      <dl class="footer-business-list">
+        <div class="footer-business-item footer-business-address">
+          <dt>{t('footer.address', lang)}</dt>
+          <dd><address>{company.address}</address></dd>
+        </div>
+        <div class="footer-business-item">
+          <dt>{t('footer.representative', lang)}</dt>
+          <dd>{company.representative}</dd>
+        </div>
+        <div class="footer-business-item">
+          <dt>{t('footer.businessNumber', lang)}</dt>
+          <dd>{company.businessRegistrationNumber}</dd>
+        </div>
+      </dl>
+    </section>
+
     <div class="footer-grid">
       <div class="footer-brand">
         <a href={localePath('/', lang)} class="footer-logo" aria-label={t('nav.home', lang)}>
@@ -352,10 +369,53 @@ const socialLinks = [
     flex-direction: column;
     gap: 0.75rem;
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 1.25rem;
     border-top: 1px solid rgba(59, 130, 246, 0.08);
     padding-top: 1.5rem;
     text-align: center;
+  }
+
+  .footer-business {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+    padding-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-business-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+  }
+
+  .footer-business-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.35rem 0.55rem;
+    margin: 0;
+  }
+
+  .footer-business-item dt,
+  .footer-business-item dd {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .footer-business-item dt {
+    color: #475569;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .footer-business-item dd,
+  .footer-business-item address {
+    color: #64748b;
+    font-style: normal;
   }
 
   @media (min-width: 640px) {

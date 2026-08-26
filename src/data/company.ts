@@ -9,6 +9,9 @@ interface Company {
   email: string;
   website: string;
   founded: number;
+  address: string;
+  representative: string;
+  businessRegistrationNumber: string;
 }
 
 const companyData: Record<Locale, Company> = {
@@ -21,6 +24,9 @@ const companyData: Record<Locale, Company> = {
     email: 'blue@bluesecurity.online',
     website: 'https://www.bluesecurity.online',
     founded: 2025,
+    address: '경기도 용인시 기흥구 강남서로 9, 7층 703호 N119호(구갈동)',
+    representative: '이장호',
+    businessRegistrationNumber: '370-09-02609',
   },
   en: {
     name: 'BlueSecurity',
@@ -31,6 +37,9 @@ const companyData: Record<Locale, Company> = {
     email: 'blue@bluesecurity.online',
     website: 'https://www.bluesecurity.online',
     founded: 2025,
+    address: 'N119, Room 703, 7F, 9 Gangnamseo-ro, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea (Gugal-dong)',
+    representative: '이장호',
+    businessRegistrationNumber: '370-09-02609',
   },
 };
 
