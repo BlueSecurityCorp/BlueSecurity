@@ -18,7 +18,7 @@ const productsData: Record<Locale, Product[]> = {
       id: 'codeblue',
       name: 'CodeBlue',
       tagline: 'AI 기반 소스코드 보안 스캐너',
-      description: '소스코드의 보안 취약점을 AI가 자동으로 탐지하고, OWASP Top 10, CWE, ISMS-P 기준으로 분류하여 리포트합니다. DevSecOps 파이프라인에 통합하여 개발 단계에서부터 보안을 확보하세요.',
+      description: '소스코드의 보안 취약점을 탐지하고 AI가 조치 방법을 제공합니다. DevSecOps 파이프라인에 통합하여 개발 단계에서부터 보안을 확보하세요.',
       category: 'SAST (정적 분석)',
       href: '/products/codeblue',
       features: [
@@ -42,7 +42,7 @@ const productsData: Record<Locale, Product[]> = {
       id: 'codeblue',
       name: 'CodeBlue',
       tagline: 'AI-Powered Source Code Security Scanner',
-      description: 'AI automatically detects security vulnerabilities in source code and classifies them according to OWASP Top 10, CWE, and ISMS-P standards. Integrate into your DevSecOps pipeline to secure code from the development stage.',
+      description: 'Detects security vulnerabilities in source code and AI provides remediation methods. Integrate into your DevSecOps pipeline to secure code from the development stage.',
       category: 'SAST (Static Analysis)',
       href: '/en/products/codeblue',
       features: [

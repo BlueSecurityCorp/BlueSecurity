@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../i18n/index';
 import blueSecurityWordmark from '@bluesecuritycorp/brand/bluesecurity-wordmark.png';
+import codeBlueWordmark from '@bluesecuritycorp/brand/codeblue-wordmark.png';
 import { localePath } from '../i18n/index';
 import { t } from '../i18n/ui';
 import { getCompany } from '../data/company';
@@ -25,9 +26,9 @@ const companyLinks = [
 ];
 
 const socialLinks = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/블루시큐리티' },
-  { label: 'GitHub', href: 'https://github.com/BlueSecurityCorp' },
-  { label: t('footer.email', lang), href: `mailto:${company.email}` },
+  { platform: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/블루시큐리티' },
+  { platform: 'github', label: 'GitHub', href: 'https://github.com/BlueSecurityCorp' },
+  { platform: 'email', label: t('footer.email', lang), href: `mailto:${company.email}` },
 ];
 ---
 
@@ -68,16 +69,32 @@ const socialLinks = [
         <p class="footer-slogan">{company.slogan}</p>
         <p class="footer-description">{company.description}</p>
 
-        <div class="footer-social" role="group" aria-label="Social links">
+        <div class="footer-social" role="group" aria-label={lang === 'ko' ? '소셜 및 연락처' : 'Social and contact links'}>
           {socialLinks.map((link) => (
             <a
               href={link.href}
-              class="social-link"
+              class:list={['social-link', `social-link--${link.platform}`]}
               aria-label={link.label}
               target={link.href.startsWith('http') ? '_blank' : undefined}
               rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
             >
-              {link.label}
+              {link.platform === 'linkedin' && (
+                <svg class="social-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.5 8.25H3.25v10.5H6.5V8.25Zm.2-3.25A1.85 1.85 0 1 0 3 5a1.85 1.85 0 0 0 3.7 0Zm5.05 3.25H8.63v10.5h3.25v-5.2c0-1.37.26-2.7 1.96-2.7 1.68 0 1.7 1.57 1.7 2.79v5.11h3.25v-5.76c0-2.83-.61-5-3.91-5a3.42 3.42 0 0 0-3.08 1.69h-.05V8.25Z" />
+                </svg>
+              )}
+              {link.platform === 'github' && (
+                <svg class="social-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.55 9.55 0 0 1 12 6.82c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" clip-rule="evenodd" />
+                </svg>
+              )}
+              {link.platform === 'email' && (
+                <svg class="social-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              )}
+              <span>{link.label}</span>
             </a>
           ))}
         </div>
@@ -89,9 +106,22 @@ const socialLinks = [
           {products.map((product) => (
             <li>
               <a href={product.href} class="footer-nav-link">
-                <span class="footer-link-dot" aria-hidden="true"></span>
-                {product.name}
-                <span class="footer-link-badge">{product.category.split(' ')[0]}</span>
+                {product.id === 'codeblue' ? (
+                  <img
+                    class="footer-product-logo"
+                    src={codeBlueWordmark.src}
+                    alt="CodeBlue"
+                    width="120"
+                    height="24"
+                    loading="lazy"
+                  />
+                ) : (
+                  <>
+                    <span class="footer-link-dot" aria-hidden="true"></span>
+                    {product.name}
+                    <span class="footer-link-badge">{product.category.split(' ')[0]}</span>
+                  </>
+                )}
               </a>
             </li>
           ))}
@@ -134,8 +164,6 @@ const socialLinks = [
         <a href={localePath('/privacy', lang)} class="footer-bottom-link">{t('footer.privacy', lang)}</a>
         <span class="footer-divider" aria-hidden="true">/</span>
         <a href={localePath('/terms', lang)} class="footer-bottom-link">{t('footer.terms', lang)}</a>
-        <span class="footer-divider" aria-hidden="true">/</span>
-        <span class="footer-founded">{t('footer.founded', lang)} {company.founded}</span>
       </div>
     </div>
   </div>
@@ -233,16 +261,51 @@ const socialLinks = [
   }
 
   .social-link {
-    border: 1px solid var(--bs-color-border-default);
-    background-color: var(--bs-color-surface-default);
-    padding: 0.45rem 0.6rem;
-    color: var(--bs-color-text-secondary);
+    --social-color: var(--bs-color-primary);
+    --social-on-color: var(--bs-color-surface-default);
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    border: 1px solid color-mix(in srgb, var(--social-color) 28%, var(--bs-color-border-default));
+    background-color: color-mix(in srgb, var(--social-color) 7%, var(--bs-color-surface-default));
+    padding: 0.45rem 0.7rem;
+    color: var(--social-color);
     font-size: var(--bs-font-size-body-4);
+    font-weight: var(--bs-font-weight-semibold);
+    box-shadow: var(--bs-shadow-sm);
+    transition:
+      transform var(--bs-duration-fast) var(--bs-ease-standard),
+      border-color var(--bs-duration-fast) var(--bs-ease-standard),
+      background-color var(--bs-duration-fast) var(--bs-ease-standard),
+      color var(--bs-duration-fast) var(--bs-ease-standard),
+      box-shadow var(--bs-duration-fast) var(--bs-ease-standard);
   }
 
   .social-link:hover {
-    color: var(--bs-color-primary);
-    background-color: var(--bs-color-primary-subtle);
+    transform: translateY(-1px);
+    border-color: var(--social-color);
+    background-color: var(--social-color);
+    color: var(--social-on-color);
+    box-shadow: var(--bs-shadow-md);
+  }
+
+  .social-link:active {
+    transform: translateY(0);
+  }
+
+  .social-link--linkedin {
+    --social-color: #0a66c2;
+    --social-on-color: #ffffff;
+  }
+
+  .social-link--github {
+    --social-color: var(--bs-color-text-primary);
+    --social-on-color: var(--bs-color-surface-default);
+  }
+
+  .social-link-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
   }
 
   .footer-col-heading {
@@ -288,6 +351,12 @@ const socialLinks = [
   .footer-contact-link:hover,
   .footer-bottom-link:hover {
     color: var(--bs-color-primary);
+  }
+
+  .footer-product-logo {
+    display: block;
+    width: 7.5rem;
+    height: auto;
   }
 
   .footer-link-dot {

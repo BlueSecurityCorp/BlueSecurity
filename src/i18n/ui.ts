@@ -17,16 +17,14 @@ const ui = {
     'hero.badge': '대한민국 중소기업 보안의 표준',
     'hero.cta.start': '무료로 시작하기',
     'hero.cta.contact': '문의하기',
-    'hero.scope.heading': '현재 제공하는 것',
     'hero.scope.code.title': '코드 보안 점검',
     'hero.scope.code.desc': 'CodeBlue로 소스코드와 오픈소스 구성 요소의 위험을 확인합니다.',
     'hero.scroll': '스크롤',
 
     // Products section
     'products.eyebrow': 'Products',
-    'products.heading': '지금 제공하는 보안 제품',
+    'products.heading': 'BlueSecurity의 보안서비스',
     'products.heading.accent': '',
-    'products.subtitle': 'CodeBlue로 소스코드 보안 점검과 SBOM 확인을 시작할 수 있습니다.',
     'products.card.more': '자세히 보기',
 
     // Trust indicators
@@ -39,8 +37,7 @@ const ui = {
     'cta.heading.prefix': '지금 바로 ',
     'cta.heading.accent': '시작하세요',
     'cta.description': 'CodeBlue로 소스코드 보안 취약점과 오픈소스 구성 요소 위험을 먼저 확인하세요.',
-    'cta.trust': '2026년 12월 31일까지 CodeBlue 무료 제공',
-    'cta.button.start': 'CodeBlue 시작하기',
+    'cta.button.start': '시작하기',
     'cta.compliance': 'OWASP Top 10 · CWE · ISMS-P 기준 완벽 대응',
 
     // About page
@@ -194,7 +191,6 @@ const ui = {
     'footer.contact.cta': '문의하기',
     'footer.privacy': '개인정보처리방침',
     'footer.terms': '이용약관',
-    'footer.founded': '설립',
     'footer.businessInfo': '사업자 정보',
     'footer.address': '회사 주소',
     'footer.representative': '대표',
@@ -248,16 +244,14 @@ const ui = {
     'hero.badge': 'Security Standard for Korean SMEs',
     'hero.cta.start': 'Get Started Free',
     'hero.cta.contact': 'Contact Us',
-    'hero.scope.heading': 'What we offer today',
     'hero.scope.code.title': 'Code security checks',
     'hero.scope.code.desc': 'Use CodeBlue to review source code and open-source component risks.',
     'hero.scroll': 'Scroll',
 
     // Products section
     'products.eyebrow': 'Products',
-    'products.heading': 'Security product available now',
+    'products.heading': 'BlueSecurity\'s security product',
     'products.heading.accent': '',
-    'products.subtitle': 'Start code security checks and SBOM review with CodeBlue.',
     'products.card.more': 'Learn More',
 
     // Trust indicators
@@ -270,8 +264,7 @@ const ui = {
     'cta.heading.prefix': 'Get Started ',
     'cta.heading.accent': 'Today',
     'cta.description': 'Use CodeBlue to check source code vulnerabilities and open-source component risks first.',
-    'cta.trust': 'CodeBlue is free through December 31, 2026',
-    'cta.button.start': 'Start CodeBlue',
+    'cta.button.start': 'Get Started',
     'cta.compliance': 'Full compliance with OWASP Top 10 · CWE · ISMS-P',
 
     // About page
@@ -425,7 +418,6 @@ const ui = {
     'footer.contact.cta': 'Contact Us',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
-    'footer.founded': 'Founded',
     'footer.businessInfo': 'Business information',
     'footer.address': 'Address',
     'footer.representative': 'Representative',
