@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../i18n/index';
+import codeBlueWordmark from '@bluesecuritycorp/brand/codeblue-wordmark.png';
 import { t } from '../i18n/ui';
 
 export interface Props {
@@ -27,8 +28,16 @@ const { name, tagline, href, category, description, lang = 'ko' } = Astro.props;
   </div>
 
   <!-- Product name -->
-  <h3 class="mb-2 text-xl font-semibold text-white transition-colors duration-200 group-hover:text-blue-300">
-    {name}
+  <h3 class="mb-2 min-h-9 text-xl font-semibold text-white transition-colors duration-200 group-hover:text-blue-300">
+    {name === 'CodeBlue' ? (
+      <img
+        class="h-9 w-auto max-w-full object-contain object-left transition-opacity duration-200 group-hover:opacity-90"
+        src={codeBlueWordmark.src}
+        alt={name}
+        width="180"
+        height="36"
+      />
+    ) : name}
   </h3>
 
   <!-- Tagline -->
