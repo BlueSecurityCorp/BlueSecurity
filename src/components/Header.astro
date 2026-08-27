@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../i18n/index';
 import blueSecurityWordmark from '@bluesecuritycorp/brand/bluesecurity-wordmark.png';
+import codeBlueWordmark from '@bluesecuritycorp/brand/codeblue-wordmark.png';
 import { localePath, switchLocalePath } from '../i18n/index';
 import { t } from '../i18n/ui';
 import { getProductLineup } from '../data/products';
@@ -54,7 +55,17 @@ function isActive(path: string) {
           <p>{t('nav.products.lineup', lang)}</p>
           {products.map((product) => (
             <a href={product.href} class="product-link">
-              <strong>{product.name}</strong>
+              {product.id === 'codeblue' ? (
+                <img
+                  class="product-wordmark"
+                  src={codeBlueWordmark.src}
+                  alt={product.name}
+                  width="140"
+                  height="28"
+                />
+              ) : (
+                <strong>{product.name}</strong>
+              )}
               <span>{product.tagline}</span>
             </a>
           ))}
@@ -202,6 +213,13 @@ function isActive(path: string) {
   .product-link span {
     color: var(--bs-color-text-tertiary);
     font-size: var(--bs-font-size-body-4);
+  }
+
+  .product-wordmark {
+    display: block;
+    width: 8.75rem;
+    height: auto;
+    margin-bottom: 0.15rem;
   }
 
   .pricing-link {
