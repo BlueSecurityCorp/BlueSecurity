@@ -15,7 +15,7 @@ const ui = {
 
     // Hero
     'hero.badge': '대한민국 중소기업 보안의 표준',
-    'hero.cta.start': '무료로 시작하기',
+    'hero.cta.start': 'CodeBlue 살펴보기',
     'hero.cta.contact': '문의하기',
     'hero.scope.code.title': '코드 보안 점검',
     'hero.scope.code.desc': 'CodeBlue로 소스코드와 오픈소스 구성 요소의 위험을 확인합니다.',
@@ -34,10 +34,10 @@ const ui = {
     'trust.why.subtitle': '자동화된 코드 점검을 필요한 범위부터 현실적으로 적용합니다',
 
     // CTA
-    'cta.heading.prefix': '지금 바로 ',
-    'cta.heading.accent': '시작하세요',
-    'cta.description': 'CodeBlue로 소스코드 보안 취약점과 오픈소스 구성 요소 위험을 먼저 확인하세요.',
-    'cta.button.start': '시작하기',
+    'cta.heading.prefix': 'CodeBlue 출시를 ',
+    'cta.heading.accent': '준비하고 있습니다',
+    'cta.description': '출시 일정과 가격 정책은 확정되는 대로 안내하겠습니다. 도입이나 연동 관련 상담이 필요하면 문의해 주세요.',
+    'cta.button.start': '출시 관련 문의',
     'cta.compliance': 'OWASP Top 10 · CWE · ISMS-P 기준 완벽 대응',
 
     // About page
@@ -57,18 +57,15 @@ const ui = {
     'about.cta.products': '제품 살펴보기',
 
     // Pricing page
-    'pricing.title': '가격 정책 | BlueSecurity',
-    'pricing.meta': 'CodeBlue는 2026년 12월 31일까지 무료로 제공합니다.',
-    'pricing.heading': '가격 정책',
-    'pricing.subtitle': 'CodeBlue는 2026년 12월 31일까지 무료 서비스로 제공합니다.',
-    'pricing.annual': '2026년 12월 31일까지 무료 제공',
+    'pricing.meta': 'CodeBlue는 현재 정식 서비스 출시를 준비 중이며, 가격 정책은 추후 공개할 예정입니다.',
+    'pricing.heading': '가격',
+    'pricing.subtitle': 'CodeBlue는 현재 정식 서비스 오픈을 준비하고 있습니다. 가격과 이용 정책은 확정되는 대로 안내하겠습니다.',
+    'pricing.annual': '서비스 준비 중 · 가격 정책 추후 공개',
     'pricing.faq.heading': '자주 묻는 질문',
-    'pricing.custom.heading': 'CodeBlue 도입 문의가 필요하신가요?',
-    'pricing.custom.description': 'CI/CD 연동, 사용 환경, 계정과 프로젝트 범위가 궁금하시면 요구사항에 맞춰 안내해 드립니다.',
-    'pricing.custom.cta': '도입 문의하기 →',
-    'pricing.recommended': '추천',
-    'pricing.free': '무료',
-    'pricing.custom.note': '맞춤 견적을 제공합니다.',
+    'pricing.status.badge': '출시 준비 중',
+    'pricing.status.heading': '가격 정보는 추후 공개됩니다',
+    'pricing.status.description': '정식 서비스 출시 일정과 요금 정책이 확정되면 이 페이지를 통해 안내하겠습니다.',
+    'pricing.custom.cta': '출시 관련 문의 →',
 
     // Notices page
     'notices.title': '공지사항 | BlueSecurity',
@@ -174,7 +171,7 @@ const ui = {
     'products.page.bundle.cta': '도입 문의',
     'products.page.pricing': '요금 안내',
     'products.detail.features': '주요 기능',
-    'products.detail.start': '무료로 시작하기',
+    'products.detail.start': '출시 관련 문의',
     'products.detail.contact': '문의하기',
     'products.detail.others': '다른 제품 보기',
     'products.detail.home': '홈',
@@ -241,7 +238,7 @@ const ui = {
 
     // Hero
     'hero.badge': 'Security Standard for Korean SMEs',
-    'hero.cta.start': 'Get Started Free',
+    'hero.cta.start': 'Explore CodeBlue',
     'hero.cta.contact': 'Contact Us',
     'hero.scope.code.title': 'Code security checks',
     'hero.scope.code.desc': 'Use CodeBlue to review source code and open-source component risks.',
@@ -260,10 +257,10 @@ const ui = {
     'trust.why.subtitle': 'Automated code security checks scoped to what you need now',
 
     // CTA
-    'cta.heading.prefix': 'Get Started ',
-    'cta.heading.accent': 'Today',
-    'cta.description': 'Use CodeBlue to check source code vulnerabilities and open-source component risks first.',
-    'cta.button.start': 'Get Started',
+    'cta.heading.prefix': 'CodeBlue is ',
+    'cta.heading.accent': 'coming soon',
+    'cta.description': 'We will announce the release schedule and pricing once they are confirmed. Contact us to discuss deployment or integration in advance.',
+    'cta.button.start': 'Launch Inquiry',
     'cta.compliance': 'Full compliance with OWASP Top 10 · CWE · ISMS-P',
 
     // About page
@@ -283,18 +280,15 @@ const ui = {
     'about.cta.products': 'View Products',
 
     // Pricing page
-    'pricing.title': 'Pricing | BlueSecurity',
-    'pricing.meta': 'CodeBlue is free through December 31, 2026.',
+    'pricing.meta': 'CodeBlue is preparing for its official launch. Pricing will be announced at a later date.',
     'pricing.heading': 'Pricing',
-    'pricing.subtitle': 'CodeBlue is available as a free service through December 31, 2026.',
-    'pricing.annual': 'Free through December 31, 2026',
+    'pricing.subtitle': 'CodeBlue is preparing for its official service launch. Pricing and usage policies will be announced once finalized.',
+    'pricing.annual': 'Preparing for launch · Pricing to be announced',
     'pricing.faq.heading': 'Frequently Asked Questions',
-    'pricing.custom.heading': 'Need CodeBlue deployment support?',
-    'pricing.custom.description': 'Contact us about CI/CD integration, operating environments, accounts, and project scope.',
-    'pricing.custom.cta': 'Contact Us →',
-    'pricing.recommended': 'Recommended',
-    'pricing.free': 'Free',
-    'pricing.custom.note': 'Custom pricing available.',
+    'pricing.status.badge': 'Preparing for launch',
+    'pricing.status.heading': 'Pricing will be announced later',
+    'pricing.status.description': 'We will publish the official release schedule and pricing on this page once they are finalized.',
+    'pricing.custom.cta': 'Launch Inquiry →',
 
     // Notices page
     'notices.title': 'Notices | BlueSecurity',
@@ -400,7 +394,7 @@ const ui = {
     'products.page.bundle.cta': 'Contact Us',
     'products.page.pricing': 'View Pricing',
     'products.detail.features': 'Key Features',
-    'products.detail.start': 'Get Started Free',
+    'products.detail.start': 'Launch Inquiry',
     'products.detail.contact': 'Contact Us',
     'products.detail.others': 'View Other Products',
     'products.detail.home': 'Home',

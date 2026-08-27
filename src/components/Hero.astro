@@ -30,9 +30,7 @@ const company = getCompany(lang);
 
       <div class="mt-8 flex flex-col gap-3 sm:flex-row">
         <a
-          href="https://codeblue.bluesecurity.online"
-          target="_blank"
-          rel="noopener noreferrer"
+          href={localePath('/products/codeblue', lang)}
           class="bs-marketing-action bs-marketing-action--primary"
         >
           {t('hero.cta.start', lang)}
