@@ -13,28 +13,17 @@ const lang = 'en' as Locale;
   <Header slot="header" lang={lang} />
 
   <div data-pagefind-body>
-    <section class="news-hero">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="hero-eyebrow"><span></span>{t('news.eyebrow', lang)}</p>
-          <h1>{t('news.heading', lang)}</h1>
-          <p class="hero-description">{t('news.subtitle', lang)}</p>
-        </div>
-
-        <div class="briefing-mark" aria-hidden="true">
-          <div class="mark-orbit orbit-outer"></div>
-          <div class="mark-orbit orbit-inner"></div>
-          <div class="mark-core">
-            <svg width="42" height="42" viewBox="0 0 48 48" fill="none">
-              <path d="M10 9h28v30H10z" stroke="currentColor" stroke-width="1.5" />
-              <path d="M16 17h16M16 23h16M16 29h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-              <path d="M29 29h3v3h-3z" fill="currentColor" />
-            </svg>
-          </div>
-          <span class="mark-label">BLUESECURITY<br />BRIEFING</span>
-        </div>
+    <section class="border-b border-slate-800 bg-navy-900 pt-24 pb-10">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-300">
+          {t('news.eyebrow', lang)}
+        </p>
+        <h1 class="max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+          {t('news.heading', lang)}
+        </h1>
+        <p class="mt-4 max-w-2xl text-base leading-7 text-slate-400">
+          {t('news.subtitle', lang)}
+        </p>
       </div>
     </section>
 
@@ -43,25 +32,3 @@ const lang = 'en' as Locale;
 
   <Footer slot="footer" lang={lang} />
 </Layout>
-
-<style>
-  .news-hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--bs-color-border-default); background: var(--bs-color-surface-default); padding: 5.5rem 0 4.75rem; }
-  .hero-grid { position: absolute; inset: 0; opacity: .55; background-image: linear-gradient(color-mix(in srgb, var(--bs-color-border-default) 55%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb, var(--bs-color-border-default) 55%, transparent) 1px,transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(to right,black,transparent 75%); }
-  .hero-glow { position: absolute; top: -180px; right: 7%; width: 520px; height: 520px; border-radius: 50%; background: var(--bs-color-primary-subtle); filter: blur(70px); }
-  .hero-inner { position: relative; display: grid; grid-template-columns: minmax(0,1fr); align-items: center; width: min(1200px,calc(100% - 3rem)); margin: 0 auto; }
-  .hero-copy { max-width: 720px; }
-  .hero-eyebrow { display: flex; align-items: center; gap: .65rem; margin: 0 0 1.25rem; color: var(--bs-color-primary); font-size: var(--bs-font-size-body-4); font-weight: var(--bs-font-weight-bold); letter-spacing: .16em; text-transform: uppercase; }
-  .hero-eyebrow span { display: block; width: 1.7rem; height: 1px; background: linear-gradient(90deg,var(--bs-color-primary),var(--bs-color-tertiary)); }
-  h1 { max-width: 680px; margin: 0; color: var(--bs-color-text-primary); font-size: var(--bs-font-size-display-1); font-weight: var(--bs-font-weight-display); line-height: var(--bs-line-height-display); letter-spacing: -.045em; }
-  .hero-description { max-width: 580px; margin: 1.4rem 0 0; color: var(--bs-color-text-secondary); font-size: var(--bs-font-size-body-1); line-height: var(--bs-line-height-relaxed); }
-  .briefing-mark { display: none; }
-  @media (min-width: 900px) {
-    .hero-inner { grid-template-columns: minmax(0,1fr) 300px; gap: 4rem; }
-    .briefing-mark { position: relative; display: flex; align-items: center; justify-content: center; width: 250px; height: 250px; justify-self: end; color: var(--bs-color-primary); }
-    .mark-orbit { position: absolute; border: 1px solid var(--bs-color-border-default); border-radius: 50%; }
-    .orbit-outer { inset: 0; } .orbit-inner { inset: 32px; border-style: dashed; }
-    .mark-core { position: relative; display: grid; place-items: center; width: 100px; height: 100px; border: 1px solid var(--bs-color-primary); border-radius: 50%; background: var(--bs-color-primary-subtle); box-shadow: var(--bs-shadow-md); }
-    .mark-label { position: absolute; right: -12px; bottom: 38px; color: var(--bs-color-text-tertiary); font-family: var(--bs-font-family-code); font-size: .55rem; line-height: 1.45; letter-spacing: .12em; }
-  }
-  @media (max-width: 639px) { .news-hero { padding: 4.5rem 0 3.8rem; } .hero-inner { width: min(100% - 2rem,1200px); } }
-</style>

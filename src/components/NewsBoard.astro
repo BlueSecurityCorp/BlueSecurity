@@ -69,11 +69,6 @@ function formatDate(date: string): string {
   <div class="news-container" data-news-board data-count-suffix={t('news.count', lang)}>
     <h2 id="news-list-heading" class="sr-only">{t('news.heading', lang)}</h2>
 
-    <div class="published-heading">
-      <h2>{t('news.published.heading', lang)}</h2>
-      <span>{t('news.published.subtitle', lang)}</span>
-    </div>
-
     <div class="news-toolbar">
       <label class="search-field">
         <span class="sr-only">{t('news.search', lang)}</span>
@@ -414,11 +409,6 @@ function formatDate(date: string): string {
     background: var(--bs-color-primary-subtle);
     color: var(--bs-color-primary);
   }
-
-  .published-heading { margin-bottom: 1.7rem; }
-  .published-heading p { margin: 0 0 0.55rem; color: var(--bs-color-primary); font-size: var(--bs-font-size-body-4); font-weight: var(--bs-font-weight-bold); letter-spacing: 0.14em; text-transform: uppercase; }
-  .published-heading h2 { margin: 0; color: var(--bs-color-text-primary); font-size: var(--bs-font-size-title-1); font-weight: var(--bs-font-weight-title); letter-spacing: -0.025em; }
-  .published-heading span { display: block; margin-top: 0.55rem; color: var(--bs-color-text-secondary); font-size: var(--bs-font-size-body-3); line-height: var(--bs-line-height-body); }
 
   .search-field {
     display: flex;
